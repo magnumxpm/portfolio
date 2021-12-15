@@ -110,7 +110,9 @@ nav{
     font-size: 2rem;
     width: 700px;
 }
-
+.landing-hireme-btn{
+    display: none;
+}
 
 
 
@@ -182,5 +184,25 @@ nav{
         width: 70%;
         font-size: 1rem;
         margin-left: 30px;
+    }
+    .landing-hireme-btn{
+        display: flex;
+        padding: 0.5rem 1.5rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: var(--secondary-white);
+        font-size: 2rem;
+        font-weight: bold;
+        align-items: center;
+        justify-content: center;
+        margin-left: 30px;
+        margin-top: 30px;
+        letter-spacing: 2px;
+        border-radius: 25px;
+        width: 60%;
+        height: 70px;
+        background-color: var(--primary-black);
+        filter: drop-shadow(0px 2px 2px #282828);
+        transition: all 0.3s ease;
     }
 }
