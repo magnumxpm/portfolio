@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immersive navbar</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container{
+            max-width: 75%;
+            margin: auto;
+        }
+
+        /*Big Button*/
+        .big-button{
+            position: relative;
+            display: inline-block;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: aliceblue;
+            font-size: 1rem;
+            opacity: 1;
+            margin: 15px;
+            letter-spacing: 2px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #781be1, #aa6dee);
+        }
+        .btn-ripples{
+            position: absolute;
+            background: aliceblue;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 50%;
+            animation: ripple-animation 1s infinite;
+        }
+        @keyframes ripple-animation{
+            0%{
+                width: 0px;
+                height: 0px;
+                opacity: 0.5;
+            }
+            100%{
+                width: 500px;
+                height: 500px;
+                opacity: 0;
+            }
+        }
+
+        nav{
+            min-height: 15vh;
+            display: flex;
+            align-items: center;
+        }
+        .nav-container{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand{
+            margin: 3px;
+            text-transform: uppercase;
+            font-size: 2rem
+        }
+        .nav-links-area{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-links{
+            display: flex;
+            margin: 3px;
+            list-style: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-links li{
+            margin: 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            opacity: 70%;
+        }
+        .nav-links li:hover{
+            opacity: 95%;
+        }
+        .nav-links a{
+            text-decoration: none;
+            color: black;
+        }
+        .burgermenu{
+            display: none;
+            cursor: pointer;
+        }
+        .burgermenu div{
+            width: 25px;
+            height: 3px;
+            background-color: black;
+            opacity: 70%;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        #landing{
+            display: flex;
+            height: 85vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media screen and (max-width: 970px) {
+            .container{
+                max-width: 90%;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            body{
+                overflow-x: hidden;
+            }
+            .nav-links{
+                position: absolute;
+                right: 0;
+                top: 15vh;
+                height: 85vh;
+                background-color: #292929;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                color: azure;
+                justify-content: space-around;
+                margin: 0;
+                transform: translateX(100%);
+            }
+            .nav-container{
+                width: 80%;
+            }
+            .nav-links a{
+                color: azure;
+            }
+            .burgermenu{
+                display: block;
+            }
+
+            .big-button{
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        .nav-active{
+            transform: translateX(0%);
+        }
+        .toggle .burgerline1{
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .toggle .burgerline2{
+            opacity: 0;
+        }
+        .toggle .burgerline3{
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-container">
+            <h4 class="brand">Brand</h4>
+            <div class="nav-links-area">
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Projects</a></li>
+                </ul>
+                <a class="big-button" href="#">Hire Me</a>
+                <div class="burgermenu">
+                    <div class="toggle burgerline1"></div>
+                    <div class="toggle burgerline2"></div>
+                    <div class="toggle burgerline3"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section id="landing">
+        <div class="container">
+            <h1>Content</h1>
+        </div>
+    </section>
+
+    <script>
+        let nav = document.querySelector('.nav-links');
+        let burgermenu = document.querySelector('.burgermenu');
+
+        burgermenu.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+            burgermenu.classList.toggle('toggle');
+        })
+
+        //Big Button for ripples
+        const buttons = document.querySelectorAll('.big-button');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', e => {
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+
+                let ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                ripples.className = 'btn-ripples';
+                btn.appendChild(ripples);
+
+                setTimeout(() => {
+                    ripples.remove()
+                }, 1000);
+            })
+        })
+    </script>
+</body>
+</html>
