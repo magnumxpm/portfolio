@@ -140,6 +140,7 @@ nav{
         justify-content: space-around;
         margin: 0;
         transform: translateX(100%);
+        display: none;
     }
     .nav-container{
         width: 90%;
@@ -156,6 +157,7 @@ nav{
 
     .nav-active{
         transform: translateX(0%);
+        display: flex;
     }
     .toggle .burgerline1{
         transform: rotate(-45deg) translate(-5px, 8px);
