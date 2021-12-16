@@ -16,7 +16,7 @@ body{
     font-family: var(--normal-font);
     background-image: linear-gradient(to right top, var(--theme-blue), var(--theme-violet));
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
 }
 
 .container{
@@ -134,6 +134,7 @@ nav{
     justify-content: space-around;
     height: 220px;
     border-radius: 25px;
+    filter: drop-shadow(0px 2px 2px #282828);
 }
 .quicklink-card1 > h3, .quicklink-card2 > h3{
     font-family: var(--header-font);
