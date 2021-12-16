@@ -65,11 +65,11 @@ nav{
 }
 .nav-hireme-btn{
     display: flex;
-    padding: 0.5rem 1.5rem;
+    padding: 0.8rem 1.8rem;
     text-decoration: none;
     text-transform: uppercase;
     color: var(--secondary-white);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     margin: 15px;
     letter-spacing: 2px;
@@ -121,6 +121,7 @@ nav{
     width: 560px;
     margin-left: 30px;
     margin-top: 50px;
+    margin-bottom: 58px;
 }
 .quicklink-cards .quicklink-card1, .quicklink-card2{
     display: flex;
@@ -161,7 +162,10 @@ nav{
     filter: drop-shadow(0px 2px 2px #282828);
     transition: all 0.3s ease;
 }
-
+.quicklink-card1 > a:hover, .quicklink-card2 > a:hover{
+    background-color: var(--primary-black);
+    filter: none;
+}
 
 
 
