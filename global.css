@@ -167,6 +167,13 @@ nav{
     filter: none;
 }
 
+.projects{
+    background-color: var(--primary-black);
+    color: var(--secondary-white);
+    min-height: 100vh;
+    width: 100%;
+}
+
 
 
 
@@ -215,6 +222,7 @@ nav{
     .nav-active{
         transform: translateX(0%);
         display: flex;
+        overflow-y: hidden;
     }
     .toggle .burgerline1{
         transform: rotate(-45deg) translate(-5px, 8px);
