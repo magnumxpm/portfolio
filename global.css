@@ -279,48 +279,24 @@ nav{
     margin-bottom: 50px;
 }
 .skill-type .skill-cards{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.skill-cards-container{
     display: grid;
-    gap: 25px;
-    width: 82%;
+    gap: 15px;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    background-color: violet;
+    height: 60vh;
 }
 .skill-cards .skill-card{
-    filter: drop-shadow(0px 2px 2px #282828);
-    background-color: var(--secondary-white);
+    background-color: yellowgreen;
     border-radius: 25px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    text-align: center;
-    min-width: 200px;
 }
-.frontend-ui-skill .skill-card:nth-of-type(3){
-    grid-column: 1 / span 1;
+.frontend-ui-skill .skill-cards{
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
-.frontend-ui-skill .skill-card:nth-of-type(5){
+.frontend-ui-skill .skill-cards .skill-card:nth-of-type(5){
     grid-column: 3 / span 2;
     grid-row: 1 / span 2;
-}
-.frontend-ui-skill .skill-card img{
-    /*height: 70%;*/
-    width: 75%;
-    height: auto;
-    padding: 5px;
-}
-.gsap-img{
-    width: 100%;
-    padding: 15px;
 }
 
 
@@ -459,21 +435,15 @@ nav{
         margin-left: 30px;
     }
     .skill-type .skill-cards{
-        width: 100%;
+        width: 86%;
+        height: 70vh;
     }
-    .skill-cards-container{
-        width: 100%;
+    .frontend-ui-skill .skill-cards{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
     }
-    .skill-cards .skill-card{
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .skill-cards .skill-cards-container .skill-card img{
-        width: 100px;
-    }
-    .frontend-ui-skill .skill-card:nth-of-type(5){
+    .frontend-ui-skill .skill-cards .skill-card:nth-of-type(5){
         grid-column: 1 / span 2;
-        grid-row: 3 / span 4;
+        grid-row: 3 / span 2;
     }
 }
