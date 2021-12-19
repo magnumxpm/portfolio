@@ -372,6 +372,80 @@ nav{
     letter-spacing: 1px;
 }
 
+.contact{
+    background-color: var(--primary-black);
+    color: var(--secondary-white);
+    min-height: 60vh;
+    width: 100%;
+    padding-top: 60px;
+}
+.contact .container{
+    width: 80%;
+}
+.contact h4{
+    font-family: var(--header-font);
+    font-size: 2.5rem;
+    padding-top: 50px;
+    text-align: center;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contact .contact-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    margin-top: 50px;
+    width: 40%;
+    padding-bottom: 20vh;
+}
+.contact .contact-info h4{
+    text-align: left;
+    opacity: 0.7;
+    margin-left: 0;
+}
+.contact .contact-info span{
+    font-size: 1.1rem;
+    margin-top: 15px;
+    margin-left: 120px;
+}
+.contact-hireme-btn{
+    display: flex;
+    padding: 0.5rem 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--primary-black);
+    font-size: 2rem;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    letter-spacing: 2px;
+    border-radius: 25px;
+    width: 60%;
+    height: 70px;
+    background-color: var(--secondary-white);
+    filter: drop-shadow(0px 2px 2px #282828);
+    transition: all 0.3s ease;
+    margin-bottom: 25px;
+}
+.contact-hireme-btn:hover{
+    background-color: var(--theme-violet);
+    color: var(--secondary-white);
+    filter: none;
+}
+.contact .credits{
+    text-align: center;
+    padding-bottom: 50px;
+    font-size: 1.1rem;
+}
+.contact .credits p{
+    margin: 10px;
+}
+.contact .credits .cpyrt{
+    opacity: 0.7;
+}
 
 
 
@@ -572,5 +646,35 @@ nav{
         margin-right: auto;
         font-size: 1.1rem;
         letter-spacing: 1px;
+    }
+
+    .contact{
+        text-align: center;
+    }
+    .contact .container {
+        width: 85%;
+    }
+    .contact h4{
+        width: 100%;
+        font-size: 2rem;
+    }
+    .contact .contact-info{
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    .contact-info h4{
+        font-size: 1.3rem;
+        text-align: center;
+        width: 100%;
+    }
+    .contact .contact-info span{
+        margin-left: 0;
+    }
+    .contact-hireme-btn{
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
     }
 }
