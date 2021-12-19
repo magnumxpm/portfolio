@@ -678,4 +678,7 @@ nav{
         margin-right: auto;
         width: 90%;
     }
+    .contact .credits{
+        font-size: 0.8rem;
+    }
 }
