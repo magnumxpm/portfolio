@@ -635,6 +635,7 @@ nav{
 
     .about{
         min-height: 115vh;
+        padding-bottom: 50px;
     }
     .about h2{
         margin-left: 30px;
