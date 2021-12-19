@@ -273,6 +273,9 @@ nav{
     margin-right: auto;
     width: 90%;
 }
+.skill-type{
+    margin-bottom: 15vh;
+}
 .skill-type h5{
     font-size: 1.3rem;
     opacity: 0.5;
@@ -294,6 +297,7 @@ nav{
     align-items: center;
     justify-content: space-around;
     padding: 15px;
+    text-align: center;
     filter: drop-shadow(0px 2px 2px #282828);
 }
 .skill-cards .skill-card img{
@@ -310,6 +314,41 @@ nav{
 .frontend-ui-skill .skill-cards .skill-card:nth-of-type(5) img{
     height: 85%;
     width: auto;
+}
+.frontend-technologies-skill .skill-cards{
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+.frontend-technologies-skill .skill-cards .skill-card:nth-of-type(1){
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+}
+.frontend-technologies-skill .skill-cards .skill-card:nth-of-type(2){
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+}
+.backend-technologies-skill .skill-cards{
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+.backend-technologies-skill .skill-cards .skill-card:nth-of-type(5){
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+}
+.backend-technologies-skill .skill-cards .skill-card:nth-of-type(5) img{
+    width: 85%;
+}
+.cloud-providers-skill .skill-cards{
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+.cloud-providers-skill .skill-cards .skill-card:nth-of-type(1){
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+}
+.cloud-providers-skill .skill-cards .skill-card:nth-of-type(2){
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
 }
 
 
@@ -451,6 +490,10 @@ nav{
         width: 86%;
         min-height: 70vh;
     }
+    .skill-type h5{
+        margin-left: 30px;
+        font-size: 1.1rem;
+    }
     .frontend-ui-skill .skill-cards{
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(4, 1fr);
@@ -458,5 +501,40 @@ nav{
     .frontend-ui-skill .skill-cards .skill-card:nth-of-type(5){
         grid-column: 1 / span 2;
         grid-row: 3 / span 2;
+    }
+    .frontend-technologies-skill .skill-cards{
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    .frontend-technologies-skill .skill-cards .skill-card:nth-of-type(1){
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+    }
+    .frontend-technologies-skill .skill-cards .skill-card:nth-of-type(2){
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 1;
+    }
+    .backend-technologies-skill .skill-cards{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+    .backend-technologies-skill .skill-cards .skill-card:nth-of-type(5){
+        grid-column: 1 / span 2;
+        grid-row: 1 / span 2;
+    }
+    .backend-technologies-skill .skill-cards .skill-card:nth-of-type(5) img{
+        height: 85%;
+    }
+    .cloud-providers-skill .skill-cards{
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    .cloud-providers-skill .skill-cards .skill-card:nth-of-type(1){
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+    }
+    .cloud-providers-skill .skill-cards .skill-card:nth-of-type(2){
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 1;
     }
 }
