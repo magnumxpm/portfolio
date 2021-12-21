@@ -12,12 +12,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 let t1 = gsap.timeline({ defaults: {duration: 1} });
 
-gsap.from('.nav-container', {
-    y: -50,
-    opacity: 0,
-    duration: 0.5,
-});
-
 t1.from('.landing-branding', {
     x: -50,
     opacity: 0,
@@ -45,6 +39,7 @@ t1.from('.section-header', {
     duration: 0.5,
     scrollTrigger:{
         trigger: '.project-card1',
+        end: "top 90%",
         scrub: true,
     }
 })
@@ -54,6 +49,7 @@ t1.from('.section-header', {
     duration: 0.5,
     scrollTrigger:{
         trigger: '.project-card2',
+        end: "top 90%",
         scrub: true,
     }
 })
