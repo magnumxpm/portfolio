@@ -30,6 +30,7 @@ t1.from('.section-header', {
     scrollTrigger:{
         trigger: '.section-header',
         start: "top 80%",
+        end: "top 50%",
         scrub: true,
     }
 })
@@ -39,17 +40,18 @@ t1.from('.section-header', {
     duration: 0.5,
     scrollTrigger:{
         trigger: '.project-card1',
-        end: "top 90%",
+        end: "top 80%",
         scrub: true,
     }
 })
 .from('.project-card2', {
     x: 50,
     opacity: 0.7,
+    display: 'none',
     duration: 0.5,
     scrollTrigger:{
         trigger: '.project-card2',
-        end: "top 90%",
+        end: "top 80%",
         scrub: true,
     }
 })
