@@ -20,7 +20,7 @@ const config: Config = {
 				bold: "700",
 			},
 			fontFamily: {
-				code: "Space Mono, ui-monospace",
+				code: "Space Mono, monospace",
 			},
 		},
 		fontSize: {
