@@ -1,3 +1,5 @@
+"use client"
+
 import ReactTyped from "react-typed"
 
 export default function HeroContent({
@@ -26,9 +28,9 @@ export default function HeroContent({
 				<span className="text-base font-bold">
 					{tags.map((tag, idx) =>
 						idx === tags.length - 1 ? (
-							<span>{tag}</span>
+							<span key={idx}>{tag}</span>
 						) : (
-							<span>{tag} · </span>
+							<span key={idx}>{tag} · </span>
 						)
 					)}
 				</span>

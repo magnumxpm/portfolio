@@ -1,5 +1,4 @@
 "use client"
-
 import HeroContent from "portfoliov1/components/HeroContent"
 import { useEffect, useState } from "react"
 
@@ -20,7 +19,7 @@ export default function Home() {
 		<main className="flex min-h-screen text-base justify-center">
 			{/* VV The div will limit all content to fill within a max-width */}
 			<div className="flex flex-col w-full max-w-large justify-center">
-				{data && <HeroContent tags={data!.tags} desc={data!.desc} />}
+				{data && <HeroContent tags={data.tags} desc={data.desc} />}
 			</div>
 		</main>
 	)
