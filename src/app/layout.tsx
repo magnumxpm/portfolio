@@ -1,13 +1,8 @@
 import type { Metadata } from "next"
-import { Inter, Space_Mono } from "next/font/google"
+import { Inter } from "next/font/google"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
-const spaceMono = Space_Mono({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	variable: "--font-spacemono",
-})
 
 export const metadata: Metadata = {
 	title: "Pritam Mukherjee | Developer Portfolio",
