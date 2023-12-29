@@ -8,3 +8,4 @@ With the culmination of the year 2023, I decided on making the updated and more 
 
 -   December: v0 existed on [Github Pages here](https://pmukherjee.dev).
 -   December: Development started on v1. Progress is slow due to upcoming university semester exams
+-   December 29: Successfully deployed the ongoing alpha of v1 on [Vercel](https://www.pmukherjee.com)
