@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { TypeAnimation } from "react-type-animation"
 import ReactTyped from "react-typed"
 
 export default function HeroContent({
@@ -16,25 +17,34 @@ export default function HeroContent({
 			tagsStringified + (idx === tags.length - 1 ? tag : tag + " · ")
 	})
 
+	const [showDesc, setShowDesc] = useState(false)
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+			setShowDesc(true)
+		}, 1300)
+
+		return () => {
+			clearTimeout(timeoutId)
+		}
+	}, [])
+
 	return (
 		<div className="flex items-center gap-1 sm:pt-0">
 			<div className="flex flex-col gap-1 p-3 w-full sm:w-3/5 px-5">
 				<span className="font-code text-base sm:text-xl min-h-5 sm:min-h-6 cursor-default select-none">
 					// ~{" "}
-					<ReactTyped
-						strings={["whoami"]}
-						typeSpeed={50}
-						startDelay={300}
-						showCursor={false}
-						className="cursor-default select-none"
+					<TypeAnimation
+						sequence={["whoami"]}
+						wrapper="span"
+						speed={50}
+						cursor={false}
 					/>
-					{/* // ~ whoami */}
 				</span>
 				<h1 className=" text-3xl sm:text-hero font-bold leading-tight min-h-11 sm:min-h-24">
 					<ReactTyped
 						strings={["Pritam Mukherjee"]}
 						typeSpeed={30}
-						startDelay={900}
+						startDelay={400}
 						cursorChar="_"
 						showCursor
 						className="cursor-default select-none"
@@ -51,15 +61,16 @@ export default function HeroContent({
 					/>
 				</span>
 				<p className="mt-6 sm:mt-10 text-base_mobile sm:text-base min-h-[500px] sm:min-h-[450px] font-code">
-					{/* {desc} */}
-					<ReactTyped
-						strings={[desc]}
-						typeSpeed={1}
-						cursorChar="•"
-						startDelay={2000}
-						showCursor
-						className="cursor-default select-none"
-					/>
+					{showDesc && (
+						<TypeAnimation
+							splitter={(str) => str.split(/(?= )/)}
+							speed={{ type: "keyStrokeDelayInMs", value: 30 }}
+							sequence={[desc]}
+							wrapper="p"
+							className="type"
+							cursor={false}
+						/>
+					)}
 				</p>
 			</div>
 			{/* <div className="w-2/5 flex items-center justify-center border">
