@@ -45,11 +45,12 @@ const config: Config = {
 			},
 		},
 		fontSize: {
+			base_mobile: "14px",
 			base: "18px",
 			lg: "22px",
 			xl: "24px",
 			"2xl": "30px",
-			"3xl": "40px",
+			"3xl": "38px",
 			hero: "72px",
 		},
 		maxWidth: {

@@ -18,7 +18,7 @@ export default function Home() {
 			specialties: [
 				"API servers",
 				"Websockets",
-				"Server-side development",
+				"Backend dev",
 				"React | Next.js",
 				"Flutter",
 				"Authentication",
@@ -39,27 +39,30 @@ export default function Home() {
 				{data && <HeroContent tags={data.tags} desc={data.desc} />}
 			</div>
 
-			<div className="h-screen py-5 text-white bg-dark w-full snap-y snap-start flex justify-center">
-				<div className="max-w-large h-full w-full flex p-3 gap-2">
-					<div className="w-1/4 h-full flex flex-col items-center p-3">
-						<h3 className="w-full font-bold text-2xl leading-tight">
+			<div className="min-h-screen py-5 text-white bg-dark w-full snap-y snap-start flex justify-center">
+				<div className="max-w-large h-full w-full flex flex-col sm:flex-row p-3 gap-2">
+					<div className="w-full sm:w-1/4 sm:h-full flex flex-col items-center p-3">
+						<h3 className="w-full font-bold text-xl sm:text-2xl leading-tight">
 							Specialities
 						</h3>
 
-						<div className="mt-6 flex flex-wrap gap-3">
+						<div className="mt-5 sm:mt-6 flex flex-wrap gap-3">
 							{data &&
 								data.specialties.map((item, idx) => (
 									<Badge
 										variant="default"
-										className=" text-base"
+										className="text-base_mobile sm:text-base"
+										key={idx}
 									>
 										{item}
 									</Badge>
 								))}
 						</div>
 					</div>
-					<div className="w-3/4 h-full">
-						Well, this site is under construction as you can see
+					<div className="w-full sm:w-3/4 min-h-screen sm:min-h-fit sm:h-full p-3 flex items-center justify-center">
+						<p className="text-center">
+							Well, this site is under construction as you can see
+						</p>
 					</div>
 				</div>
 			</div>
