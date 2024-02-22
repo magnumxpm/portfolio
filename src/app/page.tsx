@@ -3,6 +3,7 @@ import HeroContent from "portfoliov1/components/HeroContent"
 import { useEffect, useState } from "react"
 
 import { Badge } from "../../@/components/ui/badge"
+import NavBar from "portfoliov1/components/NavBar"
 
 export default function Home() {
 	const [data, setData] = useState<{
@@ -34,6 +35,11 @@ export default function Home() {
 
 	return (
 		<main className="flex flex-col text-base !scroll-smooth items-center snap-mandatory snap-y">
+			<div className="max-w-large w-full">
+				{/* Navigation */}
+				<NavBar />
+			</div>
+
 			{/* VV The div will limit all content to fill within a max-width */}
 			<div className="flex flex-col min-h-screen w-full max-w-large justify-center snap-y snap-start">
 				{data && <HeroContent tags={data.tags} desc={data.desc} />}

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { TypeAnimation } from "react-type-animation"
 import ReactTyped from "react-typed"
+import Image from "next/image"
 
 export default function HeroContent({
 	tags,
@@ -29,24 +30,15 @@ export default function HeroContent({
 	}, [])
 
 	return (
-		<div className="flex items-center gap-1 sm:pt-0">
+		<div className="flex items-center gap-1 sm:pt-0 relative">
 			<div className="flex flex-col gap-1 p-3 w-full sm:w-3/5 px-5">
-				<span className="font-code text-base sm:text-xl min-h-5 sm:min-h-6 cursor-default select-none">
-					// ~{" "}
-					<TypeAnimation
-						sequence={["whoami"]}
-						wrapper="span"
-						speed={50}
-						cursor={false}
-					/>
-				</span>
 				<h1 className=" text-3xl sm:text-hero font-bold leading-tight min-h-11 sm:min-h-24">
 					<ReactTyped
 						strings={["Pritam Mukherjee"]}
 						typeSpeed={30}
 						startDelay={400}
-						cursorChar="_"
-						showCursor
+						// cursorChar="_"
+						showCursor={false}
 						className="cursor-default select-none"
 					/>
 				</h1>
@@ -64,7 +56,7 @@ export default function HeroContent({
 					{showDesc && (
 						<TypeAnimation
 							splitter={(str) => str.split(/(?= )/)}
-							speed={{ type: "keyStrokeDelayInMs", value: 30 }}
+							speed={{ type: "keyStrokeDelayInMs", value: 15 }}
 							sequence={[desc]}
 							wrapper="p"
 							className="type"
@@ -74,14 +66,16 @@ export default function HeroContent({
 				</p>
 			</div>
 			{/* <div className="w-2/5 flex items-center justify-center border">
-        <Image
-            width={36}
-            height={40}
-            className=" w-1/3"
-            src="/code.svg"
-            alt="Code glyph"
-        />
-    </div> */}
+				<Image
+					width={36}
+					height={40}
+					className=" w-1/3"
+					src="/code.svg"
+					alt="Code glyph"
+				/>
+			</div> */}
 		</div>
+
+		// <div className="flex flex-col w-full items-center">Some content</div>
 	)
 }

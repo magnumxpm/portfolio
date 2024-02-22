@@ -25,10 +25,13 @@ const config: Config = {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 			},
-
+			colors: {
+				theme: "#D9B99B",
+			},
 			backgroundColor: {
 				primary: "#f8f7f3",
 				dark: "#242424",
+				theme: "#D9B99B",
 			},
 			fontWeight: {
 				bold: "700",
