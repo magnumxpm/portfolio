@@ -100,7 +100,7 @@ export default function HeroContent({
 				<ExternalLink
 					href="#"
 					variant="big"
-					className={`transition-all duration-700 ${
+					className={`transition-all duration-700 pb-6 ${
 						nameIsDone
 							? "translate-y-0 opacity-100"
 							: "opacity-0 -translate-y-5"
@@ -108,6 +108,16 @@ export default function HeroContent({
 				>
 					My Résumé
 				</ExternalLink>
+
+				<p
+					className={`text-base_mobile sm:text-base font-code transition-all duration-700 ${
+						nameIsDone
+							? "translate-y-0 opacity-100"
+							: "opacity-0 -translate-y-5"
+					}`}
+				>
+					{desc}
+				</p>
 			</div>
 		</div>
 	)
