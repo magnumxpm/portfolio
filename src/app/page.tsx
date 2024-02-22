@@ -34,14 +34,13 @@ export default function Home() {
 	}, [])
 
 	return (
-		<main className="flex flex-col text-base !scroll-smooth items-center snap-mandatory snap-y">
+		<main className="flex flex-col text-base items-center !scroll-smooth snap-mandatory snap-y">
 			<div className="max-w-large w-full">
-				{/* Navigation */}
 				<NavBar />
 			</div>
 
 			{/* VV The div will limit all content to fill within a max-width */}
-			<div className="flex flex-col min-h-screen w-full max-w-large justify-center snap-y snap-start">
+			<div className="flex flex-col px-5 py-3 min-h-screen w-full max-w-large snap-y snap-start">
 				{data && <HeroContent tags={data.tags} desc={data.desc} />}
 			</div>
 

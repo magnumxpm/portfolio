@@ -54,7 +54,10 @@ const config: Config = {
 			xl: "24px",
 			"2xl": "30px",
 			"3xl": "38px",
+			tab_hero: "60px",
+			tab_sub_hero: "40px",
 			hero: "72px",
+			sub_hero: "50px",
 		},
 		maxWidth: {
 			large: "1500px",
