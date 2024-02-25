@@ -26,7 +26,7 @@ export default function Home() {
 				"DevOps",
 				"ML",
 			],
-			desc: "I am a computer science student, delving deep into AI and Deep learning throughout my coursework. While pursuing my bachelors in engineering, I work on my algorithmic and problem solving skills forging myself for a world that demands the most optimum solutions to critical problems. Additionally, I engage in trying my hand out in various fun and utilitarian projects relating to Web development, Microservices, Databases, Data Science, and AI including NLPs. Throughout my academic life, I seeked roles of leadership, be it in group projects or demonstrations. In my college I have achieved victory in two nationally revered hackathons that focus on innovation, utility, and the cutting-edge tech.",
+			desc: "Hi 👋. I am a software engineering undergrad. I've been into computer science since elementary school, and over the years, I've involved myself with software projects that come in various forms -- social media, auto task delegation, video conferencing, network-enabled system auditing, and more. I have dabbled with Web and mobile dev and won two nationally revered hackathons during my undergrad.",
 			specialties: [
 				"API servers",
 				"Websockets",
@@ -51,7 +51,7 @@ export default function Home() {
 			</div>
 
 			{/* VV The div will limit all content to fill within a max-width */}
-			<div className="flex flex-col min-h-[600px] md:min-h-[570px] lg:min-h-[500px] px-5 py-3 w-full max-w-desktop snap-y snap-start">
+			<div className="flex flex-col min-h-[400px] md:min-h-[450px] lg:min-h-[500px] px-5 py-3 w-full max-w-desktop snap-y snap-start">
 				{data && <HeroContent tags={data.tags} desc={data.desc} />}
 			</div>
 
