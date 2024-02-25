@@ -25,7 +25,13 @@ export default function ExternalLink({
 				{children}
 			</div>
 
-			<MoveUpRight className="group-hover:text-theme group-focus:text-theme" />
+			<MoveUpRight
+				className={
+					variant == "big"
+						? "group-hover:text-theme_light group-focus:text-theme_light"
+						: "group-hover:text-theme group-focus:text-theme"
+				}
+			/>
 		</Link>
 	)
 }

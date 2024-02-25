@@ -14,7 +14,18 @@ export default function Home() {
 
 	useEffect(() => {
 		setData({
-			tags: ["CSE Undergrad", "Specializing in AI"],
+			tags: [
+				"Next.js",
+				"React",
+				"Golang",
+				"APIs",
+				"Websockets",
+				"UI/UX",
+				"Full-stack Dev",
+				"Testing",
+				"DevOps",
+				"ML",
+			],
 			desc: "I am a computer science student, delving deep into AI and Deep learning throughout my coursework. While pursuing my bachelors in engineering, I work on my algorithmic and problem solving skills forging myself for a world that demands the most optimum solutions to critical problems. Additionally, I engage in trying my hand out in various fun and utilitarian projects relating to Web development, Microservices, Databases, Data Science, and AI including NLPs. Throughout my academic life, I seeked roles of leadership, be it in group projects or demonstrations. In my college I have achieved victory in two nationally revered hackathons that focus on innovation, utility, and the cutting-edge tech.",
 			specialties: [
 				"API servers",
@@ -52,29 +63,9 @@ export default function Home() {
 
 			<div className="min-h-screen py-5 text-white bg-dark w-full snap-y snap-start flex justify-center">
 				<div className="max-w-desktop h-full w-full flex flex-col sm:flex-row p-3 gap-2">
-					<div className="w-full sm:w-1/4 sm:h-full flex flex-col items-center p-3">
-						<h3 className="w-full font-bold text-xl sm:text-2xl leading-tight">
-							Specialities
-						</h3>
-
-						<div className="mt-5 sm:mt-6 flex flex-wrap gap-3">
-							{data &&
-								data.specialties.map((item, idx) => (
-									<Badge
-										variant="default"
-										className="text-base_mobile sm:text-base"
-										key={idx}
-									>
-										{item}
-									</Badge>
-								))}
-						</div>
-					</div>
-					<div className="w-full sm:w-3/4 min-h-screen sm:min-h-fit sm:h-full p-3 flex items-center justify-center">
-						<p className="text-center">
-							🚧 🧱 🔨 Under construction! 🚧 🧱 🔨
-						</p>
-					</div>
+					<p className="text-center">
+						🚧 🧱 🔨 Under construction! 🚧 🧱 🔨
+					</p>
 				</div>
 			</div>
 		</main>

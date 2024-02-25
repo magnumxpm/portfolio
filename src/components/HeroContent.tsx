@@ -38,43 +38,6 @@ export default function HeroContent({
 	}
 
 	return (
-		// <div className="flex items-center gap-1 sm:pt-0 relative">
-		// 	<div className="flex flex-col gap-1 p-3 w-full sm:w-3/5 px-5">
-		// 		<h1 className=" text-3xl sm:text-hero font-bold leading-tight min-h-11 sm:min-h-24">
-		// 			<ReactTyped
-		// 				strings={["Pritam Mukherjee"]}
-		// 				typeSpeed={30}
-		// 				startDelay={400}
-		// 				// cursorChar="_"
-		// 				showCursor={false}
-		// 				className="cursor-default select-none"
-		// 			/>
-		// 		</h1>
-		// 		<span className="text-base_mobile sm:text-base min-h-6 sm:min-h-7 font-bold">
-		// 			<ReactTyped
-		// 				strings={[tagsStringified]}
-		// 				typeSpeed={20}
-		// 				cursorChar=""
-		// 				startDelay={1300}
-		// 				showCursor
-		// 				className="cursor-default select-none"
-		// 			/>
-		// 		</span>
-		// 		<p className="mt-6 sm:mt-10 text-base_mobile sm:text-base min-h-[500px] sm:min-h-[450px] font-code">
-		// 			{showDesc && (
-		// 				<TypeAnimation
-		// 					splitter={(str) => str.split(/(?= )/)}
-		// 					speed={{ type: "keyStrokeDelayInMs", value: 15 }}
-		// 					sequence={[desc]}
-		// 					wrapper="p"
-		// 					className="type"
-		// 					cursor={false}
-		// 				/>
-		// 			)}
-		// 		</p>
-		// 	</div>
-		// </div>
-
 		<div className="flex flex-col w-full">
 			<div className="flex flex-col py-4">
 				<h1 className="text-2xl sm:text-tab_hero md:text-hero font-bold leading-tight min-h-11 sm:min-h-20">
@@ -121,7 +84,19 @@ export default function HeroContent({
 				>
 					{desc}
 				</p>
+
+				<div className="flex flex-wrap gap-2 mt-6 sm:w-1/2">
+					{tags && tags.map((item, idx) => <HeroTag tag={item} />)}
+				</div>
 			</div>
+		</div>
+	)
+}
+
+function HeroTag({ tag }: { tag: string }) {
+	return (
+		<div className="bg-gray-200 px-2 py-1 rounded-md font-code text-sm sm:text-base_mobile">
+			{tag}
 		</div>
 	)
 }

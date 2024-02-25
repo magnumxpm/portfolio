@@ -55,6 +55,7 @@ const config: Config = {
 			},
 		},
 		fontSize: {
+			sm: "10px",
 			base_mobile: "14px",
 			base: "18px",
 			md: "20px",
