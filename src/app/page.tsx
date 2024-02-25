@@ -56,9 +56,9 @@ export default function Home() {
 			</div>
 
 			<img
-				src="wave-haikei.svg"
+				src="wv_haikei.svg"
 				alt=""
-				className="w-full aspect-[960/200]"
+				className="w-full aspect-[900/100]"
 			/>
 
 			<div className="min-h-screen py-5 text-white bg-dark w-full snap-y snap-start flex justify-center">

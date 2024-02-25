@@ -95,7 +95,7 @@ export default function HeroContent({
 
 function HeroTag({ tag }: { tag: string }) {
 	return (
-		<div className="bg-gray-200 px-2 py-1 rounded-md font-code text-sm sm:text-base_mobile">
+		<div className="bg-gray-100 px-2 py-1 rounded-md font-code text-sm sm:text-base_mobile">
 			{tag}
 		</div>
 	)
