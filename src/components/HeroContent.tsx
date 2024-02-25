@@ -77,7 +77,7 @@ export default function HeroContent({
 
 		<div className="flex flex-col w-full">
 			<div className="flex flex-col py-4">
-				<h1 className="text-2xl sm:text-tab_hero md:text-hero font-bold leading-tight min-h-11 sm:min-h-24">
+				<h1 className="text-2xl sm:text-tab_hero md:text-hero font-bold leading-tight min-h-11 sm:min-h-20">
 					<ReactTyped
 						strings={["Pritam Mukherjee"]}
 						typeSpeed={30}
@@ -94,7 +94,8 @@ export default function HeroContent({
 							: "opacity-0 -translate-y-5"
 					}`}
 				>
-					Software <span className="text-theme">{engineerText}</span>
+					Software{" "}
+					<span className="text-theme_light">{engineerText}</span>
 				</p>
 
 				<ExternalLink
@@ -106,7 +107,9 @@ export default function HeroContent({
 							: "opacity-0 -translate-y-5"
 					}`}
 				>
-					My Résumé
+					<span className="group-hover:text-theme_light group-hover:border-theme_light  group-focus:text-theme_light  group-focus:border-theme_light">
+						My Résumé
+					</span>
 				</ExternalLink>
 
 				<p

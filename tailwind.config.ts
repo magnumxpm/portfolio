@@ -27,17 +27,24 @@ const config: Config = {
 			},
 			colors: {
 				theme: "#D9B99B",
+				theme_light: "#E0944E",
+				primary: "#f8f7f3",
+				dark: "#242424",
 			},
 			backgroundColor: {
 				primary: "#f8f7f3",
 				dark: "#242424",
 				theme: "#D9B99B",
+				theme_light: "#E0944E",
 			},
 			fontWeight: {
 				bold: "700",
 			},
 			fontFamily: {
 				code: "Space Mono, monospace",
+			},
+			maxWidth: {
+				desktop: "1300px",
 			},
 		},
 		container: {
@@ -50,14 +57,15 @@ const config: Config = {
 		fontSize: {
 			base_mobile: "14px",
 			base: "18px",
+			md: "20px",
 			lg: "22px",
 			xl: "24px",
 			"2xl": "30px",
 			"3xl": "38px",
-			tab_hero: "60px",
-			tab_sub_hero: "40px",
-			hero: "72px",
-			sub_hero: "50px",
+			tab_hero: "54px",
+			tab_sub_hero: "36px",
+			hero: "60px",
+			sub_hero: "42px",
 		},
 		maxWidth: {
 			large: "1500px",

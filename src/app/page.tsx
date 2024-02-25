@@ -35,17 +35,23 @@ export default function Home() {
 
 	return (
 		<main className="flex flex-col text-base items-center !scroll-smooth snap-mandatory snap-y">
-			<div className="max-w-large w-full">
+			<div className="max-w-desktop w-full">
 				<NavBar />
 			</div>
 
 			{/* VV The div will limit all content to fill within a max-width */}
-			<div className="flex flex-col px-5 py-3 min-h-screen w-full max-w-large snap-y snap-start">
+			<div className="flex flex-col min-h-[600px] md:min-h-[570px] lg:min-h-[500px] px-5 py-3 w-full max-w-desktop snap-y snap-start">
 				{data && <HeroContent tags={data.tags} desc={data.desc} />}
 			</div>
 
+			<img
+				src="wave-haikei.svg"
+				alt=""
+				className="w-full aspect-[960/200]"
+			/>
+
 			<div className="min-h-screen py-5 text-white bg-dark w-full snap-y snap-start flex justify-center">
-				<div className="max-w-large h-full w-full flex flex-col sm:flex-row p-3 gap-2">
+				<div className="max-w-desktop h-full w-full flex flex-col sm:flex-row p-3 gap-2">
 					<div className="w-full sm:w-1/4 sm:h-full flex flex-col items-center p-3">
 						<h3 className="w-full font-bold text-xl sm:text-2xl leading-tight">
 							Specialities
@@ -66,7 +72,7 @@ export default function Home() {
 					</div>
 					<div className="w-full sm:w-3/4 min-h-screen sm:min-h-fit sm:h-full p-3 flex items-center justify-center">
 						<p className="text-center">
-							Well, this site is under construction as you can see
+							🚧 🧱 🔨 Under construction! 🚧 🧱 🔨
 						</p>
 					</div>
 				</div>

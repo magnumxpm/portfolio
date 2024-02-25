@@ -17,7 +17,7 @@ export default function ExternalLink({
 			href={href}
 			className={`${className} flex items-center gap-1 w-fit group outline-none ${
 				variant == "big"
-					? "font-semibold text-base sm:text-lg"
+					? "font-semibold text-base sm:text-md"
 					: "text-base_mobile sm:text-base"
 			}`}
 		>
