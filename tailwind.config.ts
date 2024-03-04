@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import plugin from "tailwindcss"
 
 const config: Config = {
 	content: [
@@ -20,10 +21,21 @@ const config: Config = {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: "0" },
 				},
+				slidein: {
+					from: {
+						opacity: "0",
+						transform: "translateY(-10px)",
+					},
+					to: {
+						opacity: "1",
+						transform: "translateY(0)",
+					},
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+				slidein: "slidein 1s ease var(--slidein-delay) forwards",
 			},
 			colors: {
 				theme: "#D9B99B",
@@ -71,6 +83,11 @@ const config: Config = {
 		maxWidth: {
 			large: "1500px",
 		},
+		// screens: {
+		// 	tablet: "640px",
+		// 	laptop: "1024px",
+		// 	desktop: "1280px",
+		// },
 	},
 	plugins: [require("tailwindcss-animate")],
 }

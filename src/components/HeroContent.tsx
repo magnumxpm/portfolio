@@ -6,6 +6,7 @@ import ReactTyped from "react-typed"
 import Image from "next/image"
 import Link from "next/link"
 import ExternalLink from "./ExternalLink"
+import { twMerge } from "tailwind-merge"
 
 export default function HeroContent({
 	tags,
@@ -86,16 +87,31 @@ export default function HeroContent({
 				</p>
 
 				<div className="flex flex-wrap gap-2 mt-6 sm:w-1/2">
-					{tags && tags.map((item, idx) => <HeroTag tag={item} />)}
+					{tags &&
+						tags.map((item, idx) => (
+							<HeroTag
+								tag={item}
+								className={
+									nameIsDone
+										? "translate-y-0 opacity-100"
+										: "opacity-0 -translate-y-5"
+								}
+							/>
+						))}
 				</div>
 			</div>
 		</div>
 	)
 }
 
-function HeroTag({ tag }: { tag: string }) {
+function HeroTag({ tag, className }: { tag: string; className?: string }) {
 	return (
-		<div className="bg-gray-100 px-2 py-1 rounded-md font-code text-sm sm:text-base_mobile">
+		<div
+			className={twMerge(
+				"bg-gray-100 px-2 py-1 rounded-md font-code text-sm sm:text-base_mobile transition-all duration-700 delay-75",
+				className
+			)}
+		>
 			{tag}
 		</div>
 	)

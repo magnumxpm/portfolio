@@ -51,7 +51,7 @@ export default function Home() {
 			</div>
 
 			{/* VV The div will limit all content to fill within a max-width */}
-			<div className="flex flex-col min-h-[400px] md:min-h-[450px] lg:min-h-[500px] px-5 py-3 w-full max-w-desktop snap-y snap-start">
+			<div className="flex flex-col min-h-[500px] px-5 py-3 w-full max-w-desktop snap-y snap-start">
 				{data && <HeroContent tags={data.tags} desc={data.desc} />}
 			</div>
 
