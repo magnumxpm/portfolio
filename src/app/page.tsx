@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 
 import { Badge } from "../../@/components/ui/badge"
 import NavBar from "portfoliov1/components/NavBar"
+import { TracingBeam } from "../../@/components/ui/tracing_beam"
 
 export default function Home() {
 	const [data, setData] = useState<{
@@ -61,7 +62,7 @@ export default function Home() {
 				className="w-full aspect-[900/100]"
 			/>
 
-			<div className="min-h-screen py-5 text-white bg-dark w-full snap-y snap-start flex justify-center">
+			<div className="antialiased relative min-h-screen h-[3000px] py-5 text-white bg-dark w-full flex justify-center">
 				<div className="max-w-desktop h-full w-full flex flex-col sm:flex-row p-3 gap-2">
 					<p className="text-center">
 						🚧 🧱 🔨 Under construction! 🚧 🧱 🔨

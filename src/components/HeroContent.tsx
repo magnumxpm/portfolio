@@ -106,22 +106,27 @@ export default function HeroContent({
 					<SocialLink
 						href="https://github.com/pritammukherjee02"
 						icon="radix-icons:github-logo"
+						className="animate-slidein [--slidein-delay:1600ms]"
 					/>
 					<SocialLink
 						href="https://linkedin.com/in/pritam-mukherjee-52a348225"
 						icon="akar-icons:linkedin-v1-fill"
+						className="animate-slidein [--slidein-delay:1700ms]"
 					/>
 					<SocialLink
 						href="https://twitter.com/pmukherjee02"
 						icon="bi:twitter-x"
+						className="animate-slidein [--slidein-delay:1800ms]"
 					/>
 					<SocialLink
 						href="https://instagram.com/mukherjee.anon"
 						icon="mdi:instagram"
+						className="animate-slidein [--slidein-delay:1900ms]"
 					/>
 					<SocialLink
 						href="https://bento.me/mukherjee"
 						icon="material-symbols:bento-outline"
+						className="animate-slidein [--slidein-delay:2000ms]"
 					/>
 				</div>
 			</div>
@@ -142,11 +147,22 @@ function HeroTag({ tag, className }: { tag: string; className?: string }) {
 	)
 }
 
-function SocialLink({ icon, href }: { icon: string; href: string }) {
+function SocialLink({
+	icon,
+	href,
+	className,
+}: {
+	icon: string
+	href: string
+	className?: string
+}) {
 	return (
 		<Link
 			href={href}
-			className="p-2 border group rounded-lg focus:outline-none focus:border-theme_light"
+			className={twMerge(
+				"p-2 border group rounded-lg focus:outline-none focus:border-theme_light opacity-0",
+				className
+			)}
 		>
 			<Icon
 				icon={icon}

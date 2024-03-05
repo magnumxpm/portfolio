@@ -27,7 +27,7 @@ export default function NavBar() {
 			<div className="flex gap-2 absolute right-4">
 				<Link
 					href="mailto:official.pmukherjee@gmail.com"
-					className="px-6 py-3 sm:px-5 sm:py-3 flex gap-2 items-center xs:px-10 bg-dark text-gray-200 rounded-md text-base_mobile sm:text-base font-semibold leading-tight focus:bg-theme_light focus:outline-none focus:text-black hover:bg-theme_light hover:text-black transition duration-100"
+					className="px-5 py-2 sm:px-6 sm:py-3 flex gap-2 items-center xs:px-10 bg-dark text-gray-200 rounded-md text-base_mobile sm:text-base font-semibold leading-tight focus:bg-theme_light focus:outline-none focus:text-black hover:bg-theme_light hover:text-black transition duration-100"
 				>
 					<MailIcon size={22} />
 					Let's Talk
