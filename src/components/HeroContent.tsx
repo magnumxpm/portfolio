@@ -8,6 +8,8 @@ import Link from "next/link"
 import ExternalLink from "./ExternalLink"
 import { twMerge } from "tailwind-merge"
 
+import { Icon } from "@iconify/react"
+
 export default function HeroContent({
 	tags,
 	desc,
@@ -99,6 +101,29 @@ export default function HeroContent({
 							/>
 						))}
 				</div>
+
+				<div className="flex gap-3 mt-6 sm:1/2">
+					<SocialLink
+						href="https://github.com/pritammukherjee02"
+						icon="radix-icons:github-logo"
+					/>
+					<SocialLink
+						href="https://linkedin.com/in/pritam-mukherjee-52a348225"
+						icon="akar-icons:linkedin-v1-fill"
+					/>
+					<SocialLink
+						href="https://twitter.com/pmukherjee02"
+						icon="bi:twitter-x"
+					/>
+					<SocialLink
+						href="https://instagram.com/mukherjee.anon"
+						icon="mdi:instagram"
+					/>
+					<SocialLink
+						href="https://bento.me/mukherjee"
+						icon="material-symbols:bento-outline"
+					/>
+				</div>
 			</div>
 		</div>
 	)
@@ -114,5 +139,19 @@ function HeroTag({ tag, className }: { tag: string; className?: string }) {
 		>
 			{tag}
 		</div>
+	)
+}
+
+function SocialLink({ icon, href }: { icon: string; href: string }) {
+	return (
+		<Link
+			href={href}
+			className="p-2 border group rounded-lg focus:outline-none focus:border-theme_light"
+		>
+			<Icon
+				icon={icon}
+				className="h-5 w-5 opacity-50 group-hover:opacity-100 group-focus:opacity-100"
+			/>
+		</Link>
 	)
 }
