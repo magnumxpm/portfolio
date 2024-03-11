@@ -20,14 +20,25 @@ export default function ProjectCard({
 }) {
 	return (
 		<div className="flex flex-col gap-3 sm:gap-4 p-4 sm:p-5 border border-theme rounded-lg group hover:scale-105 transition-all duration-500">
-			<p className="text-md sm:text-lg font-semibold leading-4">
-				{title}
-			</p>
-			<p className="text-sm sm:text-[14px] font-medium font-code">
-				{description}
-			</p>
+			<div className="flex gap-3">
+				<Image
+					src={imageSrc}
+					alt={`${title} image`}
+					width={46}
+					height={30}
+					className="aspect-[1.54] sm:hidden group-hover:scale-125 transition-all duration-500 object-contain"
+				/>
+				<div className="flex flex-col gap-3">
+					<p className="text-md sm:text-lg font-semibold leading-4">
+						{title}
+					</p>
+					<p className="text-sm sm:text-[14px] font-medium font-code">
+						{description}
+					</p>
+				</div>
+			</div>
 			<div className="border-b border-theme"></div>
-			<Link href={url}>
+			<Link href={url} className="hidden sm:block">
 				<Image
 					src={imageSrc}
 					alt={`${title} image`}
