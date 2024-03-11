@@ -88,7 +88,7 @@ export default function HeroContent({
 					{desc}
 				</p>
 
-				<div className="flex flex-wrap gap-2 mt-6 sm:w-1/2">
+				<div className="flex flex-wrap gap-2 mt-6 lg:w-1/2">
 					{tags &&
 						tags.map((item, idx) => (
 							<HeroTag

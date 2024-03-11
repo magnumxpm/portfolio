@@ -48,12 +48,12 @@ export default function Home() {
 
 	return (
 		<main className="flex flex-col text-base items-center">
-			<div className="max-w-desktop w-full">
+			<div className="max-w-phone sm:max-w-tablet lg:max-w-desk w-full">
 				<NavBar />
 			</div>
 
 			{/* VV The div will limit all content to fill within a max-width */}
-			<div className="flex flex-col min-h-[555px] sm:min-h-[520px] px-5 py-3 w-full max-w-desktop">
+			<div className="flex flex-col min-h-[555px] sm:min-h-[520px] px-5 py-3 w-full max-w-phone sm:max-w-tablet lg:max-w-desk">
 				{data && <HeroContent tags={data.tags} desc={data.desc} />}
 			</div>
 
@@ -64,7 +64,7 @@ export default function Home() {
 			/>
 
 			<div className="py-5 text-white bg-dark w-full flex justify-center">
-				<div className="max-w-desktop h-full w-full flex flex-col sm:flex-row p-3 gap-2">
+				<div className="max-w-phone sm:max-w-tablet lg:max-w-desk h-full w-full flex flex-col sm:flex-row p-3 gap-2">
 					{/* Content */}
 					<div className="w-full px-2 flex flex-col gap-4">
 						<ProjectsSection />

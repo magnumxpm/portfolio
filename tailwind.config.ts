@@ -87,6 +87,9 @@ const config: Config = {
 		},
 		maxWidth: {
 			large: "1500px",
+			desk: "1200px",
+			tablet: "760px",
+			phone: "400px",
 		},
 		// screens: {
 		// 	tablet: "640px",
