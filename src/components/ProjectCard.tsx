@@ -20,8 +20,10 @@ export default function ProjectCard({
 }) {
 	return (
 		<div className="flex flex-col gap-3 sm:gap-4 p-4 sm:p-5 border border-theme rounded-lg group hover:scale-105 transition-all duration-500">
-			<p className="text-md sm:text-xl font-bold">{title}</p>
-			<p className="text-sm sm:text-[16px] font-medium font-code">
+			<p className="text-md sm:text-lg font-semibold leading-4">
+				{title}
+			</p>
+			<p className="text-sm sm:text-[14px] font-medium font-code">
 				{description}
 			</p>
 			<div className="border-b border-theme"></div>
@@ -60,7 +62,7 @@ function Tag({ tag, className }: { tag: string; className?: string }) {
 	return (
 		<div
 			className={twMerge(
-				"border px-2 py-1 rounded-full font-code text-xs sm:text-sm transition-all duration-700 delay-75",
+				"border px-2 py-1 rounded-full font-code text-xs transition-all duration-700 delay-75",
 				className
 			)}
 		>
