@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { Badge } from "../../@/components/ui/badge"
 import NavBar from "portfoliov1/components/NavBar"
 import { TracingBeam } from "../../@/components/ui/tracing_beam"
+import ProjectsSection from "portfoliov1/components/ProjectsSection"
 
 export default function Home() {
 	const [data, setData] = useState<{
@@ -46,13 +47,13 @@ export default function Home() {
 	}, [])
 
 	return (
-		<main className="flex flex-col text-base items-center !scroll-smooth snap-mandatory snap-y">
+		<main className="flex flex-col text-base items-center">
 			<div className="max-w-desktop w-full">
 				<NavBar />
 			</div>
 
 			{/* VV The div will limit all content to fill within a max-width */}
-			<div className="flex flex-col min-h-[555px] sm:min-h-[520px] px-5 py-3 w-full max-w-desktop snap-y snap-start">
+			<div className="flex flex-col min-h-[555px] sm:min-h-[520px] px-5 py-3 w-full max-w-desktop">
 				{data && <HeroContent tags={data.tags} desc={data.desc} />}
 			</div>
 
@@ -62,11 +63,12 @@ export default function Home() {
 				className="w-full aspect-[900/100]"
 			/>
 
-			<div className="antialiased relative min-h-screen h-[3000px] py-5 text-white bg-dark w-full flex justify-center">
+			<div className="py-5 text-white bg-dark w-full flex justify-center">
 				<div className="max-w-desktop h-full w-full flex flex-col sm:flex-row p-3 gap-2">
-					<p className="text-center">
-						🚧 🧱 🔨 Under construction! 🚧 🧱 🔨
-					</p>
+					{/* Content */}
+					<div className="w-full px-2 flex flex-col gap-4">
+						<ProjectsSection />
+					</div>
 				</div>
 			</div>
 		</main>

@@ -71,6 +71,7 @@ const config: Config = {
 			},
 		},
 		fontSize: {
+			xs: "10px",
 			sm: "12px",
 			base_mobile: "14px",
 			base: "18px",
