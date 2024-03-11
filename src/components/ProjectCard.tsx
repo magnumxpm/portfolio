@@ -19,7 +19,7 @@ export default function ProjectCard({
 	url: string
 }) {
 	return (
-		<div className="flex flex-col gap-4 p-4 sm:p-5 border border-theme rounded-lg group hover:scale-105 transition-all duration-500">
+		<div className="flex flex-col gap-3 sm:gap-4 p-4 sm:p-5 border border-theme rounded-lg group hover:scale-105 transition-all duration-500">
 			<p className="text-md sm:text-xl font-bold">{title}</p>
 			<p className="text-sm sm:text-[16px] font-medium font-code">
 				{description}
@@ -34,7 +34,7 @@ export default function ProjectCard({
 					className="aspect-[1.54] w-full border rounded-lg group-hover:scale-105 transition-all duration-500"
 				/>
 			</Link>
-			<div className="flex w-full justify-between">
+			<div className="flex items-center w-full justify-between">
 				<p className="text-base_mobile sm:text-base font-code font-semibold flex-1">
 					{role}
 				</p>

@@ -42,10 +42,10 @@ export default function ProjectsSection() {
 
 	return (
 		<section id="projects">
-			<p className="text-lg text-blue-100 sm:text-3xl font-semibold font-code">
+			<p className="text-lg text-blue-100 sm:text-3xl font-medium font-code">
 				Projects
 			</p>
-			<div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 w-full gap-5">
+			<div className="mt-6 md:mt-8 grid md:grid-cols-2 lg:grid-cols-3 w-full gap-5">
 				{/* Project tiles */}
 				{data.map((val, idx) => (
 					<ProjectCard

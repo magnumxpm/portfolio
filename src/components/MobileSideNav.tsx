@@ -24,10 +24,16 @@ export default function MobileSideNav({ className }: { className?: string }) {
 					</SheetHeader>
 
 					<div className="flex flex-col h-full py-40 justify-between gap-6 items-center text-gray-200">
-						<MobileNavLink href="#">Projects</MobileNavLink>
-						<MobileNavLink href="#">Achievements</MobileNavLink>
-						<MobileNavLink href="#">Certifications</MobileNavLink>
-						<MobileNavLink href="#">Academics</MobileNavLink>
+						<MobileNavLink href="#projects">Projects</MobileNavLink>
+						<MobileNavLink href="#achievements">
+							Achievements
+						</MobileNavLink>
+						<MobileNavLink href="#certifications">
+							Certifications
+						</MobileNavLink>
+						<MobileNavLink href="#academics">
+							Academics
+						</MobileNavLink>
 					</div>
 				</SheetContent>
 			</Sheet>

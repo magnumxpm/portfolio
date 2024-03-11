@@ -20,9 +20,9 @@ export default function NavBar() {
 			</Link>
 
 			<NavLink href="#projects">Projects</NavLink>
-			<NavLink href="#">Achievements</NavLink>
-			<NavLink href="#">Certifications</NavLink>
-			<NavLink href="#">Academics</NavLink>
+			<NavLink href="#achievements">Achievements</NavLink>
+			<NavLink href="#certifications">Certifications</NavLink>
+			<NavLink href="#academics">Academics</NavLink>
 
 			<div className="flex gap-2 absolute right-4">
 				<Link
@@ -33,7 +33,7 @@ export default function NavBar() {
 					Let's Talk
 				</Link>
 
-				<MobileSideNav className="block md:hidden" />
+				<MobileSideNav className="block lg:hidden" />
 			</div>
 		</div>
 	)
@@ -49,7 +49,7 @@ function NavLink({
 	return (
 		<Link
 			href={href}
-			className="items-center hidden md:flex text-base font-semibold leading-tight opacity-50 border-b-4 border-transparent hover:opacity-80 focus:opacity-80 focus:outline-none hover:border-theme_light focus:border-theme_light hover:box-border"
+			className="items-center hidden lg:flex text-base font-semibold leading-tight opacity-50 border-b-4 border-transparent hover:opacity-80 focus:opacity-80 focus:outline-none hover:border-theme_light focus:border-theme_light hover:box-border"
 		>
 			{children}
 		</Link>
