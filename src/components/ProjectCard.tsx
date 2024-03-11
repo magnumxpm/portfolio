@@ -33,7 +33,7 @@ export default function ProjectCard({
 					alt={`${title} image`}
 					width={278}
 					height={180}
-					className="aspect-[1.54] w-full border rounded-lg group-hover:scale-105 transition-all duration-500"
+					className="aspect-[1.54] w-full border rounded-lg group-hover:scale-105 transition-all duration-500 object-contain"
 				/>
 			</Link>
 			<div className="flex items-center w-full justify-between">

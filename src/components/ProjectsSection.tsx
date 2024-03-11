@@ -9,7 +9,7 @@ export default function ProjectsSection() {
 			technologies: ["Golang", "Postgres", "Kotlin", "Android SDK"],
 			role: "Backend & Android App",
 			url: "#",
-			thumbnail: "/vercel.svg",
+			thumbnail: "/confention.png",
 		},
 		{
 			title: "Samklaang",
@@ -18,7 +18,7 @@ export default function ProjectsSection() {
 			technologies: ["Next.js", "Tailwind", "Electron", "UI/UX"],
 			role: "Front-end",
 			url: "#",
-			thumbnail: "/vercel.svg",
+			thumbnail: "/Samklaang.svg",
 		},
 		{
 			title: "Helmdall",
@@ -36,7 +36,24 @@ export default function ProjectsSection() {
 			technologies: ["Kotlin", "Next.js", "Tailwind", "UI/UX"],
 			role: "Front-end",
 			url: "https://shopydoo.in",
-			thumbnail: "/vercel.svg",
+			thumbnail: "/shopydoo.png",
+		},
+		{
+			title: "Jarnkit",
+			description: "Consolidated AI Toolkit platform for Developers",
+			technologies: ["Golang", "AI Models", "DevOps", "Next.js"],
+			role: "Full-Stack",
+			url: "https://jarnkit.com",
+			thumbnail: "/jarnkit2.png",
+		},
+		{
+			title: "ResearchBook",
+			description:
+				"Social Media platform for Scholars. Goldmine of Research papers",
+			technologies: ["Next.js", "Tailwind", "Firebase", "DevOps"],
+			role: "Full-Stack",
+			url: "https://researchbook.vercel.app",
+			thumbnail: "/researchbook.png",
 		},
 	]
 
