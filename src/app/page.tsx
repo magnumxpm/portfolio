@@ -6,6 +6,8 @@ import { Badge } from "../../@/components/ui/badge"
 import NavBar from "portfoliov1/components/NavBar"
 import { TracingBeam } from "../../@/components/ui/tracing_beam"
 import ProjectsSection from "portfoliov1/components/ProjectsSection"
+import ExperienceSection from "portfoliov1/components/ExperienceSection"
+import AchievementsSection from "portfoliov1/components/AchievementsSection"
 
 export default function Home() {
 	const [data, setData] = useState<{
@@ -66,8 +68,12 @@ export default function Home() {
 			<div className="py-5 text-white bg-dark w-full flex justify-center">
 				<div className="max-w-phone sm:max-w-tablet lg:max-w-desk h-full w-full flex flex-col sm:flex-row p-3 gap-2">
 					{/* Content */}
-					<div className="w-full px-2 flex flex-col gap-4">
+					<div className="w-full px-2 flex flex-col gap-14">
 						<ProjectsSection />
+
+						<ExperienceSection />
+
+						<AchievementsSection />
 					</div>
 				</div>
 			</div>

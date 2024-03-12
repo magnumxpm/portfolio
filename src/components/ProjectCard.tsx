@@ -32,7 +32,7 @@ export default function ProjectCard({
 					<p className="text-md sm:text-lg font-semibold leading-4">
 						{title}
 					</p>
-					<p className="text-sm sm:text-[14px] font-medium font-code">
+					<p className="text-sm sm:text-[14px] font-medium font-code text-gray-300">
 						{description}
 					</p>
 				</div>
@@ -73,7 +73,7 @@ function Tag({ tag, className }: { tag: string; className?: string }) {
 	return (
 		<div
 			className={twMerge(
-				"border px-2 py-1 rounded-full font-code text-xs transition-all duration-700 delay-75",
+				"border px-2 py-1 rounded-full font-code text-xs text-gray-300 transition-all duration-700 delay-75",
 				className
 			)}
 		>
