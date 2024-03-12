@@ -29,9 +29,11 @@ export default function ProjectCard({
 					className="aspect-[1.54] sm:hidden group-hover:scale-125 transition-all duration-500 object-contain"
 				/>
 				<div className="flex flex-col gap-3">
-					<p className="text-md sm:text-lg font-semibold leading-4">
-						{title}
-					</p>
+					<Link href={url}>
+						<p className="text-md sm:text-lg font-semibold leading-4">
+							{title}
+						</p>
+					</Link>
 					<p className="text-sm sm:text-[14px] font-medium font-code text-gray-300">
 						{description}
 					</p>

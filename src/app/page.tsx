@@ -62,7 +62,7 @@ export default function Home() {
 			<img
 				src="wv_haikei.svg"
 				alt=""
-				className="w-full aspect-[900/100]"
+				className="w-full aspect-[900/100] select-none"
 			/>
 
 			<div className="py-5 text-white bg-dark w-full flex justify-center">
