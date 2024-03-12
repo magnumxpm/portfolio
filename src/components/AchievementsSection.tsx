@@ -8,14 +8,14 @@ export default function AchievementsSection() {
 			year: "2023",
 			description:
 				"Co-led the college hackathon team into victory. Created the frontend application using React and Electron, and led a team of 4 in the frontend team. Implemented a high quality video conferencing solution using WebRTC and SFUs.",
-			url: "/",
+			url: "https://www.linkedin.com/posts/pritam-mukherjee-52a348225_sih2023-sih1464-aicte-activity-7146066472568512512-Sisu?utm_source=share&utm_medium=member_desktop",
 		},
 		{
 			title: "KAVACH 2023, Cybersec. Hackathon Winner",
 			year: "2023",
 			description:
 				"Co-led the college hackathon team into victory. Implemented the backend server systems (API, Websockets) single-handedly, and released an MVP that worked live. Implemented CVSS Vulnerability scanner on the server-side, that periodically pulls data from the NVD Database.",
-			url: "/",
+			url: "https://www.linkedin.com/posts/pritam-mukherjee-52a348225_helmdall-activity-7101957694307143680-yyxm?utm_source=share&utm_medium=member_desktop",
 		},
 	]
 	return (
