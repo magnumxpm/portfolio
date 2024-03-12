@@ -27,7 +27,7 @@ export default function ProjectsSection() {
 			technologies: ["Golang", "Postgres", "gRPC", "WebSockets", "AWS"],
 			role: "Backend",
 			url: "https://helmdall.com",
-			thumbnail: "/vercel.svg",
+			thumbnail: "/helmdall.png",
 		},
 		{
 			title: "Shopydoo",
