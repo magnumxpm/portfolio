@@ -147,7 +147,7 @@ function HeroTag({ tag, className }: { tag: string; className?: string }) {
 	)
 }
 
-function SocialLink({
+export function SocialLink({
 	icon,
 	href,
 	className,
