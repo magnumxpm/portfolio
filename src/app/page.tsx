@@ -9,6 +9,7 @@ import ProjectsSection from "portfoliov1/components/ProjectsSection"
 import ExperienceSection from "portfoliov1/components/ExperienceSection"
 import AchievementsSection from "portfoliov1/components/AchievementsSection"
 import CertificationsSection from "portfoliov1/components/CertificationsSection"
+import AcademicsSection from "portfoliov1/components/AcademicsSection"
 
 export default function Home() {
 	const [data, setData] = useState<{
@@ -77,6 +78,8 @@ export default function Home() {
 						<AchievementsSection />
 
 						<CertificationsSection />
+
+						<AcademicsSection />
 					</div>
 				</div>
 			</div>
