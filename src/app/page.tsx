@@ -10,6 +10,7 @@ import ExperienceSection from "portfoliov1/components/ExperienceSection"
 import AchievementsSection from "portfoliov1/components/AchievementsSection"
 import CertificationsSection from "portfoliov1/components/CertificationsSection"
 import AcademicsSection from "portfoliov1/components/AcademicsSection"
+import NewsLetterPitch from "portfoliov1/components/NewsLetterPitch"
 
 export default function Home() {
 	const [data, setData] = useState<{
@@ -80,6 +81,10 @@ export default function Home() {
 						<CertificationsSection />
 
 						<AcademicsSection />
+
+						<div className="border-b border-theme"></div>
+
+						<NewsLetterPitch />
 					</div>
 				</div>
 			</div>

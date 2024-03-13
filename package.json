@@ -15,7 +15,7 @@
 		"badge": "^1.0.3",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.0",
-		"framer-motion": "^11.0.8",
+		"framer-motion": "^11.0.12",
 		"lucide-react": "^0.303.0",
 		"next": "14.0.4",
 		"react": "^18",
