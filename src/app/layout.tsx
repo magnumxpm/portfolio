@@ -8,6 +8,10 @@ export const metadata: Metadata = {
 	title: "Pritam Mukherjee | Developer Portfolio",
 	description:
 		"Personal portfolio showcasing my skillset, all the projects I worked on, and all of my experiences.",
+	icons: "/favicon.ico",
+	openGraph: {
+		images: ["/thumbnail.png"],
+	},
 }
 
 export default function RootLayout({
