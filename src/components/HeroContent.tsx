@@ -65,7 +65,7 @@ export default function HeroContent({
 				</p>
 
 				<ExternalLink
-					href="#"
+					href="https://1drv.ms/b/s!Aukoqznc45UmpQTEXFNub-w0_dOI?e=NOfYN4"
 					variant="big"
 					className={`transition-all duration-700 pb-6 ${
 						nameIsDone
