@@ -17,7 +17,7 @@ export default function Footer() {
 
 			<div className="flex mx-auto sm:mx-0 gap-3 sm:1/2">
 				<SocialLink
-					href="https://github.com/pritammukherjee02"
+					href="https://github.com/magnumxpm"
 					icon="radix-icons:github-logo"
 					className="opacity-1 text-gray-100 border-gray-600"
 				/>
