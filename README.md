@@ -1,12 +1,66 @@
-# v1 Developer Portfolio
+# Developer Portfolio v1
 
-With the culmination of the year 2023, I decided on making the updated and more modern version of my portfolio that up-to-date with my current achievements, both in content and in code. It is a task I took upon to challenge myself to create a really high quality web application that is a joy to scroll through.
+A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. This portfolio showcases projects, experience, achievements, and skills in a clean, professional design.
 
-### Changelog
+## Technologies
+
+- **Framework**: Next.js 14
+- **UI**: Tailwind CSS, Framer Motion
+- **Language**: TypeScript
+- **Animation**: React-typed, TypeAnimation
+- **Icons**: Lucide React, Iconify
+
+## Features
+
+- Responsive design for all devices
+- Modern UI with animations and transitions
+- Type-safe code with TypeScript
+- Component-based architecture
+- Optimized images and performance
+- SEO optimized
+
+## Project Structure
+
+```
+src/
+├── app/              # Next.js app directory
+├── components/       # React components
+│   ├── ui/           # Reusable UI components
+│   └── layout/       # Layout components
+├── data/             # Data files
+└── types/            # TypeScript type definitions
+```
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm run start
+
+# Lint code
+npm run lint
+```
+
+## Code Quality
+
+This project follows industry best practices for code organization, type safety, and component design. See [REFACTORING.md](./REFACTORING.md) for details on code improvements and standards.
+
+## Changelog
 
 **2023**
+- December: v0 existed on [Github Pages here](https://pmukherjee.dev)
+- December: Development started on v1
+- December 29: Successfully deployed the alpha of v1 on [Vercel](https://www.pmukherjee.com)
+- December 30: Added Shadcn badge
 
--   December: v0 existed on [Github Pages here](https://pmukherjee.dev).
--   December: Development started on v1. Progress is slow due to upcoming university semester exams
--   December 29: Successfully deployed the ongoing alpha of v1 on [Vercel](https://www.pmukherjee.com)
--   December 30: Added Shadcn badge. Will be deploying the changes on the **v1** website
+**2024**
+- May: Major code refactoring for improved maintainability and adherence to industry standards
