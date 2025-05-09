@@ -1,4 +1,4 @@
-import { SocialLink } from "./HeroContent"
+import { SocialLink } from "./ui/SocialLink
 
 export default function Footer() {
 	return (

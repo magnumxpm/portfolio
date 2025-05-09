@@ -50,8 +50,7 @@ export default function HeroContent({ tags, desc }: HeroContentProps) {
               : "opacity-0 -translate-y-5"
           }`}
         >
-          Software{" "}
-          <span className="text-theme_light">{engineerText}</span>
+          Software <span className="text-theme_light">{engineerText}</span>
         </p>
 
         <ExternalLink
