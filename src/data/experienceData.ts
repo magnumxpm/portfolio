@@ -5,7 +5,7 @@ export const experienceData: ExperienceItem[] = [
     company: "AICTE (Internship)",
     tenure: "2023",
     description:
-      "Worked as a Frontend Developer. Implemented full-spec application end-to-end using React and Electron. Ideated, Designed, and Developed reusable UI components, and deployed as a monorepo with the backend with Docker - with full continuous delivery. Won the internship as a reward for winning the Smart India Hackathon, 2203.",
+      "Worked as a Frontend Developer. Implemented full-spec application end-to-end using React and Electron. Ideated, Designed, and Developed reusable UI components, and deployed as a monorepo with the backend with Docker - with full continuous delivery. Won the internship as a reward for winning the Smart India Hackathon, 2023.",
   },
   {
     company: "LeadGPT",
