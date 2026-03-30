@@ -11,6 +11,6 @@ export const experienceData: ExperienceItem[] = [
     company: "LeadGPT",
     tenure: "2024-2025",
     description:
-      "Worked as a Backend Development Engineer. Refactored older codebase into more a industry standard version. Fixed critical issues in Email delivery pipeline - a mission-critical component in the business. Designed and implememted detailed data-enabled statistics and analytics. Architected an Email reply detection system. Used RabbitMQ as a message queue to facilitate microservice-based design. Enabled CI/CD using Docker and Docker Swarm.",
+      "Worked as a Backend Development Engineer. Refactored older codebase into a more industry standard version. Fixed critical issues in Email delivery pipeline - a mission-critical component in the business. Designed and implememted detailed data-enabled statistics and analytics. Architected an Email reply detection system. Used RabbitMQ as a message queue to facilitate microservice-based design. Enabled CI/CD using Docker and Docker Swarm.",
   },
 ];
