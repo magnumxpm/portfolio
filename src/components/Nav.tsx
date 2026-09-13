@@ -117,60 +117,68 @@ export function Nav() {
 						Get in touch
 					</a>
 
-					<button
-						ref={triggerRef}
-						type="button"
-						onClick={() => setOpen((v) => !v)}
-						aria-expanded={open}
-						aria-controls="nav-panel"
-						className="nav-pill nav-trigger font-mono text-meta text-fg"
-					>
-						<span className="sr-only">{open ? "Close navigation" : "Open navigation"}</span>
-						{open ? (
-							<X className="size-4" aria-hidden="true" />
-						) : (
-							<span aria-hidden="true" className="nav-bars">
-								<span />
-								<span />
+					{/* A morph, not a popover: the pill *is* the panel. One surface owns
+					    the border, fill and blur and interpolates between the two
+					    geometries; a clip box on the same geometry reveals the links as
+					    it grows; the trigger stays put and becomes the panel's header.
+					    The wrapper keeps the pill's size at all times, so opening never
+					    touches the nav's layout. */}
+					<div className="nav-morph" data-open={open || undefined}>
+						<span aria-hidden="true" className="nav-morph-surface" />
+
+						{/* `inert` on the panel already takes it out of the a11y tree and out of
+						    the tab order; an aria-hidden here as well would be redundant and
+						    would hide it from a name query even when open. */}
+						<div className="nav-morph-clip">
+							<div id="nav-panel" ref={panelRef} className="nav-morph-panel" inert={!open}>
+								<ul>
+									{links.map((link, i) => (
+										<li key={link.href} style={{ "--i": i } as React.CSSProperties}>
+											<a
+												href={link.href}
+												onClick={() => close(false)}
+												className="nav-morph-item font-mono text-meta text-fg-dim"
+											>
+												{link.label}
+											</a>
+										</li>
+									))}
+									<li style={{ "--i": links.length } as React.CSSProperties}>
+										<a
+											href={`mailto:${heroData.email}`}
+											onClick={() => close(false)}
+											className="nav-morph-item font-mono text-meta text-accent"
+										>
+											Get in touch
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<button
+							ref={triggerRef}
+							type="button"
+							onClick={() => setOpen((v) => !v)}
+							aria-expanded={open}
+							aria-controls="nav-panel"
+							className="nav-morph-trigger font-mono text-meta text-fg"
+						>
+							<span className="sr-only">{open ? "Close navigation" : "Open navigation"}</span>
+							{/* Both marks are always present and crossfade in place, so the
+							    glyph never jumps as the surface grows around it. */}
+							<span aria-hidden="true" className="nav-morph-glyph">
+								<span className="nav-bars">
+									<span />
+									<span />
+								</span>
+								<X className="nav-morph-x size-4" />
 							</span>
-						)}
-						<span aria-hidden="true" className="nav-trigger-label">
-							Menu
-						</span>
-					</button>
+							<span aria-hidden="true">Menu</span>
+						</button>
+					</div>
 				</div>
 
-				{/* Expands out of the trigger's own geometry. */}
-				<div
-					id="nav-panel"
-					ref={panelRef}
-					data-open={open || undefined}
-					className="nav-panel pointer-events-auto absolute right-6 top-3 md:right-10"
-					inert={!open}
-				>
-					<ul className="flex flex-col gap-0.5 p-2">
-						{links.map((link, i) => (
-							<li key={link.href} style={{ "--i": i } as React.CSSProperties}>
-								<a
-									href={link.href}
-									onClick={() => close(false)}
-									className="nav-panel-item font-mono text-meta text-fg-dim"
-								>
-									{link.label}
-								</a>
-							</li>
-						))}
-						<li style={{ "--i": links.length } as React.CSSProperties}>
-							<a
-								href={`mailto:${heroData.email}`}
-								onClick={() => close(false)}
-								className="nav-panel-item font-mono text-meta text-accent"
-							>
-								Get in touch
-							</a>
-						</li>
-					</ul>
-				</div>
 			</nav>
 		</header>
 	)

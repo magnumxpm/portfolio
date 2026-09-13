@@ -394,8 +394,7 @@
 	/* With JavaScript off the collapse never happens, so the trigger would be a
 	   dead control. Hide it and leave the inline links as the real nav — the
 	   same guarantee the rest of the page makes. */
-	html:not([data-js]) .nav-trigger,
-	html:not([data-js]) .nav-panel {
+	html:not([data-js]) .nav-morph {
 		display: none;
 	}
 	html:not([data-js]) .nav-links {
@@ -403,9 +402,11 @@
 	}
 
 	/* At the top of the page on a wide screen the inline links are the nav, so
-	   the trigger would be a duplicate. Below md it is the only nav there is. */
+	   the trigger would be a duplicate. Below md it is the only nav there is.
+	   The :not([data-open]) guard matters: scrolling back to the top with the
+	   panel open would otherwise vanish it mid-interaction. */
 	@media (min-width: 768px) {
-		header:not([data-collapsed]) .nav-trigger {
+		header:not([data-collapsed]) .nav-morph:not([data-open]) {
 			display: none;
 		}
 	}
@@ -426,28 +427,134 @@
 		background-size: 100% 1px;
 	}
 
-	/* The trigger is a bare glyph at the top of the page and grows a label once
-	   the bar collapses — the "Menu" affordance only appears when it is the
-	   only way to reach the links. */
-	.nav-trigger {
-		cursor: pointer;
-		overflow: hidden;
+	/* --- the morph ------------------------------------------------------- */
+
+	/* Two geometries, one for each state, shared by the surface and the clip.
+	   They are explicit rather than measured because nothing here can measure:
+	   this is CSS, and `width: auto` does not interpolate. Both boxes must stay
+	   in step or the panel will paint outside its own chrome. */
+	.nav-morph {
+		--morph-w: 5.75rem;
+		--morph-h: 2.25rem;
+		--morph-w-open: 13.5rem;
+		/* trigger 2.25 + 6 items x 2.25 + the panel's 0.75 bottom padding.
+		   Locked to the link count by a test — add a link and this must move. */
+		--morph-h-open: 16.5rem;
+
+		position: relative;
+		width: var(--morph-w);
+		height: var(--morph-h);
 	}
-	.nav-trigger-label {
-		display: inline-block;
-		max-width: 0;
-		opacity: 0;
-		white-space: nowrap;
+
+	.nav-morph-surface,
+	.nav-morph-clip {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: var(--morph-w);
+		height: var(--morph-h);
+		border-radius: 999px;
 		transition:
-			max-width 0.5s var(--ease-spring),
-			opacity 0.3s var(--ease-out),
-			margin-left 0.5s var(--ease-spring);
-		margin-left: 0;
+			width 0.55s var(--ease-spring),
+			height 0.55s var(--ease-spring),
+			border-radius 0.4s var(--ease-out);
 	}
-	[data-collapsed] .nav-trigger-label {
-		max-width: 4rem;
+	.nav-morph[data-open] .nav-morph-surface,
+	.nav-morph[data-open] .nav-morph-clip {
+		width: var(--morph-w-open);
+		height: var(--morph-h-open);
+		border-radius: 1.25rem;
+	}
+
+	/* The single continuous surface. The trigger carries no chrome of its own,
+	   so there is never a pill border sitting inside a panel border. */
+	.nav-morph-surface {
+		pointer-events: none;
+		border: 1px solid transparent;
+		background: transparent;
+		transition:
+			width 0.55s var(--ease-spring),
+			height 0.55s var(--ease-spring),
+			border-radius 0.4s var(--ease-out),
+			background-color 0.4s var(--ease-out),
+			border-color 0.4s var(--ease-out),
+			box-shadow 0.4s var(--ease-out);
+	}
+	[data-collapsed] .nav-morph-surface,
+	.nav-morph[data-open] .nav-morph-surface {
+		border-color: var(--line);
+		background: color-mix(in oklab, var(--bg) 72%, transparent);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.05),
+			0 8px 24px -12px rgba(0, 0, 0, 0.8);
+		backdrop-filter: blur(14px) saturate(140%);
+	}
+	.nav-morph[data-open] .nav-morph-surface {
+		background: color-mix(in oklab, var(--bg) 88%, transparent);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.05),
+			0 24px 60px -20px rgba(0, 0, 0, 0.9);
+		backdrop-filter: blur(18px) saturate(140%);
+	}
+
+	/* Same geometry, clipping. The links are revealed *by* the surface growing
+	   rather than fading in beside it — which is the whole difference between a
+	   morph and a popover. */
+	.nav-morph-clip {
+		overflow: hidden;
+		pointer-events: none;
+	}
+	.nav-morph[data-open] .nav-morph-clip {
+		pointer-events: auto;
+	}
+
+	.nav-morph-panel {
+		position: absolute;
+		top: var(--morph-h);
+		right: 0;
+		width: var(--morph-w-open);
+		padding: 0 0.75rem 0.75rem;
+	}
+
+	.nav-morph-trigger {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 1;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		width: var(--morph-w);
+		height: var(--morph-h);
+		cursor: pointer;
+	}
+
+	/* The two marks are stacked on one cell and crossfade, so the glyph stays
+	   put while everything around it moves. */
+	.nav-morph-glyph {
+		display: grid;
+		place-items: center;
+		width: 1rem;
+		height: 1rem;
+	}
+	.nav-morph-glyph > * {
+		grid-area: 1 / 1;
+		transition:
+			opacity 0.25s var(--ease-out),
+			transform 0.4s var(--ease-spring);
+	}
+	.nav-morph-x {
+		opacity: 0;
+		transform: rotate(-90deg) scale(0.7);
+	}
+	.nav-morph[data-open] .nav-bars {
+		opacity: 0;
+		transform: rotate(90deg) scale(0.7);
+	}
+	.nav-morph[data-open] .nav-morph-x {
 		opacity: 1;
-		margin-left: 0.125rem;
+		transform: none;
 	}
 
 	.nav-bars {
@@ -465,67 +572,42 @@
 	.nav-bars span:last-child {
 		width: 60%;
 	}
-	.nav-trigger:hover .nav-bars span:last-child {
+	.nav-morph-trigger:hover .nav-bars span:last-child {
 		width: 100%;
 	}
 
-	/* Expands out of the trigger's own geometry: same corner, same radius. */
-	.nav-panel {
-		width: 0;
-		opacity: 0;
-		visibility: hidden;
-		transform-origin: top right;
-		transform: scale(0.92);
-		overflow: hidden;
-		border: 1px solid var(--line);
-		border-radius: 14px;
-		background: color-mix(in oklab, var(--bg) 88%, transparent);
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.05),
-			0 24px 60px -20px rgba(0, 0, 0, 0.9);
-		backdrop-filter: blur(18px) saturate(140%);
-		transition:
-			width 0.5s var(--ease-spring),
-			opacity 0.28s var(--ease-out),
-			transform 0.5s var(--ease-spring),
-			visibility 0s linear 0.5s;
-	}
-	.nav-panel[data-open] {
-		width: 13rem;
-		opacity: 1;
-		visibility: visible;
-		transform: scale(1);
-		transition-delay: 0s;
-	}
-
-	.nav-panel-item {
-		display: block;
-		padding: 0.5rem 0.75rem;
+	.nav-morph-item {
+		display: flex;
+		align-items: center;
+		height: 2.25rem;
+		padding-inline: 0.75rem;
 		border-radius: 8px;
 		white-space: nowrap;
 		opacity: 0;
-		transform: translateX(8px);
+		transform: translateY(-6px);
 		transition:
 			opacity 0.25s var(--ease-out),
-			transform 0.35s var(--ease-out),
+			transform 0.4s var(--ease-out),
 			background-color 0.2s var(--ease-out),
 			color 0.2s var(--ease-out);
 	}
-	.nav-panel[data-open] .nav-panel-item {
+	.nav-morph[data-open] .nav-morph-item {
 		opacity: 1;
 		transform: none;
-		transition-delay: calc(0.06s + var(--i, 0) * 0.035s);
+		transition-delay: calc(0.1s + var(--i, 0) * 0.04s);
 	}
-	.nav-panel-item:hover {
+	.nav-morph-item:hover {
 		background: var(--surface-hi);
 		color: var(--text);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.nav-panel,
-		.nav-panel-item,
-		.nav-inline,
-		.nav-trigger-label {
+		.nav-morph-surface,
+		.nav-morph-clip,
+		.nav-morph-panel,
+		.nav-morph-item,
+		.nav-morph-glyph > *,
+		.nav-inline {
 			transition-duration: 0.01ms !important;
 			transition-delay: 0s !important;
 		}

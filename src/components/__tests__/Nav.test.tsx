@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs"
+import { join } from "node:path"
+
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
@@ -57,5 +60,29 @@ describe("Nav", () => {
 		for (const cta of ctas) {
 			expect(cta).toHaveAttribute("href", `mailto:${heroData.email}`)
 		}
+	})
+})
+
+describe("morph geometry", () => {
+	// The open height cannot be measured — CSS does not interpolate `auto` — so
+	// it is written out by hand. That makes it silently wrong the moment a link
+	// is added, and a panel taller than its own surface is a very visible bug.
+	it("keeps the open height in step with the number of links", () => {
+		const css = readFileSync(
+			join(process.cwd(), "src/app/globals.css"),
+			"utf8"
+		)
+		const read = (name: string) => {
+			const m = css.match(new RegExp(`--${name}:\\s*([\\d.]+)rem`))
+			if (!m) throw new Error(`--${name} not found`)
+			return Number(m[1])
+		}
+
+		const { container } = render(<Nav />)
+		const items = container.querySelectorAll(".nav-morph-item")
+
+		const ITEM = 2.25 // .nav-morph-item height
+		const PAD = 0.75 // .nav-morph-panel bottom padding
+		expect(read("morph-h-open")).toBeCloseTo(read("morph-h") + items.length * ITEM + PAD, 5)
 	})
 })
