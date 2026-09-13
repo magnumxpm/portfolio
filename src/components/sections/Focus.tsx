@@ -26,8 +26,17 @@ export function Focus() {
 						return (
 							<Reveal key={item.id} delay={i * 0.05} className="bg-bg">
 								<article className="iso-frame group flex h-full flex-col bg-surface/40 transition-colors duration-300 ease-out hover:bg-surface-hi/50">
-									<div className="aspect-[16/9] w-full px-5 pb-2 pt-6">
-										{Diagram ? <Diagram /> : null}
+									{/* The scene is taken out of flow. As an in-flow child its
+									    `height: 100%` was cyclic against a height the well was
+									    still deriving from *it*, so each diagram fell back to its
+									    own viewBox ratio and every card's well came out a
+									    different height. Absolute positioning gives the scene a
+									    definite containing block and stops it feeding the flex
+									    column's min-height. */}
+									<div className="relative aspect-[3/2] w-full">
+										<div className="absolute inset-x-5 bottom-2 top-6">
+											{Diagram ? <Diagram /> : null}
+										</div>
 									</div>
 
 									<div className="flex items-center gap-3 px-7">

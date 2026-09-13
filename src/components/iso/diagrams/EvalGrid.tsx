@@ -2,6 +2,7 @@ import { evalGrid } from "@/data/isoDiagrams"
 
 import { IsoBox } from "../IsoBox"
 import { IsoScene } from "../IsoScene"
+import { FOCUS_ASPECT } from "../aspect"
 
 const CELL = 3
 
@@ -19,6 +20,7 @@ export function EvalGrid() {
 		<IsoScene
 			uid="eval-grid"
 			fit
+			aspect={FOCUS_ASPECT}
 			bounds={{ min: [0, 0, 0], max: [cols * CELL, rows * CELL, 4] }}
 			title="Evaluation harness results"
 			desc={`${total - failures} of ${total} evaluation cases passing; failures stand out as tall columns.`}

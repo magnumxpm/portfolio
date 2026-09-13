@@ -5,6 +5,7 @@ import { IsoLink } from "../IsoLink"
 import { IsoNode, NODE_H } from "../IsoNode"
 import { IsoPlane } from "../IsoPlane"
 import { IsoScene } from "../IsoScene"
+import { FOCUS_ASPECT } from "../aspect"
 
 const DEFAULT_SIZE = [8, 5] as const
 
@@ -22,6 +23,7 @@ export function AgentGraph() {
 		<IsoScene
 			uid="agent-graph"
 			fit
+			aspect={FOCUS_ASPECT}
 			grid={[30, 18]}
 			bounds={{ min: [0, 0, 0], max: [30, 18, 6] }}
 			title="Agent orchestration graph"

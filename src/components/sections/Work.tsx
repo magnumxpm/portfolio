@@ -87,8 +87,12 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 				) : null}
 			</div>
 
-			<div className="order-1 mx-auto aspect-square w-full max-w-[20rem] md:order-none md:mx-0">
-				<ProjectFigure kind={project.figure} layers={project.stack} project={project.title} />
+			{/* Out of flow for the same reason as the Focus wells: an in-flow scene
+			    sizes the well from its own viewBox instead of the other way round. */}
+			<div className="relative order-1 mx-auto aspect-square w-full max-w-[20rem] md:order-none md:mx-0">
+				<div className="absolute inset-0">
+					<ProjectFigure kind={project.figure} layers={project.stack} project={project.title} />
+				</div>
 			</div>
 		</Wrapper>
 	)

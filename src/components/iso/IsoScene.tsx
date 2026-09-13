@@ -1,4 +1,4 @@
-import { iso, screenBounds, U, type Vec3 } from "@/lib/iso"
+import { fitAspect, iso, screenBounds, U, type Vec3 } from "@/lib/iso"
 import { cn } from "@/lib/utils"
 
 interface IsoSceneProps {
@@ -17,6 +17,12 @@ interface IsoSceneProps {
 	uid: string
 	/** Fill the container and letterbox, instead of using the natural width. */
 	fit?: boolean
+	/**
+	 * Pad the viewBox out to this width/height ratio, centred. Set it to the
+	 * well's own ratio and the scene fills the well exactly — which is what
+	 * keeps the corner brackets aligned across a grid of diagrams.
+	 */
+	aspect?: number
 	className?: string
 	children: React.ReactNode
 }
@@ -37,10 +43,12 @@ export function IsoScene({
 	desc,
 	uid,
 	fit,
+	aspect,
 	className,
 	children,
 }: IsoSceneProps) {
-	const box = screenBounds(bounds.min, bounds.max)
+	const raw = screenBounds(bounds.min, bounds.max)
+	const box = aspect ? fitAspect(raw, aspect) : raw
 	const B = 13 // bracket arm length, screen px
 
 	const bracketPath = brackets

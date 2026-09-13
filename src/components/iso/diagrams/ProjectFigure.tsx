@@ -6,6 +6,7 @@ import { IsoLink } from "../IsoLink"
 import { IsoPlane } from "../IsoPlane"
 import { IsoScene } from "../IsoScene"
 import { STACK_TONE } from "../stackTones"
+import { FIGURE_ASPECT } from "../aspect"
 
 /**
  * One figure per project, differing by *topology* rather than by decoration.
@@ -34,6 +35,7 @@ export function ProjectFigure({ kind, layers, project }: FigureProps) {
 	return (
 		<IsoScene
 			fit
+			aspect={FIGURE_ASPECT}
 			uid={`fig-${project.toLowerCase()}`}
 			grid={[SPAN, SPAN]}
 			brackets={false}

@@ -4,6 +4,7 @@ import { serviceStack } from "@/data/isoDiagrams"
 import { IsoBox, IsoSlab } from "../IsoBox"
 import { IsoLink } from "../IsoLink"
 import { IsoScene } from "../IsoScene"
+import { FOCUS_ASPECT } from "../aspect"
 
 const SIZE = [7, 5, 3] as const
 
@@ -17,6 +18,7 @@ export function ServiceStack() {
 		<IsoScene
 			uid="service-stack"
 			fit
+			aspect={FOCUS_ASPECT}
 			grid={[18, 14]}
 			bounds={{ min: [0, 0, 0], max: [18, 14, 6] }}
 			title="Deployed agent services"

@@ -1,4 +1,4 @@
-import { elbow, handle, iso, longestMidpoint, poly, screenBounds, U } from "../iso"
+import { elbow, fitAspect, handle, iso, longestMidpoint, poly, screenBounds, U } from "../iso"
 
 describe("iso projection", () => {
 	it("puts the origin at the origin", () => {
@@ -120,5 +120,24 @@ describe("poly", () => {
 		expect(poly([0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0])).toBe(
 			"0,0 16,8 0,16 -16,8"
 		)
+	})
+})
+
+describe("fitAspect", () => {
+	const box = { x: -100, y: -50, width: 200, height: 100 }
+
+	it("leaves a box that already matches alone", () => {
+		expect(fitAspect(box, 2)).toEqual(box)
+	})
+
+	it("only ever grows, and keeps the centre fixed", () => {
+		for (const target of [0.5, 1, 1.5, 3]) {
+			const out = fitAspect(box, target)
+			expect(out.width).toBeGreaterThanOrEqual(box.width - 1e-9)
+			expect(out.height).toBeGreaterThanOrEqual(box.height - 1e-9)
+			expect(out.x + out.width / 2).toBeCloseTo(box.x + box.width / 2)
+			expect(out.y + out.height / 2).toBeCloseTo(box.y + box.height / 2)
+			expect(out.width / out.height).toBeCloseTo(target)
+		}
 	})
 })

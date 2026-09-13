@@ -149,3 +149,32 @@ export function handle(
 			return [x + w, y + d / 2, z + h / 2]
 	}
 }
+
+export interface Box {
+	x: number
+	y: number
+	width: number
+	height: number
+}
+
+/**
+ * Grow a screen box about its centre until it matches a target width/height
+ * ratio. Only ever adds space — the content is never cropped.
+ *
+ * This exists because of the corner brackets. `preserveAspectRatio` already
+ * letterboxes a scene inside its well, so heights come out equal on their own;
+ * but the brackets are drawn at the *viewBox* corners, so four diagrams with
+ * four different natural ratios frame themselves at four different widths and
+ * the grid reads ragged. Normalising the box first makes every scene fill its
+ * well exactly, so the frames line up across the grid.
+ */
+export function fitAspect(box: Box, aspect: number): Box {
+	const current = box.width / box.height
+	if (Math.abs(current - aspect) < 1e-6) return box
+	if (current < aspect) {
+		const width = box.height * aspect
+		return { ...box, x: box.x - (width - box.width) / 2, width }
+	}
+	const height = box.width / aspect
+	return { ...box, y: box.y - (height - box.height) / 2, height }
+}

@@ -171,3 +171,30 @@ describe("Contact", () => {
 		)
 	})
 })
+
+describe("diagram wells", () => {
+	// The four Focus diagrams sit in a grid. If their viewBoxes disagree on
+	// aspect ratio they letterbox to different widths and the corner brackets
+	// frame each card differently — which is what made the grid look ragged.
+	it("renders every Focus scene at one viewBox aspect ratio", () => {
+		const { container } = render(<Focus />)
+		const scenes = Array.from(container.querySelectorAll("svg.iso-scene"))
+		expect(scenes).toHaveLength(4)
+
+		const ratios = scenes.map((s) => {
+			const [, , w, h] = s.getAttribute("viewBox")!.split(" ").map(Number)
+			return w / h
+		})
+		for (const r of ratios) expect(r).toBeCloseTo(3 / 2, 5)
+	})
+
+	it("renders every project figure square", () => {
+		const { container } = render(<Work />)
+		const scenes = Array.from(container.querySelectorAll("svg.iso-scene"))
+		expect(scenes.length).toBeGreaterThan(0)
+		for (const s of scenes) {
+			const [, , w, h] = s.getAttribute("viewBox")!.split(" ").map(Number)
+			expect(w / h).toBeCloseTo(1, 5)
+		}
+	})
+})

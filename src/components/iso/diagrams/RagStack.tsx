@@ -3,6 +3,7 @@ import { ragStack } from "@/data/isoDiagrams"
 
 import { IsoLink } from "../IsoLink"
 import { IsoScene } from "../IsoScene"
+import { FOCUS_ASPECT } from "../aspect"
 import { IsoSlab } from "../IsoBox"
 
 const W = 20
@@ -17,6 +18,7 @@ export function RagStack() {
 		<IsoScene
 			uid="rag-stack"
 			fit
+			aspect={FOCUS_ASPECT}
 			grid={[W, D]}
 			bounds={{ min: [0, 0, 0], max: [W, D, top + 1] }}
 			title="Retrieval pipeline"
