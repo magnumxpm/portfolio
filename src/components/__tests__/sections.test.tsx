@@ -56,6 +56,33 @@ describe("Work", () => {
 		expect(screen.getAllByRole("link")).toHaveLength(linked.length)
 		expect(screen.getAllByText("Private")).toHaveLength(projectsData.length - linked.length)
 	})
+
+	it("renders an architecture diagram for every project", () => {
+		render(<Work />)
+		for (const project of projectsData) {
+			expect(
+				screen.getByRole("img", { name: `${project.title} architecture` })
+			).toBeInTheDocument()
+		}
+	})
+
+	it("keeps the stack layers as real text in a legend, not baked into the SVG", () => {
+		const { container } = render(<Work />)
+		// The diagram is a glyph — at 188px any label would render at 6-8px.
+		expect(container.querySelectorAll(".iso-scene text")).toHaveLength(0)
+		// getAllByText: layer labels are shared across projects by design — a
+		// "Go API" in Jarnkit is the same colour and the same words as in Helmdall.
+		for (const layer of projectsData[0].stack) {
+			expect(screen.getAllByText(layer.label).length).toBeGreaterThan(0)
+		}
+	})
+
+	it("draws one slab per layer", () => {
+		const { container } = render(<Work />)
+		const slabs = container.querySelectorAll(".iso-slab")
+		const expected = projectsData.reduce((n, p) => n + p.stack.length, 0)
+		expect(slabs).toHaveLength(expected)
+	})
 })
 
 describe("Experience", () => {

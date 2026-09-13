@@ -1,5 +1,11 @@
 import type { ProjectItem } from "@/types"
 
+/**
+ * NOTE: the `stack` layers are derived from each project's technology list and
+ * the layering is partly inferred, not documented. They render as architecture
+ * claims about real systems — confirm them before this goes live.
+ */
+
 /** Ordered so the AI and infrastructure work leads. */
 export const projectsData: ProjectItem[] = [
 	{
@@ -9,6 +15,12 @@ export const projectsData: ProjectItem[] = [
 		role: "Full-stack",
 		technologies: ["Golang", "AI Models", "DevOps", "Next.js"],
 		url: "https://jarnkit.com",
+		stack: [
+			{ label: "Next.js client", kind: "client" },
+			{ label: "Go API", kind: "service" },
+			{ label: "AI models", kind: "external" },
+			{ label: "Docker / CI", kind: "edge" },
+		],
 	},
 	{
 		title: "Helmdall",
@@ -17,6 +29,13 @@ export const projectsData: ProjectItem[] = [
 		role: "Backend",
 		technologies: ["Golang", "Postgres", "gRPC", "WebSockets", "AWS"],
 		url: "https://helmdall.com",
+		stack: [
+			{ label: "Go agent", kind: "client" },
+			{ label: "gRPC + WebSockets", kind: "edge" },
+			{ label: "Go API", kind: "service" },
+			{ label: "Postgres", kind: "store" },
+			{ label: "AWS", kind: "external" },
+		],
 	},
 	{
 		title: "Confention",
@@ -25,6 +44,11 @@ export const projectsData: ProjectItem[] = [
 		role: "Backend & Android",
 		technologies: ["Golang", "Postgres", "Kotlin", "Android SDK"],
 		url: "",
+		stack: [
+			{ label: "Android (Kotlin)", kind: "client" },
+			{ label: "Go API", kind: "service" },
+			{ label: "Postgres", kind: "store" },
+		],
 	},
 	{
 		title: "Samklaang",
@@ -33,6 +57,11 @@ export const projectsData: ProjectItem[] = [
 		role: "Frontend",
 		technologies: ["Next.js", "Tailwind", "Electron", "UI/UX"],
 		url: "",
+		stack: [
+			{ label: "Electron shell", kind: "client" },
+			{ label: "Next.js + Tailwind UI", kind: "client" },
+			{ label: "Conferencing layer", kind: "service" },
+		],
 	},
 	{
 		title: "Shopydoo",
@@ -41,6 +70,11 @@ export const projectsData: ProjectItem[] = [
 		role: "Frontend",
 		technologies: ["Kotlin", "Next.js", "Tailwind", "UI/UX"],
 		url: "https://shopydoo.in",
+		stack: [
+			{ label: "Android (Kotlin)", kind: "client" },
+			{ label: "Next.js storefront", kind: "client" },
+			{ label: "Delivery service", kind: "service" },
+		],
 	},
 	{
 		title: "ResearchBook",
@@ -49,5 +83,10 @@ export const projectsData: ProjectItem[] = [
 		role: "Full-stack",
 		technologies: ["Next.js", "Tailwind", "Firebase", "DevOps"],
 		url: "https://researchbook.vercel.app",
+		stack: [
+			{ label: "Next.js + Tailwind", kind: "client" },
+			{ label: "Firebase", kind: "store" },
+			{ label: "CI / hosting", kind: "edge" },
+		],
 	},
 ]

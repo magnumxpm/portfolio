@@ -1,4 +1,5 @@
-import { alphaRamp, bayer, field, hash01 } from "../ascii-engine"
+import { FIELD_BAND_OUTER } from "../ascii-config"
+import { alphaRamp, bayer, field, hash01, isGutterCell } from "../ascii-engine"
 
 describe("bayer", () => {
 	it("produces an n x n matrix", () => {
@@ -118,6 +119,47 @@ describe("hash01", () => {
 				expect(v).toBeGreaterThanOrEqual(0)
 				expect(v).toBeLessThan(1)
 			}
+		}
+	})
+})
+
+
+describe("isGutterCell — the two-tier field's accessibility contract", () => {
+	const cellW = 13
+	const viewportW = 1920
+	const centre = viewportW / 2
+
+	it("never allows the bright tier inside the content band", () => {
+		const cols = Math.ceil(viewportW / cellW)
+		for (let x = 0; x < cols; x++) {
+			if (!isGutterCell(x, cellW, viewportW)) continue
+			// Every cell it *does* allow must lie wholly outside the band.
+			const left = x * cellW
+			const right = left + cellW
+			const outside =
+				right <= centre - FIELD_BAND_OUTER || left >= centre + FIELD_BAND_OUTER
+			expect(outside).toBe(true)
+		}
+	})
+
+	it("keeps a cell straddling the band edge on the dim tier", () => {
+		// The cell containing the exact boundary must not be promoted.
+		const boundary = centre - FIELD_BAND_OUTER
+		const straddling = Math.floor(boundary / cellW)
+		expect(isGutterCell(straddling, cellW, viewportW)).toBe(false)
+	})
+
+	it("does light up the far gutters on a wide viewport", () => {
+		expect(isGutterCell(0, cellW, viewportW)).toBe(true)
+		expect(isGutterCell(Math.ceil(viewportW / cellW) - 1, cellW, viewportW)).toBe(true)
+	})
+
+	it("promotes nothing at all when there are no gutters", () => {
+		// 1120px shell on a 1200px viewport: the band covers the whole width.
+		const narrow = 1200
+		const cols = Math.ceil(narrow / cellW)
+		for (let x = 0; x < cols; x++) {
+			expect(isGutterCell(x, cellW, narrow)).toBe(false)
 		}
 	})
 })

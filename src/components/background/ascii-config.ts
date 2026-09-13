@@ -24,7 +24,7 @@ export interface FieldPreset {
  * Raising speed is cheap; raising density is not.
  */
 export const PRESETS: Record<string, FieldPreset> = {
-	hero: { speed: 0.55, density: 0.55, ramp: RAMP_SPARSE, accent: 0.02 },
+	hero: { speed: 0.55, density: 0.7, ramp: RAMP_SPARSE, accent: 0.02 },
 	focus: { speed: 0.32, density: 0.35, ramp: RAMP_DOTS, accent: 0.01 },
 	work: { speed: 0.25, density: 0.3, ramp: RAMP_DOTS, accent: 0 },
 	experience: { speed: 0.22, density: 0.26, ramp: RAMP_DOTS, accent: 0 },
@@ -33,16 +33,16 @@ export const PRESETS: Record<string, FieldPreset> = {
 }
 
 export const DESKTOP = {
-	cellW: 9,
-	cellH: 15,
+	cellW: 13,
+	cellH: 21,
 	maxCells: 14_000,
 	fps: 15,
 	dprCap: 1.5,
 } as const
 
 export const MOBILE = {
-	cellW: 15,
-	cellH: 24,
+	cellW: 18,
+	cellH: 28,
 	maxCells: 4_000,
 	fps: 12,
 	dprCap: 1,
@@ -54,6 +54,22 @@ export const MOBILE = {
  * not drift from the CSS token.
  */
 export const FIELD_MAX = "#2c2c32"
+
+/**
+ * The gutter tier. Roughly 3x the luminance of FIELD_MAX, which is what makes
+ * the field actually visible — but it is only ever painted outside the content
+ * band (see isGutterCell), so it sits behind no text and is exempt from the
+ * contrast math. Mirrors --field-max-edge.
+ */
+export const FIELD_MAX_EDGE = "#4a4a54"
+
+/**
+ * Half-width of the text column, px. Mirrors --field-band-outer, deliberately
+ * the mask's OUTER edge rather than its inner one: between the two the mask is
+ * mid-fade, so a bright cell there would be partly visible behind content that
+ * runs close to the shell edge.
+ */
+export const FIELD_BAND_OUTER = 610
 export const FIELD_ACCENT = "#f2a65a"
 
 /**

@@ -22,14 +22,48 @@
 		   src/app/__tests__/contrast.test.ts — change these together. */
 		--field-dim: #1a1a1d;
 		--field-max: #2c2c32;
+		/* Gutters only. Never rendered inside the content band, so it is exempt
+		   from the AA math above — enforced in ascii-engine.ts, not by the mask. */
+		--field-max-edge: #4a4a54;
 
-		--field-mask: radial-gradient(
-				ellipse 120% 80% at 50% 0%,
-				rgba(0, 0, 0, 0.85) 0%,
-				rgba(0, 0, 0, 0.35) 45%,
-				rgba(0, 0, 0, 0.08) 100%
+		/* Half-widths, in px, of the zone the field must stay out of.
+		   The shell is 1120px with 40px gutters, so text reaches at most
+		   +/-520px from centre; --field-band-inner clears that with a margin, and
+		   the field only reaches full brightness beyond --field-band-outer.
+		   --field-band-outer is also what the engine's isGutterCell() keys off,
+		   so the bright tier starts only where the mask is already fully opaque. */
+		--field-band-inner: 530px;
+		--field-band-outer: 610px;
+
+		/* The field is suppressed down the content column and visible in the side
+		   gutters — the opposite of the usual vignette. Text lives in the middle,
+		   so that is precisely where the background must not be.
+
+		   max()/min() make this self-disabling: once the viewport is narrower than
+		   2 * --field-band-outer there are no gutters left, the opaque stops
+		   collapse to zero width, and the field simply goes away rather than
+		   crowding the text. */
+		--field-mask: linear-gradient(
+				to right,
+				#000 0px,
+				#000 max(0px, calc(50% - var(--field-band-outer))),
+				transparent max(0px, calc(50% - var(--field-band-inner))),
+				transparent min(100%, calc(50% + var(--field-band-inner))),
+				#000 min(100%, calc(50% + var(--field-band-outer))),
+				#000 100%
 			),
-			linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%);
+			linear-gradient(to bottom, transparent 0%, #000 4%, #000 96%, transparent 100%);
+
+		/* Two declarations, in this order. CSS does not fall back from linear()
+		   automatically: the cubic-bezier must come first and be overridden by
+		   the later one wherever linear() parses. */
+		--ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
+		--ease-spring: linear(
+			0, 0.006 1.1%, 0.026 2.3%, 0.106 4.8%, 0.418 11.4%, 0.559 14.4%, 0.68 17.5%,
+			0.775 20.7%, 0.85 24.1%, 0.907 27.8%, 0.947 31.7%, 0.976 36.2%, 0.994 41.4%,
+			1.004 48%, 1.006 58%, 1
+		);
+		--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
 		color-scheme: dark;
 	}
@@ -85,8 +119,8 @@
 		z-index: 0;
 		pointer-events: none;
 		background-color: var(--bg);
-		background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%228%22%20shape-rendering%3D%22crispEdges%22%3E%3Cg%20fill%3D%22%238E949C%22%20fill-opacity%3D%22.5%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%226%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%226%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%226%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%225%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%226%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-		background-size: 8px 8px;
+		background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%20shape-rendering%3D%22crispEdges%22%3E%3Cg%20fill%3D%22%239aa0a8%22%20fill-opacity%3D%22.22%22%3E%3Crect%20x%3D%2224%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2248%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2272%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2224%22%20y%3D%2224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2248%22%20y%3D%2224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2272%22%20y%3D%2224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2248%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2224%22%20y%3D%2248%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2248%22%20y%3D%2248%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2272%22%20y%3D%2248%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2272%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2224%22%20y%3D%2272%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2248%22%20y%3D%2272%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%2272%22%20y%3D%2272%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%239aa0a8%22%20stroke-opacity%3D%22.30%22%20stroke-width%3D%221%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20d%3D%22M-3.5%20.5h8M.5%20-3.5v8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+		background-size: 96px 96px;
 		-webkit-mask-image: var(--field-mask);
 		mask-image: var(--field-mask);
 		-webkit-mask-composite: source-in;
@@ -123,6 +157,201 @@
 
 	.hairline {
 		border-top: 1px solid var(--line);
+	}
+
+	/* --- isometric diagrams --------------------------------------------- */
+
+	.iso-scene {
+		/* One base colour; the three faces are derived from it, so a whole
+		   diagram is re-themed by overriding this single property.
+		   --iso-top lands around #282b2d — below --field-max — so --text-faint on
+		   a diagram face stays at least as legible as the audited worst case.
+		   Do not lighten this without revisiting the contrast block above. */
+		--iso-base: var(--surface-hi);
+		--iso-line: var(--line-hi);
+		--iso-top: color-mix(in oklab, #ffffff 14%, var(--iso-base));
+		--iso-right: color-mix(in oklab, #000000 22%, var(--iso-base));
+		--iso-left: color-mix(in oklab, #000000 42%, var(--iso-base));
+
+		display: block;
+		width: 100%;
+		max-width: var(--iso-w, 360px);
+		height: auto;
+		overflow: visible;
+		/* Overrides the body's optimizeLegibility, which does the wrong thing to
+		   text inside a scaled SVG. */
+		text-rendering: geometricPrecision;
+	}
+
+	.iso-obj[data-tone="accent"] {
+		--iso-base: color-mix(in oklab, var(--accent) 26%, var(--surface-hi));
+		--iso-line: color-mix(in oklab, var(--accent) 55%, var(--line-hi));
+	}
+	.iso-obj[data-tone="muted"] {
+		--iso-base: color-mix(in oklab, var(--bg) 55%, var(--surface));
+	}
+	.iso-obj[data-tone="deep"] {
+		--iso-base: color-mix(in oklab, var(--bg) 25%, var(--surface));
+	}
+
+	.iso-face-top {
+		fill: var(--iso-top);
+	}
+	.iso-face-right {
+		fill: var(--iso-right);
+	}
+	.iso-face-left {
+		fill: var(--iso-left);
+	}
+	.iso-edge {
+		fill: none;
+		stroke: var(--iso-line);
+		stroke-width: 1;
+	}
+	.iso-dot {
+		fill: var(--text-faint);
+		fill-opacity: 0.22;
+	}
+	.iso-bracket {
+		fill: none;
+		stroke: var(--line-hi);
+		stroke-width: 1;
+	}
+	.iso-handle {
+		fill: var(--bg);
+		stroke: var(--iso-line);
+		stroke-width: 1;
+	}
+	.iso-node[data-active] .iso-handle {
+		stroke: var(--accent);
+	}
+
+	.iso-wire {
+		fill: none;
+		stroke: var(--line-hi);
+		stroke-width: 1.25;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.iso-link[data-variant="dashed"] .iso-wire {
+		stroke-dasharray: 3 4;
+		stroke-opacity: 0.7;
+	}
+	.iso-link[data-active] .iso-wire {
+		stroke: var(--accent);
+		stroke-width: 1.5;
+	}
+	.iso-arrow {
+		fill: var(--line-hi);
+	}
+	.iso-link[data-active] .iso-arrow {
+		fill: var(--accent);
+	}
+	.iso-pulse {
+		fill: var(--accent);
+		offset-distance: 0%;
+	}
+
+	.iso-pill rect {
+		fill: var(--bg);
+		stroke: var(--line-hi);
+		stroke-width: 1;
+	}
+	.iso-pill text {
+		fill: var(--text-dim);
+		font-family: theme("fontFamily.mono");
+		font-size: 10px;
+		letter-spacing: 0.04em;
+	}
+
+	.iso-scene text {
+		pointer-events: none;
+	}
+	.iso-title {
+		fill: var(--text);
+		font-family: theme("fontFamily.sans");
+		font-size: 13px;
+		font-weight: 500;
+		dominant-baseline: auto;
+	}
+	.iso-sub {
+		fill: var(--text-faint);
+		font-family: theme("fontFamily.mono");
+		font-size: 10.5px;
+		letter-spacing: 0.02em;
+		dominant-baseline: auto;
+	}
+	/* At the 0.78 downscale a Focus card hits on a 375px screen these would land
+	   at ~8px. Drop them and keep the geometry. */
+	@media (max-width: 639px) {
+		.iso-sub {
+			display: none;
+		}
+	}
+
+	/* Motion. Scoped to [data-js] exactly like the reveal system, so with JS off
+	   — or if the observer never fires — every diagram renders finished rather
+	   than as an empty frame. */
+	[data-js] .iso-obj,
+	[data-js] .iso-link {
+		opacity: 0;
+	}
+	[data-js] .iso-obj {
+		transform: translateY(10px);
+	}
+	[data-js] .iso-wire {
+		stroke-dasharray: 100;
+		stroke-dashoffset: 100;
+	}
+
+	[data-js] .is-visible .iso-obj,
+	[data-js] .is-visible .iso-link {
+		opacity: 1;
+		transform: none;
+		transition:
+			opacity 0.45s var(--ease-out) var(--iso-delay),
+			transform 0.55s var(--ease-out) var(--iso-delay);
+	}
+	[data-js] .is-visible .iso-wire {
+		stroke-dashoffset: 0;
+		transition: stroke-dashoffset 0.7s var(--ease-out) var(--iso-delay);
+	}
+	.iso-obj,
+	.iso-link {
+		--iso-delay: calc(var(--iso-step, 0) * 0.09s);
+	}
+
+	@keyframes iso-pulse {
+		to {
+			offset-distance: 100%;
+		}
+	}
+	[data-js] .is-visible .iso-pulse {
+		animation: iso-pulse 2.6s linear infinite;
+	}
+
+	/* Hover: the stack separates and the active path warms up. Transform only. */
+	.group:hover .iso-slab,
+	.group:focus-within .iso-slab {
+		transform: translateY(calc(var(--iso-step, 0) * -2px));
+	}
+	.iso-scene:hover .iso-pulse,
+	.group:hover .iso-pulse {
+		animation-duration: 1.3s;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.iso-obj,
+		.iso-link {
+			opacity: 1 !important;
+			transform: none !important;
+		}
+		.iso-wire {
+			stroke-dashoffset: 0 !important;
+		}
+		.iso-pulse {
+			display: none;
+		}
 	}
 
 	/* --- reveal ---------------------------------------------------------- */

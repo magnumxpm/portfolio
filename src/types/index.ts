@@ -17,6 +17,18 @@ export interface FocusItem {
 	keywords: string[]
 }
 
+/**
+ * A layer's role in the system, not free text — this is what lets one component
+ * colour six different projects coherently, so "Go API" reads the same in
+ * every diagram.
+ */
+export type StackKind = "client" | "edge" | "service" | "queue" | "store" | "external"
+
+export interface StackLayer {
+	label: string
+	kind: StackKind
+}
+
 export interface ProjectItem {
 	title: string
 	description: string
@@ -24,6 +36,8 @@ export interface ProjectItem {
 	role: string
 	technologies: string[]
 	url: string
+	/** Architecture layers, client-most first. 3-5; each becomes one slab. */
+	stack: StackLayer[]
 }
 
 export interface ExperienceItem {

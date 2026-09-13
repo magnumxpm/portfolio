@@ -37,7 +37,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+		// suppressHydrationWarning: the inline script below deliberately stamps
+		// data-js onto <html> before React hydrates, so the client tree will
+		// always differ from the server tree by that one attribute.
+		<html
+			lang="en"
+			className={`${GeistSans.variable} ${GeistMono.variable}`}
+			suppressHydrationWarning
+		>
 			<head>
 				{/* Runs before first paint so reveal states never flash, and so the
 				    no-JS path keeps every element visible. */}

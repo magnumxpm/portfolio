@@ -2,7 +2,9 @@ import {
 	ATLAS_FONT,
 	DESKTOP,
 	FIELD_ACCENT,
+	FIELD_BAND_OUTER,
 	FIELD_MAX,
+	FIELD_MAX_EDGE,
 	MOBILE,
 	PRESETS,
 	type FieldPreset,
@@ -50,6 +52,32 @@ export function bayer(n: 2 | 4 | 8 | 16): Float32Array {
 }
 
 export const BAYER8 = bayer(8)
+
+/**
+ * Is this column outside the text column, and therefore allowed the bright
+ * gutter tier?
+ *
+ * This is the whole accessibility contract of the two-tier field, so it is a
+ * pure function rather than an inline expression buried in the draw loop: the
+ * invariant "no cell inside the content band is ever painted brighter than
+ * FIELD_MAX" is asserted against it directly.
+ *
+ * `bandHalfPx` is the mask's OUTER edge, not its inner one. Between the two the
+ * mask is mid-fade, so a bright cell there would be partly visible behind
+ * content that runs close to the shell edge.
+ */
+export function isGutterCell(
+	x: number,
+	cellW: number,
+	viewportW: number,
+	bandHalfPx: number = FIELD_BAND_OUTER
+): boolean {
+	const centre = viewportW / 2
+	const cellLeft = x * cellW
+	const cellRight = cellLeft + cellW
+	// The whole cell must clear the band; a cell straddling the edge stays dim.
+	return cellRight <= centre - bandHalfPx || cellLeft >= centre + bandHalfPx
+}
 
 /**
  * Three directional travelling waves. Deterministic, allocation-free, and at
@@ -183,8 +211,10 @@ export function createEngine(
 	let grid: Grid = { cols: 0, rows: 0, cw: tier.cellW, ch: tier.cellH }
 	let prev = new Uint8Array(0)
 	let atlas: HTMLCanvasElement | null = null
+	let atlasEdge: HTMLCanvasElement | null = null
 	let atlasAccent: HTMLCanvasElement | null = null
 	let atlasRamp = ""
+	let cssWidth = 0
 	let alpha = alphaRamp(1)
 	let raf = 0
 	let last = 0
@@ -219,12 +249,15 @@ export function createEngine(
 		grid = { cols, rows, cw, ch }
 		prev = new Uint8Array(cols * rows).fill(255)
 		atlas = null // force rebuild at current metrics
+		atlasEdge = null
 		atlasAccent = null
+		cssWidth = cssW
 	}
 
 	function ensureAtlas(ramp: string) {
 		if (atlas && atlasRamp === ramp) return
 		atlas = buildAtlas(ramp, grid.cw, grid.ch, dpr, FIELD_MAX)
+		atlasEdge = buildAtlas(ramp, grid.cw, grid.ch, dpr, FIELD_MAX_EDGE)
 		atlasAccent = buildAtlas(ramp, grid.cw, grid.ch, dpr, FIELD_ACCENT)
 		atlasRamp = ramp
 		alpha = alphaRamp(ramp.length)
@@ -276,7 +309,11 @@ export function createEngine(
 				// canvas rather than the glyph and leave holes as neighbouring
 				// cells are cleared.
 				const src =
-					g === brightest && accent > 0 && hash01(x, y) < accent ? atlasAccent! : atlas!
+					g === brightest && accent > 0 && hash01(x, y) < accent
+						? atlasAccent!
+						: isGutterCell(x, cw, cssWidth)
+							? atlasEdge!
+							: atlas!
 
 				ctx!.globalAlpha = alpha[g]
 				ctx!.drawImage(src, g * cwDev, 0, cwDev, chDev, px, py, cw, ch)
