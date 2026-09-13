@@ -198,3 +198,23 @@ describe("diagram wells", () => {
 		}
 	})
 })
+
+describe("diagram ambient motion", () => {
+	it("marks the Focus scenes alive and gives their accent objects a drift group", () => {
+		const { container } = render(<Focus />)
+		const alive = container.querySelectorAll("svg.iso-scene[data-alive]")
+		expect(alive).toHaveLength(4)
+
+		const accents = container.querySelectorAll('.iso-obj[data-tone="accent"]')
+		expect(accents.length).toBeGreaterThan(0)
+		// Kept small on purpose: `.is-visible` is never removed, so each of these
+		// animates for the life of the page.
+		expect(accents.length).toBeLessThanOrEqual(8)
+		for (const el of accents) expect(el.querySelector(".iso-drift")).not.toBeNull()
+	})
+
+	it("does not mark project figures alive", () => {
+		const { container } = render(<Work />)
+		expect(container.querySelectorAll("svg.iso-scene[data-alive]")).toHaveLength(0)
+	})
+})

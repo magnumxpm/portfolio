@@ -21,6 +21,7 @@ export function EvalGrid() {
 			uid="eval-grid"
 			fit
 			aspect={FOCUS_ASPECT}
+			alive
 			bounds={{ min: [0, 0, 0], max: [cols * CELL, rows * CELL, 4] }}
 			title="Evaluation harness results"
 			desc={`${total - failures} of ${total} evaluation cases passing; failures stand out as tall columns.`}

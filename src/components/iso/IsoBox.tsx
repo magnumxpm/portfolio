@@ -61,40 +61,45 @@ export function IsoBox({
 			data-tone={tone}
 			style={{ "--iso-step": step } as React.CSSProperties}
 		>
-			<polygon points={left} className="iso-face-left" />
-			<polygon points={right} className="iso-face-right" />
-			<polygon points={top} className="iso-face-top" />
-			{seam ? (
-				<polygon points={top} className="iso-edge" vectorEffect="non-scaling-stroke" />
-			) : null}
+			{/* Drift lives on an inner group: the outer <g> owns the reveal
+			    transition and the hover explode, so an ambient animation on the
+			    same element would replace both. */}
+			<g className="iso-drift">
+				<polygon points={left} className="iso-face-left" />
+				<polygon points={right} className="iso-face-right" />
+				<polygon points={top} className="iso-face-top" />
+				{seam ? (
+					<polygon points={top} className="iso-edge" vectorEffect="non-scaling-stroke" />
+				) : null}
 
-			{sideLabel && label ? (
-				<path
-					d={`M${rim.sx} ${rim.sy}h14`}
-					className="iso-tick"
-					vectorEffect="non-scaling-stroke"
-				/>
-			) : null}
-			{label ? (
-				<text
-					x={sideLabel ? rim.sx + 20 : cap.sx}
-					y={sideLabel ? rim.sy - (sub ? 4 : -4) : cap.sy - 12}
-					className="iso-title"
-					textAnchor={sideLabel ? "start" : "middle"}
-				>
-					{label}
-				</text>
-			) : null}
-			{sub ? (
-				<text
-					x={sideLabel ? rim.sx + 20 : cap.sx}
-					y={sideLabel ? rim.sy + 10 : cap.sy + 1}
-					className="iso-sub"
-					textAnchor={sideLabel ? "start" : "middle"}
-				>
-					{sub}
-				</text>
-			) : null}
+				{sideLabel && label ? (
+					<path
+						d={`M${rim.sx} ${rim.sy}h14`}
+						className="iso-tick"
+						vectorEffect="non-scaling-stroke"
+					/>
+				) : null}
+				{label ? (
+					<text
+						x={sideLabel ? rim.sx + 20 : cap.sx}
+						y={sideLabel ? rim.sy - (sub ? 4 : -4) : cap.sy - 12}
+						className="iso-title"
+						textAnchor={sideLabel ? "start" : "middle"}
+					>
+						{label}
+					</text>
+				) : null}
+				{sub ? (
+					<text
+						x={sideLabel ? rim.sx + 20 : cap.sx}
+						y={sideLabel ? rim.sy + 10 : cap.sy + 1}
+						className="iso-sub"
+						textAnchor={sideLabel ? "start" : "middle"}
+					>
+						{sub}
+					</text>
+				) : null}
+			</g>
 		</g>
 	)
 }

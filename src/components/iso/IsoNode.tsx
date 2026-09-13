@@ -48,36 +48,38 @@ export function IsoNode({
 			data-active={active ? "" : undefined}
 			style={{ "--iso-step": step } as React.CSSProperties}
 		>
-			<polygon points={left} className="iso-face-left" />
-			<polygon points={right} className="iso-face-right" />
-			<polygon points={top} className="iso-face-top" />
-			<polygon points={top} className="iso-edge" vectorEffect="non-scaling-stroke" />
+			<g className="iso-drift">
+				<polygon points={left} className="iso-face-left" />
+				<polygon points={right} className="iso-face-right" />
+				<polygon points={top} className="iso-face-top" />
+				<polygon points={top} className="iso-edge" vectorEffect="non-scaling-stroke" />
 
-			{handles.map((face) => {
-				const h = iso(...handle(origin, box, face))
-				return (
-					<rect
-						key={face}
-						x={h.sx - 2.5}
-						y={h.sy - 2.5}
-						width={5}
-						height={5}
-						className="iso-handle"
-						vectorEffect="non-scaling-stroke"
-					/>
-				)
-			})}
+				{handles.map((face) => {
+					const h = iso(...handle(origin, box, face))
+					return (
+						<rect
+							key={face}
+							x={h.sx - 2.5}
+							y={h.sy - 2.5}
+							width={5}
+							height={5}
+							className="iso-handle"
+							vectorEffect="non-scaling-stroke"
+						/>
+					)
+				})}
 
-			{title ? (
-				<text x={cap.sx} y={cap.sy - 3} className="iso-title" textAnchor="middle">
-					{title}
-				</text>
-			) : null}
-			{sub ? (
-				<text x={cap.sx} y={cap.sy + 10} className="iso-sub" textAnchor="middle">
-					{sub}
-				</text>
-			) : null}
+				{title ? (
+					<text x={cap.sx} y={cap.sy - 3} className="iso-title" textAnchor="middle">
+						{title}
+					</text>
+				) : null}
+				{sub ? (
+					<text x={cap.sx} y={cap.sy + 10} className="iso-sub" textAnchor="middle">
+						{sub}
+					</text>
+				) : null}
+			</g>
 		</g>
 	)
 }

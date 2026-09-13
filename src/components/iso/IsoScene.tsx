@@ -23,6 +23,13 @@ interface IsoSceneProps {
 	 * keeps the corner brackets aligned across a grid of diagrams.
 	 */
 	aspect?: number
+	/**
+	 * Opt this scene into the ambient float. Restricted to the Focus diagrams:
+	 * `.is-visible` is added once and never removed, so an infinite animation
+	 * here runs for the life of the page — it is only worth spending on the
+	 * handful of accent objects that carry the "this is running" read.
+	 */
+	alive?: boolean
 	className?: string
 	children: React.ReactNode
 }
@@ -44,6 +51,7 @@ export function IsoScene({
 	uid,
 	fit,
 	aspect,
+	alive,
 	className,
 	children,
 }: IsoSceneProps) {
@@ -74,6 +82,7 @@ export function IsoScene({
 	return (
 		<svg
 			role="img"
+			data-alive={alive ? "" : undefined}
 			viewBox={`${box.x} ${box.y} ${box.width} ${box.height}`}
 			style={{ "--iso-w": `${width}px` } as React.CSSProperties}
 			className={cn("iso-scene", fit && "iso-scene--fit", className)}

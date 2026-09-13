@@ -19,6 +19,7 @@ export function RagStack() {
 			uid="rag-stack"
 			fit
 			aspect={FOCUS_ASPECT}
+			alive
 			grid={[W, D]}
 			bounds={{ min: [0, 0, 0], max: [W, D, top + 1] }}
 			title="Retrieval pipeline"

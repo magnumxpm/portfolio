@@ -696,21 +696,44 @@
 		stroke-dashoffset: 100;
 	}
 
+	/* Assembled slowly and on a wide stagger: these are the one place on the
+	   page where the motion is the point, so they take their time. */
 	[data-js] .is-visible .iso-obj,
 	[data-js] .is-visible .iso-link {
 		opacity: 1;
 		transform: none;
 		transition:
-			opacity 0.45s var(--ease-out) var(--iso-delay),
-			transform 0.55s var(--ease-out) var(--iso-delay);
+			opacity 0.9s var(--ease-out) var(--iso-delay),
+			transform 1.1s var(--ease-out) var(--iso-delay);
 	}
 	[data-js] .is-visible .iso-wire {
 		stroke-dashoffset: 0;
-		transition: stroke-dashoffset 0.7s var(--ease-out) var(--iso-delay);
+		transition: stroke-dashoffset 1.6s var(--ease-out) var(--iso-delay);
 	}
 	.iso-obj,
 	.iso-link {
-		--iso-delay: calc(var(--iso-step, 0) * 0.09s);
+		--iso-delay: calc(var(--iso-step, 0) * 0.18s);
+	}
+
+	/* Ambient float. Scoped to accent objects inside a [data-alive] scene —
+	   about six elements page-wide. RevealRoot unobserves after the first
+	   intersection, so `.is-visible` never comes off and anything animated here
+	   runs forever; the structure holding still while the active path breathes
+	   is also the better read. */
+	@keyframes iso-float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-2px);
+		}
+	}
+	[data-js] .is-visible [data-alive] .iso-obj[data-tone="accent"] .iso-drift {
+		animation: iso-float 7s ease-in-out infinite;
+		/* Starts only once the object has finished arriving, and each one a
+		   beat behind the last, so the set breathes rather than pulses. */
+		animation-delay: calc(var(--iso-delay) + 1.1s + var(--iso-step, 0) * 0.6s);
 	}
 
 	@keyframes iso-pulse {
@@ -719,7 +742,7 @@
 		}
 	}
 	[data-js] .is-visible .iso-pulse {
-		animation: iso-pulse 2.6s linear infinite;
+		animation: iso-pulse 5.5s linear infinite;
 	}
 
 	/* Hover: the stack separates and the active path warms up. Transform only. */
@@ -729,7 +752,7 @@
 	}
 	.iso-scene:hover .iso-pulse,
 	.group:hover .iso-pulse {
-		animation-duration: 1.3s;
+		animation-duration: 2.4s;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -743,6 +766,11 @@
 		}
 		.iso-pulse {
 			display: none;
+		}
+		/* The blanket transition-duration override above does nothing to
+		   animations, so the float needs turning off explicitly. */
+		.iso-drift {
+			animation: none !important;
 		}
 	}
 

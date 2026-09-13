@@ -19,6 +19,7 @@ export function ServiceStack() {
 			uid="service-stack"
 			fit
 			aspect={FOCUS_ASPECT}
+			alive
 			grid={[18, 14]}
 			bounds={{ min: [0, 0, 0], max: [18, 14, 6] }}
 			title="Deployed agent services"
