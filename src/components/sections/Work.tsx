@@ -19,15 +19,16 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 			className="iso-frame group grid grid-cols-1 items-center gap-8 border-b border-line py-14 transition-colors duration-300 ease-out hover:border-line-hi md:grid-cols-[1fr_20rem] md:gap-16"
 		>
 			<div className="order-2 md:order-none">
-				{/* A fixed-width index column, so the titles line up down the section
-				   and the number sits on the title's optical centre instead of its
-				   baseline. */}
-				<div className="grid grid-cols-[2.25rem_1fr] items-center gap-x-1">
-					<span className="self-center font-mono text-meta tabular-nums text-fg-faint">
+				{/* The index is display type, not a footnote: at 2xl mono it carries the
+				   left edge of the section and gives the title something to sit against.
+				   It spans both rows so it centres on the title+role pair, not on either. */}
+				<div className="grid grid-cols-[2.75rem_1fr] items-center gap-x-4 sm:grid-cols-[3.75rem_1fr] sm:gap-x-6">
+					<span className="row-span-2 self-center font-mono text-h2 font-normal leading-none tabular-nums text-fg-faint transition-colors duration-300 ease-out group-hover:text-accent">
 						{String(index + 1).padStart(2, "0")}
 					</span>
+
 					<div className="flex items-center gap-3">
-						<h3 className="text-title font-medium text-fg transition-colors duration-200 ease-out group-hover:text-accent">
+						<h3 className="text-h2 font-medium tracking-tight text-fg transition-colors duration-200 ease-out group-hover:text-accent">
 							{project.title}
 						</h3>
 						{/* Flattened to a white silhouette: the marks are wildly different
@@ -35,19 +36,23 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 						<Image
 							src={project.imageSrc}
 							alt=""
-							width={20}
-							height={20}
-							sizes="20px"
-							className="size-5 shrink-0 opacity-40 brightness-0 invert transition-opacity duration-300 ease-out group-hover:opacity-80"
+							width={24}
+							height={24}
+							sizes="24px"
+							className="size-6 shrink-0 opacity-40 brightness-0 invert transition-opacity duration-300 ease-out group-hover:opacity-80"
 						/>
 					</div>
 
-					<p className="col-start-2 mt-1 font-mono text-label uppercase text-fg-faint">
+					<p className="mt-2 flex items-center gap-3 font-mono text-meta uppercase tracking-[0.18em] text-fg-faint">
+						<span
+							aria-hidden="true"
+							className="h-px w-5 shrink-0 bg-line-hi transition-colors duration-300 ease-out group-hover:bg-accent"
+						/>
 						{project.role}
 					</p>
 				</div>
 
-				<p className="mt-6 max-w-[46ch] text-lede leading-relaxed text-fg-dim">
+				<p className="mt-8 max-w-[46ch] text-lede leading-relaxed text-fg-dim">
 					{project.description}
 				</p>
 
