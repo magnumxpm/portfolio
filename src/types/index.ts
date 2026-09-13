@@ -11,10 +11,13 @@ export interface HeroData {
 }
 
 export interface FocusItem {
+	/** Also the key that selects the card's isometric diagram. */
 	id: string
 	title: string
 	description: string
 	keywords: string[]
+	/** Blueprint-style caption for the diagram well, e.g. "01 — ROUTING". */
+	fig: string
 }
 
 /**

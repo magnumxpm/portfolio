@@ -7,24 +7,28 @@ import type { FocusItem } from "@/types"
 export const focusData: FocusItem[] = [
 	{
 		id: "orchestration",
+		fig: "01 — ROUTING",
 		title: "Agent Orchestration",
 		description: "Multi-step agent graphs in LangGraph, rather than one-shot prompts.",
 		keywords: ["LangGraph", "State machines", "Tool routing"],
 	},
 	{
 		id: "rag",
+		fig: "02 — RETRIEVAL",
 		title: "RAG & Knowledge Engineering",
 		description: "Retrieval pipelines and the knowledge modelling that makes a corpus answerable.",
 		keywords: ["Retrieval", "Chunking", "Knowledge modelling"],
 	},
 	{
 		id: "agentops",
+		fig: "03 — RUNTIME",
 		title: "AgentOps & Deployments",
 		description: "Shipping agents as deployed services, with the operational tooling around them.",
 		keywords: ["Deployment", "Tracing", "Observability"],
 	},
 	{
 		id: "harness",
+		fig: "04 — EVALS",
 		title: "Harness Engineering",
 		description: "Harnesses that exercise and evaluate agent behaviour.",
 		keywords: ["Evals", "Regression", "Scoring"],

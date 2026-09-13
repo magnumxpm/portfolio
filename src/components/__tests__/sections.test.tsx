@@ -40,6 +40,21 @@ describe("Focus", () => {
 			expect(screen.getByRole("heading", { name: item.title })).toBeInTheDocument()
 		}
 	})
+
+	it("gives every card an isometric diagram with an accessible name", () => {
+		render(<Focus />)
+		const figures = screen.getAllByRole("img")
+		expect(figures).toHaveLength(focusData.length)
+		for (const fig of figures) {
+			expect(fig).toHaveAccessibleName()
+		}
+	})
+
+	it("renders the diagrams server-side, with no images to fetch", () => {
+		const { container } = render(<Focus />)
+		expect(container.querySelectorAll("svg.iso-scene")).toHaveLength(focusData.length)
+		expect(container.querySelectorAll("img")).toHaveLength(0)
+	})
 })
 
 describe("Work", () => {
