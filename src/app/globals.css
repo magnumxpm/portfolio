@@ -10,15 +10,18 @@
 		--line: rgba(255, 255, 255, 0.07);
 		--line-hi: rgba(255, 255, 255, 0.14);
 		--text: #e8e6e3;
-		--text-dim: #8a8f98;
-		--text-faint: #5a5f66;
+		--text-dim: #9aa0a8;
+		--text-faint: #8f959d;
 		--accent: #f2a65a;
 		--accent-dim: rgba(242, 166, 90, 0.14);
 
-		/* Load-bearing for accessibility: all contrast math is computed against
-		   --field-max, the brightest possible pixel behind body text. */
+		/* Load-bearing for accessibility, not decoration. --field-max is the
+		   brightest pixel the background can ever paint, and every text token
+		   above is chosen to clear WCAG AA against *it* rather than against --bg,
+		   so legibility never depends on the mask. Locked by
+		   src/app/__tests__/contrast.test.ts — change these together. */
 		--field-dim: #1a1a1d;
-		--field-max: #3a3a40;
+		--field-max: #2c2c32;
 
 		--field-mask: radial-gradient(
 				ellipse 120% 80% at 50% 0%,

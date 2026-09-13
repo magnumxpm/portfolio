@@ -1,4 +1,4 @@
-import { alphaRamp, bayer, field } from "../ascii-engine"
+import { alphaRamp, bayer, field, hash01 } from "../ascii-engine"
 
 describe("bayer", () => {
 	it("produces an n x n matrix", () => {
@@ -86,5 +86,38 @@ describe("alphaRamp", () => {
 	it("increases monotonically", () => {
 		const a = alphaRamp(6)
 		for (let i = 1; i < a.length; i++) expect(a[i]).toBeGreaterThan(a[i - 1])
+	})
+})
+
+describe("hash01", () => {
+	it("is stable per cell", () => {
+		expect(hash01(12, 34)).toBe(hash01(12, 34))
+	})
+
+	it("scatters rather than laying accents on a lattice", () => {
+		// A cheap `(x * 7 + y * 13) & 63` hash puts every selected cell on a
+		// regular diagonal, which reads as a pattern rather than as sparkle.
+		const rate = 0.02
+		const picks: Array<[number, number]> = []
+		for (let y = 0; y < 64; y++) {
+			for (let x = 0; x < 180; x++) if (hash01(x, y) < rate) picks.push([x, y])
+		}
+		// Hits roughly the requested fraction...
+		expect(picks.length / (64 * 180)).toBeGreaterThan(rate * 0.7)
+		expect(picks.length / (64 * 180)).toBeLessThan(rate * 1.3)
+		// ...and no single (x + y) diagonal collects a disproportionate share.
+		const byDiagonal = new Map<number, number>()
+		for (const [x, y] of picks) byDiagonal.set(x + y, (byDiagonal.get(x + y) ?? 0) + 1)
+		expect(Math.max(...byDiagonal.values())).toBeLessThan(picks.length / 4)
+	})
+
+	it("stays in [0, 1)", () => {
+		for (let x = 0; x < 200; x++) {
+			for (let y = 0; y < 50; y++) {
+				const v = hash01(x, y)
+				expect(v).toBeGreaterThanOrEqual(0)
+				expect(v).toBeLessThan(1)
+			}
+		}
 	})
 })

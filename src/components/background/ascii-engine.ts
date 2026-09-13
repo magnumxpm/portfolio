@@ -125,7 +125,22 @@ function isLowPower(): boolean {
 	return false
 }
 
-function buildAtlas(ramp: string, cw: number, ch: number, dpr: number): HTMLCanvasElement {
+/**
+ * Glyphs are rasterised in `colour`, not white.
+ *
+ * This is where the contrast cap is actually enforced: the base atlas is drawn
+ * in FIELD_MAX, so even at alpha 1.0 the brightest possible cell is exactly
+ * `--field-max` and the AA contrast figure for body text holds without relying
+ * on the CSS mask to dim it. Rasterising white and hoping the mask compensates
+ * would put an untested CSS value in charge of an accessibility guarantee.
+ */
+function buildAtlas(
+	ramp: string,
+	cw: number,
+	ch: number,
+	dpr: number,
+	colour: string
+): HTMLCanvasElement {
 	const atlas = document.createElement("canvas")
 	atlas.width = Math.ceil(cw * dpr * ramp.length)
 	atlas.height = Math.ceil(ch * dpr)
@@ -134,13 +149,22 @@ function buildAtlas(ramp: string, cw: number, ch: number, dpr: number): HTMLCanv
 	c.font = `${Math.round(ch * 0.78)}px ${ATLAS_FONT}`
 	c.textBaseline = "middle"
 	c.textAlign = "center"
-	// White glyphs; recoloured per cell at draw time via globalAlpha over a
-	// fixed fill, which keeps brightness modulation essentially free.
-	c.fillStyle = "#ffffff"
+	c.fillStyle = colour
 	for (let i = 0; i < ramp.length; i++) {
 		c.fillText(ramp[i], i * cw + cw / 2, ch / 2)
 	}
 	return atlas
+}
+
+/**
+ * Stable per-cell value in [0, 1). A cheap integer hash rather than something
+ * like `(x * 7 + y * 13) & 63`, which lays the accent cells out on a visible
+ * diagonal lattice instead of scattering them.
+ */
+export function hash01(x: number, y: number): number {
+	let h = Math.imul(x, 374761393) + Math.imul(y, 668265263)
+	h = Math.imul(h ^ (h >>> 13), 1274126177)
+	return ((h ^ (h >>> 16)) >>> 0) / 4294967296
 }
 
 export function createEngine(
@@ -159,6 +183,7 @@ export function createEngine(
 	let grid: Grid = { cols: 0, rows: 0, cw: tier.cellW, ch: tier.cellH }
 	let prev = new Uint8Array(0)
 	let atlas: HTMLCanvasElement | null = null
+	let atlasAccent: HTMLCanvasElement | null = null
 	let atlasRamp = ""
 	let alpha = alphaRamp(1)
 	let raf = 0
@@ -194,11 +219,13 @@ export function createEngine(
 		grid = { cols, rows, cw, ch }
 		prev = new Uint8Array(cols * rows).fill(255)
 		atlas = null // force rebuild at current metrics
+		atlasAccent = null
 	}
 
 	function ensureAtlas(ramp: string) {
 		if (atlas && atlasRamp === ramp) return
-		atlas = buildAtlas(ramp, grid.cw, grid.ch, dpr)
+		atlas = buildAtlas(ramp, grid.cw, grid.ch, dpr, FIELD_MAX)
+		atlasAccent = buildAtlas(ramp, grid.cw, grid.ch, dpr, FIELD_ACCENT)
 		atlasRamp = ramp
 		alpha = alphaRamp(ramp.length)
 		prev.fill(255)
@@ -221,7 +248,11 @@ export function createEngine(
 		const cwDev = Math.ceil(cw * dpr)
 		const chDev = Math.ceil(ch * dpr)
 		const t = now * 0.001 * p.speed
-		const accentCut = p.accent > 0 ? rampLen - 1 : Number.POSITIVE_INFINITY
+		// Only the very brightest glyph is ever eligible for the accent, and only a
+		// `p.accent` fraction of those. That restraint is the whole difference
+		// between "technical" and "matrix screensaver".
+		const brightest = rampLen - 1
+		const accent = p.accent
 
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
@@ -240,19 +271,15 @@ export function createEngine(
 				ctx!.clearRect(px, py, cw, ch)
 				if (g === 0) continue
 
-				ctx!.globalAlpha = alpha[g]
-				ctx!.globalCompositeOperation = "source-over"
-				ctx!.drawImage(atlas!, g * cwDev, 0, cwDev, chDev, px, py, cw, ch)
+				// Swapping the source atlas is the whole tinting mechanism — no
+				// compositing modes, which would blend against the transparent
+				// canvas rather than the glyph and leave holes as neighbouring
+				// cells are cleared.
+				const src =
+					g === brightest && accent > 0 && hash01(x, y) < accent ? atlasAccent! : atlas!
 
-				// Tint only the very brightest cells. That restraint is the whole
-				// difference between "technical" and "matrix screensaver".
-				if (g >= accentCut && ((x * 7 + y * 13) & 63) < p.accent * 64) {
-					ctx!.globalAlpha = alpha[g] * 0.9
-					ctx!.fillStyle = FIELD_ACCENT
-					ctx!.globalCompositeOperation = "source-atop"
-					ctx!.fillRect(px, py, cw, ch)
-					ctx!.globalCompositeOperation = "source-over"
-				}
+				ctx!.globalAlpha = alpha[g]
+				ctx!.drawImage(src, g * cwDev, 0, cwDev, chDev, px, py, cw, ch)
 			}
 		}
 		ctx!.globalAlpha = 1
@@ -283,7 +310,6 @@ export function createEngine(
 	layout()
 	// Paint one frame immediately so the field is present without waiting for
 	// the deferred loop; the static texture covers the gap either way.
-	ctx.fillStyle = FIELD_MAX
 	draw(0)
 
 	const lowPower = isLowPower()

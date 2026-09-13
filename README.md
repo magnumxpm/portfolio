@@ -40,8 +40,11 @@ site in `src/components/background/ascii-engine.ts`: the waves are directional
 (axis-aligned ones band into scanlines) and mutually non-commensurate (otherwise
 the whole page pulses light and dark). Both are covered by tests.
 
-**Contrast is computed against `--field-max`**, the brightest possible pixel
-behind body text, not against the page background.
+**Contrast is computed against `--field-max`**, the brightest pixel the field can
+ever paint, not against the page background — and enforced by rasterising the
+glyph atlas in that colour rather than in white and hoping the mask dims it.
+`src/app/__tests__/contrast.test.ts` parses the tokens straight out of
+`globals.css` and fails if any text token drops below WCAG AA against it.
 
 ## Structure
 

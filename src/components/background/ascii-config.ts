@@ -53,7 +53,7 @@ export const MOBILE = {
  * globals.css. Body text contrast is computed against this value, so it must
  * not drift from the CSS token.
  */
-export const FIELD_MAX = "#3a3a40"
+export const FIELD_MAX = "#2c2c32"
 export const FIELD_ACCENT = "#f2a65a"
 
 /**
