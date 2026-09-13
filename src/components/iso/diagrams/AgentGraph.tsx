@@ -35,14 +35,22 @@ export function AgentGraph() {
 					route={elbow(at(l.from, l.fromFace), at(l.to, l.toFace))}
 					variant={l.active ? "solid" : "dashed"}
 					active={l.active}
-					label={l.label}
 					step={l.step ?? 0}
 				/>
 			))}
 
-			{/* Painted after the links so nodes occlude the wires behind them. */}
+			{/* Painted after the links so nodes occlude the wires behind them.
+			    No titles or subs: at this size the captions crowded the geometry
+			    and read as clutter. The card copy carries the meaning. */}
 			{nodes.map((n, i) => (
-				<IsoNode key={n.id} {...n} size={n.size ?? DEFAULT_SIZE} step={i} />
+				<IsoNode
+					key={n.id}
+					{...n}
+					title={undefined}
+					sub={undefined}
+					size={n.size ?? DEFAULT_SIZE}
+					step={i}
+				/>
 			))}
 		</IsoScene>
 	)

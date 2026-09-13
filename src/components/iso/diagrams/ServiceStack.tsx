@@ -35,7 +35,6 @@ export function ServiceStack() {
 			<IsoLink
 				route={elbow(at(services[1].origin, "right"), at(services[2].origin, "left"))}
 				active
-				label="trace"
 				step={2}
 			/>
 
@@ -45,8 +44,6 @@ export function ServiceStack() {
 					origin={s.origin}
 					size={SIZE}
 					tone={i === 1 ? "accent" : "base"}
-					label={s.title}
-					sub={s.sub}
 					step={i + 1}
 				/>
 			))}

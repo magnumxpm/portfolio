@@ -34,17 +34,9 @@ export function RagStack() {
 								arrow={false}
 							/>
 						) : null}
-						{/* labelSide="right": a lid caption would be painted over by
-						    the slab above it. */}
-						<IsoSlab
-							origin={[0, 0, z]}
-							size={[W, D]}
-							tone={layer.tone}
-							label={layer.label}
-							sub={layer.sub}
-							labelSide="right"
-							step={i}
-						/>
+						{/* Unlabelled by design — see AgentGraph. The layer names are
+						    in the <desc> for screen readers and in the card copy. */}
+						<IsoSlab origin={[0, 0, z]} size={[W, D]} tone={layer.tone} step={i} />
 					</g>
 				)
 			})}
