@@ -10,7 +10,7 @@ export function Experience() {
 
 				<ol className="mt-6">
 					{experienceData.map((item, i) => (
-						<li key={item.company}>
+						<li key={item.company} className="relative">
 							<Reveal delay={i * 0.05}>
 								<article className="iso-frame group grid grid-cols-1 gap-4 px-1 py-12 sm:grid-cols-[13rem_1fr] sm:gap-0">
 									<div className="sm:pr-10">
@@ -20,16 +20,20 @@ export function Experience() {
 										) : null}
 									</div>
 
-									{/* The rail. A border on each entry rather than one absolute
-									    line, so it stays continuous however tall the entries are
-									    and disappears with the column below the sm breakpoint. */}
-									<div className="relative sm:border-l sm:border-line sm:pl-12">
+									<div className="relative sm:pl-12">
+										{/* Rail and node are absolute so they can escape the
+										    entry's vertical padding; a border would stop at the
+										    content box and leave a gap between entries. */}
 										<span
 											aria-hidden="true"
-											className="absolute -left-[4px] top-2 hidden size-[7px] rounded-full ring-4 ring-bg transition-colors duration-300 ease-out sm:block"
-											style={{
-												background: item.current ? "var(--accent)" : "var(--line-hi)",
-											}}
+											className="tl-rail hidden sm:block"
+											data-first={i === 0 ? "" : undefined}
+											data-last={i === experienceData.length - 1 ? "" : undefined}
+										/>
+										<span
+											aria-hidden="true"
+											className="tl-node hidden sm:block"
+											data-current={item.current ? "" : undefined}
 										/>
 
 										<h3 className="text-h2 font-medium tracking-tight text-fg">{item.role}</h3>

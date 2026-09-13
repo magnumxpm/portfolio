@@ -166,6 +166,49 @@
 		border-top: 1px solid var(--line);
 	}
 
+	/* --- experience timeline -------------------------------------------- */
+
+	/* The rail has to escape each entry's vertical padding, or it only spans the
+	   content box and the line breaks between entries. Negative insets equal to
+	   the padding make adjacent rails meet exactly. */
+	.tl-rail {
+		position: absolute;
+		left: 0;
+		top: -3rem;
+		bottom: -3rem;
+		width: 1px;
+		background: var(--line);
+	}
+	.tl-rail[data-first] {
+		top: 0.75rem;
+		background: linear-gradient(to bottom, transparent, var(--line) 2rem);
+	}
+	.tl-rail[data-last] {
+		bottom: 3rem;
+		background: linear-gradient(to top, transparent, var(--line) 3rem);
+	}
+	.tl-rail[data-first][data-last] {
+		background: var(--line);
+	}
+
+	.tl-node {
+		position: absolute;
+		left: -3.5px;
+		top: 0.5rem;
+		width: 8px;
+		height: 8px;
+		border-radius: 999px;
+		background: var(--line-hi);
+		box-shadow: 0 0 0 4px var(--bg);
+		transition: background-color 0.3s var(--ease-out);
+	}
+	.tl-node[data-current] {
+		background: var(--accent);
+		box-shadow:
+			0 0 0 4px var(--bg),
+			0 0 0 7px var(--accent-dim);
+	}
+
 	/* --- framing + interaction ------------------------------------------ */
 
 	/* Corner bracket marks. Drawn with two gradients per corner rather than four

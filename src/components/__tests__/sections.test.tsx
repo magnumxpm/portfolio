@@ -76,11 +76,12 @@ describe("Work", () => {
 		}
 	})
 
-	it("links only the projects that have a public URL", () => {
+	it("links only the projects that have a public URL, and labels nothing else", () => {
 		render(<Work />)
 		const linked = projectsData.filter((p) => p.url)
 		expect(screen.getAllByRole("link")).toHaveLength(linked.length)
-		expect(screen.getAllByText("Private")).toHaveLength(projectsData.length - linked.length)
+		// No "Private" badge — the absence of a link already says it.
+		expect(screen.queryByText("Private")).not.toBeInTheDocument()
 	})
 
 	it("renders an architecture diagram for every project", () => {
@@ -137,11 +138,15 @@ describe("Experience", () => {
 		expect(screen.getByText("Current")).toBeInTheDocument()
 	})
 
-	it("gives every entry a timeline node", () => {
+	it("gives every entry a timeline node and a rail segment", () => {
 		const { container } = render(<Experience />)
-		expect(container.querySelectorAll("[aria-hidden].rounded-full")).toHaveLength(
-			experienceData.length
-		)
+		expect(container.querySelectorAll(".tl-node")).toHaveLength(experienceData.length)
+		// The rail is per-entry with negative insets rather than one absolute line,
+		// so adjacent segments meet and the timeline reads as continuous.
+		const rails = container.querySelectorAll(".tl-rail")
+		expect(rails).toHaveLength(experienceData.length)
+		expect(rails[0]).toHaveAttribute("data-first")
+		expect(rails[rails.length - 1]).toHaveAttribute("data-last")
 	})
 })
 

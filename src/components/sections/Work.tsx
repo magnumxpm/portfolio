@@ -19,26 +19,33 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 			className="iso-frame group grid grid-cols-1 items-center gap-8 border-b border-line py-14 transition-colors duration-300 ease-out hover:border-line-hi md:grid-cols-[1fr_20rem] md:gap-16"
 		>
 			<div className="order-2 md:order-none">
-				<div className="flex items-baseline gap-4">
-					<span className="font-mono text-meta tabular-nums text-fg-faint">
+				{/* A fixed-width index column, so the titles line up down the section
+				   and the number sits on the title's optical centre instead of its
+				   baseline. */}
+				<div className="grid grid-cols-[2.25rem_1fr] items-center gap-x-1">
+					<span className="self-center font-mono text-meta tabular-nums text-fg-faint">
 						{String(index + 1).padStart(2, "0")}
 					</span>
-					<h3 className="text-title font-medium text-fg transition-colors duration-200 ease-out group-hover:text-accent">
-						{project.title}
-					</h3>
-					{/* Flattened to a white silhouette: the six marks are wildly
-					    different artwork and shouldn't read as six different things. */}
-					<Image
-						src={project.imageSrc}
-						alt=""
-						width={18}
-						height={18}
-						sizes="18px"
-						className="size-[18px] shrink-0 translate-y-px opacity-40 brightness-0 invert transition-opacity duration-300 ease-out group-hover:opacity-80"
-					/>
-				</div>
+					<div className="flex items-center gap-3">
+						<h3 className="text-title font-medium text-fg transition-colors duration-200 ease-out group-hover:text-accent">
+							{project.title}
+						</h3>
+						{/* Flattened to a white silhouette: the marks are wildly different
+						    artwork and shouldn't read as five different things. */}
+						<Image
+							src={project.imageSrc}
+							alt=""
+							width={20}
+							height={20}
+							sizes="20px"
+							className="size-5 shrink-0 opacity-40 brightness-0 invert transition-opacity duration-300 ease-out group-hover:opacity-80"
+						/>
+					</div>
 
-				<p className="mt-1 pl-9 font-mono text-label uppercase text-fg-faint">{project.role}</p>
+					<p className="col-start-2 mt-1 font-mono text-label uppercase text-fg-faint">
+						{project.role}
+					</p>
+				</div>
 
 				<p className="mt-6 max-w-[46ch] text-lede leading-relaxed text-fg-dim">
 					{project.description}
@@ -62,8 +69,8 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 					))}
 				</ul>
 
-				<p className="mt-8">
-					{linked ? (
+				{linked ? (
+					<p className="mt-8">
 						<span className="inline-flex items-center gap-1.5 font-mono text-meta text-fg-faint transition-colors duration-200 ease-out group-hover:text-accent">
 							{host}
 							<ArrowUpRight
@@ -71,10 +78,8 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 								className="size-3.5 transition-transform duration-200 ease-out group-hover:-translate-y-px group-hover:translate-x-px"
 							/>
 						</span>
-					) : (
-						<span className="font-mono text-meta text-fg-faint">Private</span>
-					)}
-				</p>
+					</p>
+				) : null}
 			</div>
 
 			<div className="order-1 mx-auto aspect-square w-full max-w-[20rem] md:order-none md:mx-0">

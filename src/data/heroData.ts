@@ -22,14 +22,30 @@ export const heroData: HeroData = {
 	email: "me@pmukherjee.dev",
 }
 
+/** `icon` keys into the lucide map in Contact.tsx. */
 export const socialLinks = [
-	{ label: "GitHub", href: "https://github.com/magnumxpm", handle: "magnumxpm" },
+	{
+		label: "GitHub",
+		icon: "github",
+		href: "https://github.com/magnumxpm",
+		handle: "magnumxpm",
+	},
 	{
 		label: "LinkedIn",
+		icon: "linkedin",
 		href: "https://www.linkedin.com/in/pritam-mukherjee-52a348225/",
 		handle: "pritam-mukherjee",
 	},
-	{ label: "X", href: "https://twitter.com/pmukherjee02", handle: "pmukherjee02" },
-	{ label: "Instagram", href: "https://instagram.com/mukherjee.anon", handle: "mukherjee.anon" },
-	{ label: "Bento", href: "https://bento.me/mukherjee", handle: "mukherjee" },
+	{
+		label: "X",
+		icon: "x",
+		href: "https://twitter.com/pmukherjee02",
+		handle: "pmukherjee02",
+	},
+	{
+		label: "Instagram",
+		icon: "instagram",
+		href: "https://instagram.com/mukherjee.anon",
+		handle: "mukherjee.anon",
+	},
 ] as const
