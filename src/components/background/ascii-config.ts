@@ -6,6 +6,7 @@
  * these ramps stop at `+` so the field averages dark and stays texture, not art.
  */
 export const RAMP_SPARSE = " .:-=+"
+/** Kept for reference; presets deliberately all use one ramp now. */
 export const RAMP_DOTS = " ·∙•"
 
 export interface FieldPreset {
@@ -19,18 +20,32 @@ export interface FieldPreset {
 }
 
 /**
- * Speeds are tuned against measured dirty-cell churn: at 15fps the hero redraws
- * ~1.5% of cells per frame (~176 drawImage calls) and the quieter sections ~0.2%.
- * Raising speed is cheap; raising density is not.
+ * Section presets.
+ *
+ * Two deliberate constraints after seeing this in motion:
+ *
+ *  - Every preset uses the SAME ramp. A ramp swap is discrete, so crossing a
+ *    section boundary made the whole field's character snap rather than drift.
+ *  - The speed range is narrow and slow. The field is ambient texture, not an
+ *    animation to watch; anything faster competes with the act of reading and
+ *    reads as noise while scrolling.
  */
 export const PRESETS: Record<string, FieldPreset> = {
-	hero: { speed: 0.55, density: 0.7, ramp: RAMP_SPARSE, accent: 0.02 },
-	focus: { speed: 0.32, density: 0.35, ramp: RAMP_DOTS, accent: 0.01 },
-	work: { speed: 0.25, density: 0.3, ramp: RAMP_DOTS, accent: 0 },
-	experience: { speed: 0.22, density: 0.26, ramp: RAMP_DOTS, accent: 0 },
-	credentials: { speed: 0.2, density: 0.24, ramp: RAMP_DOTS, accent: 0 },
-	contact: { speed: 0.4, density: 0.4, ramp: RAMP_SPARSE, accent: 0.01 },
+	hero: { speed: 0.16, density: 0.7, ramp: RAMP_SPARSE, accent: 0.02 },
+	focus: { speed: 0.11, density: 0.5, ramp: RAMP_SPARSE, accent: 0.01 },
+	work: { speed: 0.09, density: 0.44, ramp: RAMP_SPARSE, accent: 0 },
+	experience: { speed: 0.09, density: 0.4, ramp: RAMP_SPARSE, accent: 0 },
+	credentials: { speed: 0.08, density: 0.38, ramp: RAMP_SPARSE, accent: 0 },
+	contact: { speed: 0.13, density: 0.52, ramp: RAMP_SPARSE, accent: 0.01 },
 }
+
+/**
+ * How far the drift is slowed while the page is actually being scrolled, and
+ * how long after the last scroll event it takes to come back. A background that
+ * keeps drifting under moving content is what reads as "moving too much".
+ */
+export const SCROLL_DAMP = 0.12
+export const SCROLL_SETTLE_MS = 260
 
 export const DESKTOP = {
 	cellW: 13,

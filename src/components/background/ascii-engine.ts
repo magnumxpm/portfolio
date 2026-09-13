@@ -5,6 +5,8 @@ import {
 	FIELD_BAND_OUTER,
 	FIELD_MAX,
 	FIELD_MAX_EDGE,
+	SCROLL_DAMP,
+	SCROLL_SETTLE_MS,
 	MOBILE,
 	PRESETS,
 	type FieldPreset,
@@ -218,6 +220,10 @@ export function createEngine(
 	let alpha = alphaRamp(1)
 	let raf = 0
 	let last = 0
+	let clock = 0
+	let damp = 1
+	let dampTarget = 1
+	let scrollTimer: ReturnType<typeof setTimeout> | undefined
 	let reduced = prefersReducedMotion()
 	let destroyed = false
 
@@ -264,7 +270,7 @@ export function createEngine(
 		prev.fill(255)
 	}
 
-	function draw(now: number) {
+	function draw(now: number, dt = 0) {
 		const p = paramsRef.current.current
 		const target = paramsRef.current.target
 
@@ -275,12 +281,17 @@ export function createEngine(
 		p.accent += (target.accent - p.accent) * 0.05
 		if (p.ramp !== target.ramp) p.ramp = target.ramp
 
+		// Ease toward the damped speed rather than snapping, so starting and
+		// stopping a scroll doesn't itself read as a change in the animation.
+		damp += (dampTarget - damp) * 0.08
+		clock += dt * p.speed * damp
+
 		ensureAtlas(p.ramp)
 		const rampLen = p.ramp.length
 		const { cols, rows, cw, ch } = grid
 		const cwDev = Math.ceil(cw * dpr)
 		const chDev = Math.ceil(ch * dpr)
-		const t = now * 0.001 * p.speed
+		const t = clock
 		// Only the very brightest glyph is ever eligible for the accent, and only a
 		// `p.accent` fraction of those. That restraint is the whole difference
 		// between "technical" and "matrix screensaver".
@@ -327,8 +338,10 @@ export function createEngine(
 		// -1 absorbs rAF jitter; without it a 15fps gate on a 60Hz display
 		// quantises down to 12fps.
 		if (now - last < interval - 1) return
+		// Cap dt so returning to a backgrounded tab does not jump the phase.
+		const dt = last ? Math.min((now - last) / 1000, 0.25) : 0
 		last = now
-		draw(now)
+		draw(now, dt)
 	}
 
 	function start() {
@@ -387,6 +400,15 @@ export function createEngine(
 
 	// The canvas is `position: fixed; inset: 0`, so an IntersectionObserver on it
 	// would always report intersecting. Visibility is the only real pause signal.
+	const onScroll = () => {
+		dampTarget = SCROLL_DAMP
+		clearTimeout(scrollTimer)
+		scrollTimer = setTimeout(() => {
+			dampTarget = 1
+		}, SCROLL_SETTLE_MS)
+	}
+	window.addEventListener("scroll", onScroll, { passive: true })
+
 	const onVisibility = () => {
 		if (document.hidden) stop()
 		else if (!reduced && !lowPower) start()
@@ -413,6 +435,8 @@ export function createEngine(
 			stop()
 			clearTimeout(resizeTimer)
 			ro.disconnect()
+			window.removeEventListener("scroll", onScroll)
+			clearTimeout(scrollTimer)
 			document.removeEventListener("visibilitychange", onVisibility)
 			mq?.removeEventListener("change", onMotionChange)
 		},

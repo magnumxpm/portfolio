@@ -18,7 +18,7 @@ export function EvalGrid() {
 	return (
 		<IsoScene
 			uid="eval-grid"
-			width={360}
+			fit
 			bounds={{ min: [0, 0, 0], max: [cols * CELL, rows * CELL, 4] }}
 			title="Evaluation harness results"
 			desc={`${total - failures} of ${total} evaluation cases passing; failures stand out as tall columns.`}

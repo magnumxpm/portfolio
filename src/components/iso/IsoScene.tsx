@@ -15,6 +15,8 @@ interface IsoSceneProps {
 	desc?: string
 	/** Stable id fragment for pattern refs — must be unique per scene on a page. */
 	uid: string
+	/** Fill the container and letterbox, instead of using the natural width. */
+	fit?: boolean
 	className?: string
 	children: React.ReactNode
 }
@@ -34,6 +36,7 @@ export function IsoScene({
 	title,
 	desc,
 	uid,
+	fit,
 	className,
 	children,
 }: IsoSceneProps) {
@@ -65,7 +68,7 @@ export function IsoScene({
 			role="img"
 			viewBox={`${box.x} ${box.y} ${box.width} ${box.height}`}
 			style={{ "--iso-w": `${width}px` } as React.CSSProperties}
-			className={cn("iso-scene", className)}
+			className={cn("iso-scene", fit && "iso-scene--fit", className)}
 		>
 			<title>{title}</title>
 			{desc ? <desc>{desc}</desc> : null}

@@ -21,7 +21,7 @@ export function AgentGraph() {
 	return (
 		<IsoScene
 			uid="agent-graph"
-			width={360}
+			fit
 			grid={[30, 18]}
 			bounds={{ min: [0, 0, 0], max: [30, 18, 6] }}
 			title="Agent orchestration graph"

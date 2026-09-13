@@ -26,7 +26,7 @@ export function Credentials() {
 									width={36}
 									height={36}
 									sizes="36px"
-									className="size-9 shrink-0 rounded-[3px] border border-line object-cover"
+									className="size-10 shrink-0 rounded-full border border-line-hi bg-surface object-cover p-0.5"
 								/>
 								<div>
 									<p className="font-medium text-fg">{item.institution}</p>
@@ -61,7 +61,7 @@ export function Credentials() {
 										width={36}
 										height={36}
 										sizes="36px"
-										className="size-9 shrink-0 rounded-[3px] border border-line object-cover"
+										className="size-10 shrink-0 rounded-full border border-line-hi bg-surface object-cover p-0.5"
 									/>
 									<div>
 										<p className="font-medium text-fg">{item.title}</p>

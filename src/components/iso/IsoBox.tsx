@@ -13,6 +13,12 @@ export interface IsoBoxProps {
 	seam?: boolean
 	label?: string
 	sub?: string
+	/**
+	 * Where the caption sits. "cap" centres it on the lid; "right" moves it clear
+	 * of the footprint with a leader tick — required for stacked slabs, where the
+	 * slab above paints over anything sitting on the lid below it.
+	 */
+	labelSide?: "cap" | "right"
 	/** Stagger index for the reveal. */
 	step?: number
 	className?: string
@@ -35,6 +41,7 @@ export function IsoBox({
 	seam = true,
 	label,
 	sub,
+	labelSide = "cap",
 	step = 0,
 	className,
 }: IsoBoxProps) {
@@ -45,6 +52,8 @@ export function IsoBox({
 	const right = poly([x + w, y, t], [x + w, y + d, t], [x + w, y + d, z], [x + w, y, z])
 
 	const cap = iso(x + w / 2, y + d / 2, t)
+	const rim = iso(x + w, y + d / 2, t)
+	const sideLabel = labelSide === "right"
 
 	return (
 		<g
@@ -59,13 +68,30 @@ export function IsoBox({
 				<polygon points={top} className="iso-edge" vectorEffect="non-scaling-stroke" />
 			) : null}
 
+			{sideLabel && label ? (
+				<path
+					d={`M${rim.sx} ${rim.sy}h14`}
+					className="iso-tick"
+					vectorEffect="non-scaling-stroke"
+				/>
+			) : null}
 			{label ? (
-				<text x={cap.sx} y={cap.sy - 12} className="iso-title" textAnchor="middle">
+				<text
+					x={sideLabel ? rim.sx + 20 : cap.sx}
+					y={sideLabel ? rim.sy - (sub ? 4 : -4) : cap.sy - 12}
+					className="iso-title"
+					textAnchor={sideLabel ? "start" : "middle"}
+				>
 					{label}
 				</text>
 			) : null}
 			{sub ? (
-				<text x={cap.sx} y={cap.sy + 1} className="iso-sub" textAnchor="middle">
+				<text
+					x={sideLabel ? rim.sx + 20 : cap.sx}
+					y={sideLabel ? rim.sy + 10 : cap.sy + 1}
+					className="iso-sub"
+					textAnchor={sideLabel ? "start" : "middle"}
+				>
 					{sub}
 				</text>
 			) : null}

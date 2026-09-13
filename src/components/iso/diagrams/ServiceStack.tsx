@@ -16,7 +16,7 @@ export function ServiceStack() {
 	return (
 		<IsoScene
 			uid="service-stack"
-			width={360}
+			fit
 			grid={[18, 14]}
 			bounds={{ min: [0, 0, 0], max: [18, 14, 6] }}
 			title="Deployed agent services"

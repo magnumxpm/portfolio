@@ -5,9 +5,9 @@ import { IsoLink } from "../IsoLink"
 import { IsoScene } from "../IsoScene"
 import { IsoSlab } from "../IsoBox"
 
-const W = 13
-const D = 9
-const GAP = 5
+const W = 20
+const D = 13
+const GAP = 3
 
 /** Exploded assembly: raw documents at the base, retrieval on top. */
 export function RagStack() {
@@ -16,7 +16,7 @@ export function RagStack() {
 	return (
 		<IsoScene
 			uid="rag-stack"
-			width={360}
+			fit
 			grid={[W, D]}
 			bounds={{ min: [0, 0, 0], max: [W, D, top + 1] }}
 			title="Retrieval pipeline"
@@ -34,12 +34,15 @@ export function RagStack() {
 								arrow={false}
 							/>
 						) : null}
+						{/* labelSide="right": a lid caption would be painted over by
+						    the slab above it. */}
 						<IsoSlab
 							origin={[0, 0, z]}
 							size={[W, D]}
 							tone={layer.tone}
 							label={layer.label}
 							sub={layer.sub}
+							labelSide="right"
 							step={i}
 						/>
 					</g>

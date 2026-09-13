@@ -282,6 +282,27 @@
 
 	/* --- nav ------------------------------------------------------------ */
 
+	/* The header is fixed and mostly transparent, so section content would slide
+	   out from under the pills mid-scroll. This scrim fades it out instead. */
+	.nav-scrim {
+		position: fixed;
+		inset: 0 0 auto 0;
+		height: 6.5rem;
+		z-index: 40;
+		pointer-events: none;
+		background: linear-gradient(
+			to bottom,
+			var(--bg) 0%,
+			color-mix(in oklab, var(--bg) 80%, transparent) 45%,
+			transparent 100%
+		);
+		opacity: 0;
+		transition: opacity 0.4s var(--ease-out);
+	}
+	[data-collapsed] .nav-scrim {
+		opacity: 1;
+	}
+
 	/* Three states: a full bar at the top, two floating pills once scrolled,
 	   and an expanded panel. Nothing here animates page layout — the header is
 	   fixed and the panel is absolutely positioned, so every transition runs on
@@ -475,18 +496,33 @@
 		   Do not lighten this without revisiting the contrast block above. */
 		--iso-base: var(--surface-hi);
 		--iso-line: var(--line-hi);
-		--iso-top: color-mix(in oklab, #ffffff 14%, var(--iso-base));
-		--iso-right: color-mix(in oklab, #000000 22%, var(--iso-base));
-		--iso-left: color-mix(in oklab, #000000 42%, var(--iso-base));
 
 		display: block;
 		width: 100%;
 		max-width: var(--iso-w, 360px);
 		height: auto;
 		overflow: visible;
+	}
+
+	/* Fills its box and letterboxes via preserveAspectRatio. Diagrams differ a
+	   lot in world extent — the RAG stack is nearly twice as tall as the agent
+	   graph is wide — so sizing them by their own geometry made the Focus cards
+	   wildly uneven. The container decides instead. */
+	.iso-scene--fit {
+		width: 100%;
+		height: 100%;
+		max-width: none;
 		/* Overrides the body's optimizeLegibility, which does the wrong thing to
 		   text inside a scaled SVG. */
 		text-rendering: geometricPrecision;
+	}
+
+	/* Derived on .iso-obj rather than on the scene, with a fallback base, so the
+	   same classes also colour a legend swatch that has no scene around it. */
+	.iso-obj {
+		--iso-top: color-mix(in oklab, #ffffff 14%, var(--iso-base, var(--surface-hi)));
+		--iso-right: color-mix(in oklab, #000000 22%, var(--iso-base, var(--surface-hi)));
+		--iso-left: color-mix(in oklab, #000000 42%, var(--iso-base, var(--surface-hi)));
 	}
 
 	.iso-obj[data-tone="accent"] {
@@ -517,6 +553,11 @@
 	.iso-dot {
 		fill: var(--text-faint);
 		fill-opacity: 0.22;
+	}
+	.iso-tick {
+		fill: none;
+		stroke: var(--line-hi);
+		stroke-width: 1;
 	}
 	.iso-bracket {
 		fill: none;

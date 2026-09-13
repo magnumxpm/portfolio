@@ -26,7 +26,7 @@ export function Focus() {
 						return (
 							<Reveal key={item.id} delay={i * 0.05} className="bg-bg">
 								<article className="iso-frame group flex h-full flex-col bg-surface/40 transition-colors duration-300 ease-out hover:bg-surface-hi/50">
-									<div className="flex min-h-[220px] items-center justify-center overflow-hidden px-6 pb-2 pt-8">
+									<div className="aspect-[16/9] w-full px-5 pb-2 pt-6">
 										{Diagram ? <Diagram /> : null}
 									</div>
 
@@ -35,7 +35,7 @@ export function Focus() {
 										<span aria-hidden="true" className="h-px flex-1 bg-line" />
 									</div>
 
-									<div className="p-7 pt-5">
+									<div className="flex flex-1 flex-col p-7 pt-5">
 										<h3 className="text-h3 font-medium text-fg">{item.title}</h3>
 										<p className="mt-3 max-w-prose text-fg-dim">{item.description}</p>
 										<ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1">

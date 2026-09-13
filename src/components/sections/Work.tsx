@@ -34,7 +34,7 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 						width={18}
 						height={18}
 						sizes="18px"
-						className="size-[18px] opacity-40 grayscale transition-all duration-300 ease-out group-hover:opacity-90 group-hover:grayscale-0"
+						className="size-[18px] shrink-0 opacity-45 brightness-0 invert transition-opacity duration-300 ease-out group-hover:opacity-90"
 					/>
 					<span className="font-mono text-label uppercase text-fg-faint">{project.role}</span>
 				</div>
