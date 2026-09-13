@@ -5,7 +5,7 @@ export interface IsoNodeProps {
 	origin: Vec3
 	/** [w, d] footprint in cells. Height is fixed so all nodes read alike. */
 	size?: readonly [number, number]
-	title: string
+	title?: string
 	sub?: string
 	tone?: IsoTone
 	/** Faces exposing a small square connector handle. */
@@ -68,9 +68,11 @@ export function IsoNode({
 				)
 			})}
 
-			<text x={cap.sx} y={cap.sy - 3} className="iso-title" textAnchor="middle">
-				{title}
-			</text>
+			{title ? (
+				<text x={cap.sx} y={cap.sy - 3} className="iso-title" textAnchor="middle">
+					{title}
+				</text>
+			) : null}
 			{sub ? (
 				<text x={cap.sx} y={cap.sy + 10} className="iso-sub" textAnchor="middle">
 					{sub}
