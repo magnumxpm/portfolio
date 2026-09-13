@@ -183,32 +183,31 @@
 		border-color: var(--line-hi);
 		border-style: solid;
 		opacity: 0;
+		/* transform, not inset — the offset is an animation, and animating
+		   top/left would put a layout pass on every hover. */
 		transition:
 			opacity 0.35s var(--ease-out),
-			inset 0.35s var(--ease-spring);
+			transform 0.35s var(--ease-spring);
 		pointer-events: none;
 	}
 	.iso-frame::before {
-		top: 6px;
-		left: 6px;
-		border-width: 1px 0 0 1px;
-	}
-	.iso-frame::after {
-		bottom: 6px;
-		right: 6px;
-		border-width: 0 1px 1px 0;
-	}
-	.iso-frame:hover::before,
-	.iso-frame:focus-within::before {
-		opacity: 1;
 		top: 2px;
 		left: 2px;
+		border-width: 1px 0 0 1px;
+		transform: translate(4px, 4px);
 	}
+	.iso-frame::after {
+		bottom: 2px;
+		right: 2px;
+		border-width: 0 1px 1px 0;
+		transform: translate(-4px, -4px);
+	}
+	.iso-frame:hover::before,
+	.iso-frame:focus-within::before,
 	.iso-frame:hover::after,
 	.iso-frame:focus-within::after {
 		opacity: 1;
-		bottom: 2px;
-		right: 2px;
+		transform: none;
 	}
 
 	/* Cursor spotlight. --mx/--my are written by PointerSpotlight; everything
