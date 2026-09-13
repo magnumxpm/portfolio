@@ -92,11 +92,22 @@ describe("Work", () => {
 		}
 	})
 
-	it("draws one slab per layer", () => {
-		const { container } = render(<Work />)
-		const slabs = container.querySelectorAll(".iso-slab")
-		const expected = projectsData.reduce((n, p) => n + p.stack.length, 0)
-		expect(slabs).toHaveLength(expected)
+	it("gives each project a distinct figure topology", () => {
+		const kinds = new Set(projectsData.map((p) => p.figure))
+		// Six projects sharing one glyph told you nothing about any of them.
+		expect(kinds.size).toBe(projectsData.length)
+	})
+
+	it("lists each stack layer exactly once, with no duplicate tech list", () => {
+		render(<Work />)
+		for (const project of projectsData) {
+			for (const layer of project.stack) {
+				expect(screen.getAllByText(layer.label).length).toBeGreaterThan(0)
+			}
+		}
+		// The `technologies` array duplicated the stack labels at the same visual
+		// weight directly above them; it is no longer rendered.
+		expect(screen.queryByText("GOLANG")).not.toBeInTheDocument()
 	})
 })
 

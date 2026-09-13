@@ -37,7 +37,7 @@ const config: Config = {
 				prose: "68ch",
 			},
 			spacing: {
-				section: "clamp(4.5rem, 11vw, 9rem)",
+				section: "clamp(5.5rem, 12vw, 11rem)",
 			},
 			transitionTimingFunction: {
 				out: "cubic-bezier(0.16, 1, 0.3, 1)",

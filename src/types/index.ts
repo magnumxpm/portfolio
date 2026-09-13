@@ -32,6 +32,14 @@ export interface StackLayer {
 	kind: StackKind
 }
 
+/**
+ * The shape of a project's isometric figure. Topology, not decoration: a
+ * toolkit is a hub, a fleet of auditing agents is a fleet, a marketplace with
+ * delivery is a routed grid. Each reads differently at thumbnail size without
+ * needing a single word of label.
+ */
+export type ProjectFigureKind = "hub" | "fleet" | "chain" | "mesh" | "grid" | "stack"
+
 export interface ProjectItem {
 	title: string
 	description: string
@@ -39,8 +47,9 @@ export interface ProjectItem {
 	role: string
 	technologies: string[]
 	url: string
-	/** Architecture layers, client-most first. 3-5; each becomes one slab. */
+	/** Architecture layers, client-most first. Drives the legend and the figure. */
 	stack: StackLayer[]
+	figure: ProjectFigureKind
 }
 
 export interface ExperienceItem {

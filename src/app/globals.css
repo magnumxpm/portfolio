@@ -288,7 +288,9 @@
 		position: fixed;
 		inset: 0 0 auto 0;
 		height: 6.5rem;
-		z-index: 40;
+		/* 0, not 40: the scrim is a child of the header, so a positive z-index
+		   here lifts it above its own siblings and paints it over the pills. */
+		z-index: 0;
 		pointer-events: none;
 		background: linear-gradient(
 			to bottom,

@@ -10,7 +10,7 @@ export function Contact() {
 				<SectionHeader index="05" label="Contact" />
 
 				<Reveal>
-					<p className="mt-12 max-w-prose text-h2 font-medium text-fg">
+					<p className="mt-14 max-w-[24ch] text-h1 font-medium tracking-tight text-fg">
 						Open to conversations about agent systems, retrieval, and the infrastructure
 						underneath them.
 					</p>
@@ -19,14 +19,14 @@ export function Contact() {
 				<Reveal delay={0.05}>
 					<a
 						href={`mailto:${heroData.email}`}
-						className="sweep mt-8 inline-block font-mono text-h3 text-accent"
+						className="sweep mt-10 inline-block font-mono text-h3 text-accent"
 					>
 						{heroData.email}
 					</a>
 				</Reveal>
 
 				<Reveal delay={0.1}>
-					<PointerSpotlight className="spotlight mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
+					<PointerSpotlight className="spotlight mt-14 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
 						{socialLinks.map((social) => (
 							<div key={social.label}>
 								<a

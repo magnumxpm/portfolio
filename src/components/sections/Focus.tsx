@@ -20,7 +20,7 @@ export function Focus() {
 			<div className="shell">
 				<SectionHeader index="01" label="What I'm building now" />
 
-				<PointerSpotlight className="spotlight mt-12 grid gap-px border border-line bg-line sm:grid-cols-2">
+				<PointerSpotlight className="spotlight mt-14 grid gap-px border border-line bg-line sm:grid-cols-2">
 					{focusData.map((item, i) => {
 						const Diagram = DIAGRAMS[item.id]
 						return (
@@ -37,8 +37,8 @@ export function Focus() {
 
 									<div className="flex flex-1 flex-col p-7 pt-5">
 										<h3 className="text-h3 font-medium text-fg">{item.title}</h3>
-										<p className="mt-3 max-w-prose text-fg-dim">{item.description}</p>
-										<ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1">
+										<p className="mt-4 max-w-[42ch] text-body text-fg-dim">{item.description}</p>
+										<ul className="mt-auto flex flex-wrap gap-x-5 gap-y-1.5 pt-8">
 											{item.keywords.map((kw) => (
 												<li key={kw} className="font-mono text-label uppercase text-fg-faint">
 													{kw}

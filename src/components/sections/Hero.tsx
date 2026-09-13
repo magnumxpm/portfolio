@@ -18,22 +18,22 @@ export function Hero() {
 				</Reveal>
 
 				<Reveal delay={0.05}>
-					<h1 className="mt-6 text-display font-medium text-fg">{heroData.name}</h1>
+					<h1 className="mt-7 text-display font-medium text-fg">{heroData.name}</h1>
 				</Reveal>
 
 				<Reveal delay={0.1}>
-					<p className="mt-4 font-mono text-h3 text-fg-dim">
+					<p className="mt-5 font-mono text-h3 text-fg-dim">
 						{heroData.role} <span className="text-fg-faint">/</span>{" "}
 						<span className="text-accent">{heroData.roleAccent}</span>
 					</p>
 				</Reveal>
 
 				<Reveal delay={0.15}>
-					<p className="mt-8 max-w-prose text-lede text-fg">{heroData.lede}</p>
+					<p className="mt-10 max-w-[54ch] text-lede text-fg-dim">{heroData.lede}</p>
 				</Reveal>
 
 				<Reveal delay={0.2}>
-					<ul className="mt-8 flex flex-wrap gap-1.5">
+					<ul className="mt-10 flex flex-wrap gap-1.5">
 						{heroData.tags.map((tag) => (
 							<li key={tag}>
 								<Tag>{tag}</Tag>
@@ -43,7 +43,7 @@ export function Hero() {
 				</Reveal>
 
 				<Reveal delay={0.25}>
-					<div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+					<div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3">
 						<a
 							href={`mailto:${heroData.email}`}
 							className="rounded-[3px] bg-accent px-4 py-2 font-mono text-meta text-[#0a0a0b] transition-opacity duration-200 ease-out hover:opacity-85"
@@ -62,7 +62,7 @@ export function Hero() {
 				</Reveal>
 
 				<Reveal delay={0.3}>
-					<ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2">
+					<ul className="mt-12 flex flex-wrap gap-x-7 gap-y-2">
 						{socialLinks.map((social) => (
 							<li key={social.label}>
 								<a

@@ -15,11 +15,11 @@ export function Credentials() {
 			<div className="shell">
 				<SectionHeader index="04" label="Credentials" />
 
-				<div className="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-10">
+				<div className="mt-16 grid gap-14 lg:grid-cols-3 lg:gap-12">
 					<Reveal>
 						<ColumnHeading>Education</ColumnHeading>
 						{educationData.map((item) => (
-							<div key={item.institution} className="mt-5 flex gap-4">
+							<div key={item.institution} className="mt-6 flex gap-4">
 								<Image
 									src={item.logo}
 									alt=""
@@ -39,12 +39,12 @@ export function Credentials() {
 
 					<Reveal delay={0.05}>
 						<ColumnHeading>Awards</ColumnHeading>
-						<ul className="mt-5 space-y-6">
+						<ul className="mt-6 space-y-8">
 							{awardsData.map((item) => (
 								<li key={item.title}>
 									<p className="font-medium text-fg">{item.title}</p>
 									<p className="mt-1 font-mono text-meta text-fg-faint">{item.year}</p>
-									<p className="mt-2 text-fg-dim">{item.description}</p>
+									<p className="mt-3 max-w-[46ch] text-body text-fg-dim">{item.description}</p>
 								</li>
 							))}
 						</ul>
@@ -52,7 +52,7 @@ export function Credentials() {
 
 					<Reveal delay={0.1}>
 						<ColumnHeading>Certifications</ColumnHeading>
-						<ul className="mt-5 space-y-6">
+						<ul className="mt-6 space-y-8">
 							{certificationsData.map((item) => (
 								<li key={item.title} className="flex gap-4">
 									<Image

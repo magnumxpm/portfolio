@@ -82,7 +82,7 @@ export function Nav() {
 		<header className="pointer-events-none fixed inset-x-0 top-0 z-50" data-collapsed={collapsed || undefined}>
 			<span aria-hidden="true" className="nav-scrim" />
 			<nav
-				className="shell relative flex min-h-16 flex-wrap items-center gap-y-2 py-3"
+				className="shell relative z-10 flex min-h-16 flex-wrap items-center gap-y-2 py-3"
 				aria-label="Primary"
 			>
 				{/* Brand — condenses into a pill on scroll. */}

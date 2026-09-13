@@ -15,6 +15,7 @@ export const projectsData: ProjectItem[] = [
 		role: "Full-stack",
 		technologies: ["Golang", "AI Models", "DevOps", "Next.js"],
 		url: "https://jarnkit.com",
+		figure: "hub",
 		stack: [
 			{ label: "Next.js client", kind: "client" },
 			{ label: "Go API", kind: "service" },
@@ -29,6 +30,7 @@ export const projectsData: ProjectItem[] = [
 		role: "Backend",
 		technologies: ["Golang", "Postgres", "gRPC", "WebSockets", "AWS"],
 		url: "https://helmdall.com",
+		figure: "fleet",
 		stack: [
 			{ label: "Go agent", kind: "client" },
 			{ label: "gRPC + WebSockets", kind: "edge" },
@@ -44,6 +46,7 @@ export const projectsData: ProjectItem[] = [
 		role: "Backend & Android",
 		technologies: ["Golang", "Postgres", "Kotlin", "Android SDK"],
 		url: "",
+		figure: "chain",
 		stack: [
 			{ label: "Android (Kotlin)", kind: "client" },
 			{ label: "Go API", kind: "service" },
@@ -57,6 +60,7 @@ export const projectsData: ProjectItem[] = [
 		role: "Frontend",
 		technologies: ["Next.js", "Tailwind", "Electron", "UI/UX"],
 		url: "",
+		figure: "mesh",
 		stack: [
 			{ label: "Electron shell", kind: "client" },
 			{ label: "Next.js + Tailwind UI", kind: "client" },
@@ -70,6 +74,7 @@ export const projectsData: ProjectItem[] = [
 		role: "Frontend",
 		technologies: ["Kotlin", "Next.js", "Tailwind", "UI/UX"],
 		url: "https://shopydoo.in",
+		figure: "grid",
 		stack: [
 			{ label: "Android (Kotlin)", kind: "client" },
 			{ label: "Next.js storefront", kind: "client" },
@@ -83,6 +88,7 @@ export const projectsData: ProjectItem[] = [
 		role: "Full-stack",
 		technologies: ["Next.js", "Tailwind", "Firebase", "DevOps"],
 		url: "https://researchbook.vercel.app",
+		figure: "stack",
 		stack: [
 			{ label: "Next.js + Tailwind", kind: "client" },
 			{ label: "Firebase", kind: "store" },
