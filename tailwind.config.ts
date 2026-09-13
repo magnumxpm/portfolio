@@ -1,114 +1,56 @@
 import type { Config } from "tailwindcss"
-import plugin from "tailwindcss"
-const colors = require("tailwindcss/colors")
-const {
-	default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette")
 
 const config: Config = {
-	content: [
-		"./src/app/pages/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/app/components/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-		"./@/**/*.{js,ts,jsx,tsx,mdx}",
-		"./@/components/**/*.{js,ts,jsx,tsx,mdx}",
-	],
+	darkMode: "class",
+	content: ["./src/app/**/*.{ts,tsx}", "./src/components/**/*.{ts,tsx}"],
 	theme: {
 		extend: {
-			keyframes: {
-				"accordion-down": {
-					from: { height: "0" },
-					to: { height: "var(--radix-accordion-content-height)" },
-				},
-				"accordion-up": {
-					from: { height: "var(--radix-accordion-content-height)" },
-					to: { height: "0" },
-				},
-				slidein: {
-					from: {
-						opacity: "0",
-						transform: "translateY(-10px)",
-					},
-					to: {
-						opacity: "1",
-						transform: "translateY(0)",
-					},
-				},
-			},
-			animation: {
-				"accordion-down": "accordion-down 0.2s ease-out",
-				"accordion-up": "accordion-up 0.2s ease-out",
-				slidein: "slidein 1s ease var(--slidein-delay) forwards",
-			},
 			colors: {
-				theme: "#D9B99B",
-				theme_light: "#E0944E",
-				primary: "#f8f7f3",
-				dark: "#242424",
-			},
-			backgroundColor: {
-				primary: "#f8f7f3",
-				dark: "#242424",
-				theme: "#D9B99B",
-				theme_light: "#E0944E",
-			},
-			fontWeight: {
-				bold: "700",
+				bg: "var(--bg)",
+				surface: "var(--surface)",
+				"surface-hi": "var(--surface-hi)",
+				line: "var(--line)",
+				"line-hi": "var(--line-hi)",
+				fg: "var(--text)",
+				"fg-dim": "var(--text-dim)",
+				"fg-faint": "var(--text-faint)",
+				accent: "var(--accent)",
+				"accent-dim": "var(--accent-dim)",
+				"field-dim": "var(--field-dim)",
+				"field-max": "var(--field-max)",
 			},
 			fontFamily: {
-				code: "Space Mono, monospace",
+				sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+				mono: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+			},
+			fontSize: {
+				display: ["clamp(2.75rem, 9vw, 6rem)", { lineHeight: "0.95", letterSpacing: "-0.04em" }],
+				h1: ["clamp(2rem, 5vw, 3.25rem)", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
+				h2: ["clamp(1.5rem, 3.2vw, 2.125rem)", { lineHeight: "1.15", letterSpacing: "-0.02em" }],
+				h3: ["clamp(1.125rem, 2vw, 1.375rem)", { lineHeight: "1.3", letterSpacing: "-0.01em" }],
+				lede: ["clamp(1rem, 1.6vw, 1.25rem)", { lineHeight: "1.6" }],
+				label: ["0.6875rem", { lineHeight: "1", letterSpacing: "0.16em" }],
+				meta: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.02em" }],
 			},
 			maxWidth: {
-				desktop: "1300px",
+				content: "1120px",
+				prose: "68ch",
+			},
+			spacing: {
+				section: "clamp(4.5rem, 11vw, 9rem)",
+			},
+			transitionTimingFunction: {
+				out: "cubic-bezier(0.16, 1, 0.3, 1)",
+			},
+			keyframes: {
+				"caret-blink": { "0%,49%": { opacity: "1" }, "50%,100%": { opacity: "0" } },
+			},
+			animation: {
+				"caret-blink": "caret-blink 1.1s steps(1) infinite",
 			},
 		},
-		container: {
-			center: true,
-			padding: "2rem",
-			screens: {
-				"2xl": "1400px",
-			},
-		},
-		fontSize: {
-			xs: "10px",
-			sm: "12px",
-			base_mobile: "14px",
-			base: "18px",
-			md: "20px",
-			lg: "22px",
-			xl: "24px",
-			"2xl": "30px",
-			"3xl": "38px",
-			tab_hero: "54px",
-			tab_sub_hero: "36px",
-			hero: "60px",
-			sub_hero: "42px",
-		},
-		maxWidth: {
-			large: "1500px",
-			desk: "1200px",
-			tablet: "760px",
-			phone: "400px",
-		},
-		// screens: {
-		// 	tablet: "640px",
-		// 	laptop: "1024px",
-		// 	desktop: "1280px",
-		// },
 	},
-	plugins: [require("tailwindcss-animate"), addVariablesForColors],
+	plugins: [require("tailwindcss-animate")],
 }
+
 export default config
-
-// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
-function addVariablesForColors({ addBase, theme }: any) {
-	let allColors = flattenColorPalette(theme("colors"))
-	let newVars = Object.fromEntries(
-		Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-	)
-
-	addBase({
-		":root": newVars,
-	})
-}

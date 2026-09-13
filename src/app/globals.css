@@ -1,3 +1,151 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	:root {
+		--bg: #0a0a0b;
+		--surface: #0e1011;
+		--surface-hi: #15181a;
+		--line: rgba(255, 255, 255, 0.07);
+		--line-hi: rgba(255, 255, 255, 0.14);
+		--text: #e8e6e3;
+		--text-dim: #8a8f98;
+		--text-faint: #5a5f66;
+		--accent: #f2a65a;
+		--accent-dim: rgba(242, 166, 90, 0.14);
+
+		/* Load-bearing for accessibility: all contrast math is computed against
+		   --field-max, the brightest possible pixel behind body text. */
+		--field-dim: #1a1a1d;
+		--field-max: #3a3a40;
+
+		--field-mask: radial-gradient(
+				ellipse 120% 80% at 50% 0%,
+				rgba(0, 0, 0, 0.85) 0%,
+				rgba(0, 0, 0, 0.35) 45%,
+				rgba(0, 0, 0, 0.08) 100%
+			),
+			linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%);
+
+		color-scheme: dark;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		background-color: var(--bg);
+		color: var(--text);
+		font-feature-settings: "cv11", "ss01";
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	::selection {
+		background: var(--accent);
+		color: #0a0a0b;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}
+
+@layer components {
+	/* --- ASCII / dither background field -------------------------------- */
+
+	/* The static Bayer texture lives on the wrapper and is ALWAYS present:
+	   it is the reduced-motion fallback, it prevents pop-in when the animated
+	   loop starts late, and it keeps the page looking designed if the canvas
+	   module never loads. The canvas composites on top via clearRect. */
+	.ascii-field-wrap {
+		position: fixed;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+		background-color: var(--bg);
+		background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%228%22%20shape-rendering%3D%22crispEdges%22%3E%3Cg%20fill%3D%22%238E949C%22%20fill-opacity%3D%22.5%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%226%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%226%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%226%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%225%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3Crect%20x%3D%226%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+		background-size: 8px 8px;
+		-webkit-mask-image: var(--field-mask);
+		mask-image: var(--field-mask);
+		-webkit-mask-composite: source-in;
+		mask-composite: intersect;
+	}
+
+	.ascii-field-canvas {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	/* Belt-and-braces for the window before hydration decides. */
+	@media (prefers-reduced-motion: reduce) {
+		.ascii-field-canvas {
+			display: none;
+		}
+	}
+
+	/* --- layout primitives ---------------------------------------------- */
+
+	.shell {
+		width: 100%;
+		max-width: theme("maxWidth.content");
+		margin-inline: auto;
+		padding-inline: 1.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.shell {
+			padding-inline: 2.5rem;
+		}
+	}
+
+	.hairline {
+		border-top: 1px solid var(--line);
+	}
+
+	/* --- reveal ---------------------------------------------------------- */
+
+	/* Scoped to [data-js], which an inline script sets before first paint. With
+	   JavaScript off or broken the content is simply visible — nothing on this
+	   page is ever gated behind a script finishing. */
+	[data-js] [data-reveal] {
+		opacity: 0;
+		transform: translateY(12px);
+		will-change: opacity, transform;
+	}
+
+	[data-js] [data-reveal].is-visible {
+		opacity: 1;
+		transform: none;
+		transition:
+			opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
+			transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
+		will-change: auto;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-js] [data-reveal] {
+			opacity: 1;
+			transform: none;
+		}
+	}
+}

@@ -1,31 +1,35 @@
-import { HeroData } from "@/types";
+import type { HeroData } from "@/types"
 
 export const heroData: HeroData = {
-  tags: [
-    "Next.js",
-    "React",
-    "Golang",
-    "APIs",
-    "Websockets",
-    "UI/UX",
-    "Full-stack Dev",
-    "Testing",
-    "DevOps",
-    "ML",
-  ],
-  desc: "Hi 👋. I am a software engineering undergrad. I've been into computer science since elementary school, and over the years, I've involved myself with software projects that come in various forms -- social media, auto task delegation, video conferencing, network-enabled system auditing, and more. I have dabbled with Web and mobile dev and won two nationally revered hackathons during my undergrad.",
-  specialties: [
-    "API servers",
-    "Websockets",
-    "Backend dev",
-    "React | Next.js",
-    "Flutter",
-    "Authentication",
-    "Data modelling",
-    "UI/UX Design",
-    "Testing",
-    "DevOps",
-    "LLM",
-    "Deeplearning",
-  ],
-};
+	name: "Pritam Mukherjee",
+	role: "Software Engineer",
+	roleAccent: "Agent Systems",
+	status: "EPAM Systems — since Nov 2025",
+	lede: "I build agentic systems — LangGraph orchestration, retrieval and knowledge engineering, and the deployment harnesses that keep them honest in production. Before agents: Go API servers, message-queue pipelines, and two national hackathon wins.",
+	tags: [
+		"LangGraph",
+		"RAG",
+		"Knowledge Engineering",
+		"AgentOps",
+		"Evals",
+		"Python",
+		"Golang",
+		"Next.js",
+		"Docker",
+		"RabbitMQ",
+	],
+	resumeUrl: "https://1drv.ms/b/s!Aukoqznc45UmpQTEXFNub-w0_dOI?e=NOfYN4",
+	email: "me@pmukherjee.dev",
+}
+
+export const socialLinks = [
+	{ label: "GitHub", href: "https://github.com/magnumxpm", handle: "magnumxpm" },
+	{
+		label: "LinkedIn",
+		href: "https://www.linkedin.com/in/pritam-mukherjee-52a348225/",
+		handle: "pritam-mukherjee",
+	},
+	{ label: "X", href: "https://twitter.com/pmukherjee02", handle: "pmukherjee02" },
+	{ label: "Instagram", href: "https://instagram.com/mukherjee.anon", handle: "mukherjee.anon" },
+	{ label: "Bento", href: "https://bento.me/mukherjee", handle: "mukherjee" },
+] as const

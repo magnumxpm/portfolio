@@ -1,45 +1,32 @@
-import { MoveUpRight } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { ArrowUpRight } from "lucide-react"
+
+import { cn } from "@/lib/utils"
 
 interface ExternalLinkProps {
-  href: string;
-  className?: string;
-  variant?: "default" | "big";
-  children: ReactNode;
+	href: string
+	children: React.ReactNode
+	className?: string
 }
 
-export function ExternalLink({
-  href,
-  className,
-  variant = "default",
-  children,
-}: ExternalLinkProps) {
-  return (
-    <Link
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn(
-        "flex items-center gap-1 w-fit group outline-none",
-        variant === "big" 
-          ? "font-semibold text-base sm:text-md" 
-          : "text-base_mobile sm:text-base",
-        className
-      )}
-    >
-      <div className="border-b-2 border-black group-hover:text-theme group-hover:border-theme group-focus:text-theme group-focus:border-theme">
-        {children}
-      </div>
-
-      <MoveUpRight
-        className={cn(
-          variant === "big"
-            ? "group-hover:text-theme_light group-focus:text-theme_light"
-            : "group-hover:text-theme group-focus:text-theme"
-        )}
-      />
-    </Link>
-  );
+export function ExternalLink({ href, children, className }: ExternalLinkProps) {
+	return (
+		<a
+			href={href}
+			target="_blank"
+			rel="noopener noreferrer"
+			className={cn(
+				"group inline-flex items-center gap-1.5 text-fg",
+				"transition-colors duration-200 ease-out hover:text-accent",
+				className
+			)}
+		>
+			<span className="border-b border-line-hi pb-px transition-colors duration-200 ease-out group-hover:border-accent">
+				{children}
+			</span>
+			<ArrowUpRight
+				aria-hidden="true"
+				className="size-3.5 transition-transform duration-200 ease-out group-hover:-translate-y-px group-hover:translate-x-px"
+			/>
+		</a>
+	)
 }
