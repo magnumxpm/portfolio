@@ -19,15 +19,21 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 			className="iso-frame group grid grid-cols-1 items-center gap-8 border-b border-line py-14 transition-colors duration-300 ease-out hover:border-line-hi md:grid-cols-[1fr_20rem] md:gap-16"
 		>
 			<div className="order-2 md:order-none">
-				{/* The index is display type, not a footnote: at 2xl mono it carries the
-				   left edge of the section and gives the title something to sit against.
-				   It spans both rows so it centres on the title+role pair, not on either. */}
-				<div className="grid grid-cols-[2.75rem_1fr] items-center gap-x-4 sm:grid-cols-[3.75rem_1fr] sm:gap-x-6">
-					<span className="row-span-2 self-center font-mono text-h2 font-normal leading-none tabular-nums text-fg-faint transition-colors duration-300 ease-out group-hover:text-accent">
+				{/* Eyebrow, then title, then copy. The role sat under the title before,
+				   which put a small mono line between two things it should be
+				   introducing. The index is display-scale but baseline-aligned to the
+				   title rather than centred on the block, so it reads as part of the
+				   same line instead of floating beside it. */}
+				<div className="grid grid-cols-[2.75rem_1fr] items-baseline gap-x-4 sm:grid-cols-[4rem_1fr] sm:gap-x-6">
+					<p className="col-start-2 row-start-1 mb-2.5 font-mono text-label uppercase tracking-[0.2em] text-fg-faint">
+						{project.role}
+					</p>
+
+					<span className="col-start-1 row-start-2 font-mono text-h2 font-normal tabular-nums text-fg-faint transition-colors duration-300 ease-out group-hover:text-accent">
 						{String(index + 1).padStart(2, "0")}
 					</span>
 
-					<div className="flex items-center gap-3">
+					<div className="col-start-2 row-start-2 flex items-center gap-3">
 						<h3 className="text-h2 font-medium tracking-tight text-fg transition-colors duration-200 ease-out group-hover:text-accent">
 							{project.title}
 						</h3>
@@ -42,14 +48,6 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 							className="size-6 shrink-0 opacity-40 brightness-0 invert transition-opacity duration-300 ease-out group-hover:opacity-80"
 						/>
 					</div>
-
-					<p className="mt-2 flex items-center gap-3 font-mono text-meta uppercase tracking-[0.18em] text-fg-faint">
-						<span
-							aria-hidden="true"
-							className="h-px w-5 shrink-0 bg-line-hi transition-colors duration-300 ease-out group-hover:bg-accent"
-						/>
-						{project.role}
-					</p>
 				</div>
 
 				<p className="mt-8 max-w-[46ch] text-lede leading-relaxed text-fg-dim">

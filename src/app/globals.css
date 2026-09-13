@@ -437,9 +437,9 @@
 		--morph-w: 5.75rem;
 		--morph-h: 2.25rem;
 		--morph-w-open: 13.5rem;
-		/* trigger 2.25 + 6 items x 2.25 + the panel's 0.75 bottom padding.
-		   Locked to the link count by a test — add a link and this must move. */
-		--morph-h-open: 16.5rem;
+		/* 6 items x 2.25 + 0.75 padding top and bottom. Locked to the link count
+		   by a test — add a link and this must move. */
+		--morph-h-open: 15rem;
 
 		position: relative;
 		width: var(--morph-w);
@@ -508,16 +508,25 @@
 		pointer-events: auto;
 	}
 
+	/* The links fill the whole surface. Leaving the trigger's row empty read as
+	   dead space above the list, and the trigger fades out as they arrive — so
+	   the first link crossfades into the spot the glyph just left. */
 	.nav-morph-panel {
 		position: absolute;
-		top: var(--morph-h);
-		right: 0;
+		inset: 0 0 auto 0;
 		width: var(--morph-w-open);
-		padding: 0 0.75rem 0.75rem;
+		padding: 0.75rem;
 	}
 
+	/* Open, the trigger is invisible but still there: it keeps aria-expanded,
+	   stays in the tab order, and tapping the pill's old footprint still
+	   closes — alongside Escape and tapping outside. */
+	.nav-morph[data-open] .nav-morph-trigger {
+		opacity: 0;
+	}
 	.nav-morph-trigger {
 		position: absolute;
+		transition: opacity 0.2s var(--ease-out);
 		top: 0;
 		right: 0;
 		z-index: 1;
@@ -607,6 +616,7 @@
 		.nav-morph-panel,
 		.nav-morph-item,
 		.nav-morph-glyph > *,
+		.nav-morph-trigger,
 		.nav-inline {
 			transition-duration: 0.01ms !important;
 			transition-delay: 0s !important;

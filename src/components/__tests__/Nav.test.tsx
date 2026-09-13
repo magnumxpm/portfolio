@@ -82,7 +82,7 @@ describe("morph geometry", () => {
 		const items = container.querySelectorAll(".nav-morph-item")
 
 		const ITEM = 2.25 // .nav-morph-item height
-		const PAD = 0.75 // .nav-morph-panel bottom padding
-		expect(read("morph-h-open")).toBeCloseTo(read("morph-h") + items.length * ITEM + PAD, 5)
+		const PAD = 0.75 * 2 // .nav-morph-panel padding, top and bottom
+		expect(read("morph-h-open")).toBeCloseTo(items.length * ITEM + PAD, 5)
 	})
 })
