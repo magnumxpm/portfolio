@@ -7,7 +7,7 @@ export function Hero() {
 		<section
 			id="top"
 			data-field-preset="hero"
-			className="relative flex min-h-[calc(100dvh-4rem)] items-center py-section"
+			className="relative flex min-h-dvh items-center py-section"
 		>
 			<div className="shell w-full">
 				<Reveal>
