@@ -55,6 +55,17 @@ describe("Focus", () => {
 		expect(container.querySelectorAll("svg.iso-scene")).toHaveLength(focusData.length)
 		expect(container.querySelectorAll("img")).toHaveLength(0)
 	})
+
+	it("keeps the diagrams free of rendered text", () => {
+		// Labels crowded the geometry at this size. Meaning lives in the card
+		// copy; <title>/<desc> still carry it for screen readers.
+		const { container } = render(<Focus />)
+		expect(container.querySelectorAll(".iso-scene text")).toHaveLength(0)
+		for (const scene of container.querySelectorAll("svg.iso-scene")) {
+			expect(scene.querySelector("title")?.textContent).toBeTruthy()
+			expect(scene.querySelector("desc")?.textContent).toBeTruthy()
+		}
+	})
 })
 
 describe("Work", () => {
@@ -124,6 +135,13 @@ describe("Experience", () => {
 	it("marks the current role", () => {
 		render(<Experience />)
 		expect(screen.getByText("Current")).toBeInTheDocument()
+	})
+
+	it("gives every entry a timeline node", () => {
+		const { container } = render(<Experience />)
+		expect(container.querySelectorAll("[aria-hidden].rounded-full")).toHaveLength(
+			experienceData.length
+		)
 	})
 })
 

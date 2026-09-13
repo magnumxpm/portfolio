@@ -16,14 +16,14 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 	return (
 		<Wrapper
 			{...(linked ? { href: project.url, target: "_blank", rel: "noopener noreferrer" } : {})}
-			className="iso-frame group grid grid-cols-1 items-center gap-8 border-b border-line py-14 transition-colors duration-300 ease-out hover:border-line-hi md:grid-cols-[1fr_15rem] md:gap-14"
+			className="iso-frame group grid grid-cols-1 items-center gap-8 border-b border-line py-14 transition-colors duration-300 ease-out hover:border-line-hi md:grid-cols-[1fr_20rem] md:gap-16"
 		>
 			<div className="order-2 md:order-none">
 				<div className="flex items-baseline gap-4">
 					<span className="font-mono text-meta tabular-nums text-fg-faint">
 						{String(index + 1).padStart(2, "0")}
 					</span>
-					<h3 className="text-h2 font-medium tracking-tight text-fg transition-colors duration-200 ease-out group-hover:text-accent">
+					<h3 className="text-title font-medium text-fg transition-colors duration-200 ease-out group-hover:text-accent">
 						{project.title}
 					</h3>
 					{/* Flattened to a white silhouette: the six marks are wildly
@@ -77,7 +77,7 @@ function ProjectRow({ project, index }: { project: ProjectItem; index: number })
 				</p>
 			</div>
 
-			<div className="order-1 mx-auto aspect-square w-full max-w-[15rem] md:order-none md:mx-0">
+			<div className="order-1 mx-auto aspect-square w-full max-w-[20rem] md:order-none md:mx-0">
 				<ProjectFigure kind={project.figure} layers={project.stack} project={project.title} />
 			</div>
 		</Wrapper>

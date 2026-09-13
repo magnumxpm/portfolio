@@ -38,7 +38,7 @@ export interface StackLayer {
  * delivery is a routed grid. Each reads differently at thumbnail size without
  * needing a single word of label.
  */
-export type ProjectFigureKind = "hub" | "fleet" | "chain" | "mesh" | "grid" | "stack"
+export type ProjectFigureKind = "hub" | "fleet" | "chain" | "mesh" | "grid"
 
 export interface ProjectItem {
 	title: string

@@ -5,7 +5,12 @@ export interface NodeSpec {
 	id: string
 	origin: Vec3
 	size?: readonly [number, number]
-	title: string
+	/**
+	 * Captions are omitted throughout: at the size these render, labels crowded
+	 * the geometry and read as clutter. Meaning lives in the card copy, and in
+	 * each scene's <desc> for screen readers.
+	 */
+	title?: string
 	sub?: string
 	handles?: readonly IsoFace[]
 	active?: boolean
@@ -17,7 +22,6 @@ export interface LinkSpec {
 	fromFace: IsoFace
 	to: string
 	toFace: IsoFace
-	label?: string
 	active?: boolean
 	step?: number
 }
@@ -25,28 +29,22 @@ export interface LinkSpec {
 /** Agent orchestration: a router branching on tool choice, with a loop back. */
 export const agentGraph: { nodes: NodeSpec[]; links: LinkSpec[] } = {
 	nodes: [
-		{ id: "in", origin: [0, 6, 0], title: "Input", sub: "state", handles: ["right"] },
+		{ id: "in", origin: [0, 6, 0], handles: ["right"] },
 		{
 			id: "router",
 			origin: [10, 6, 0],
-			title: "Router",
-			sub: "tool_choice",
 			handles: ["left", "right", "top"],
 			active: true,
 		},
 		{
 			id: "tool",
 			origin: [21, 0, 0],
-			title: "Tool call",
-			sub: "retrieve()",
 			handles: ["left", "top"],
 			active: true,
 		},
 		{
 			id: "reply",
 			origin: [21, 12, 0],
-			title: "Direct",
-			sub: "respond()",
 			handles: ["left"],
 			tone: "muted",
 		},
@@ -58,12 +56,11 @@ export const agentGraph: { nodes: NodeSpec[]; links: LinkSpec[] } = {
 			fromFace: "right",
 			to: "tool",
 			toFace: "left",
-			label: "true",
 			active: true,
 			step: 1,
 		},
-		{ from: "router", fromFace: "right", to: "reply", toFace: "left", label: "false", step: 1 },
-		{ from: "tool", fromFace: "top", to: "router", toFace: "top", label: "loop", step: 2 },
+		{ from: "router", fromFace: "right", to: "reply", toFace: "left", step: 1 },
+		{ from: "tool", fromFace: "top", to: "router", toFace: "top", step: 2 },
 	],
 }
 
@@ -85,9 +82,9 @@ export const ragStack: LayerSpec[] = [
 export const serviceStack = {
 	base: { label: "Runtime", sub: "containers" },
 	services: [
-		{ id: "api", origin: [1, 1, 1] as Vec3, title: "API", sub: "ingress" },
-		{ id: "worker", origin: [1, 8, 1] as Vec3, title: "Worker", sub: "agent loop" },
-		{ id: "store", origin: [10, 8, 1] as Vec3, title: "Store", sub: "traces" },
+		{ id: "api", origin: [1, 1, 1] as Vec3 },
+		{ id: "worker", origin: [1, 8, 1] as Vec3 },
+		{ id: "store", origin: [10, 8, 1] as Vec3 },
 	],
 }
 

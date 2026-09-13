@@ -28,6 +28,7 @@ const config: Config = {
 				h1: ["clamp(2rem, 5vw, 3.25rem)", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
 				h2: ["clamp(1.5rem, 3.2vw, 2.125rem)", { lineHeight: "1.15", letterSpacing: "-0.02em" }],
 				h3: ["clamp(1.125rem, 2vw, 1.375rem)", { lineHeight: "1.3", letterSpacing: "-0.01em" }],
+				title: ["clamp(1.25rem, 1.9vw, 1.625rem)", { lineHeight: "1.25", letterSpacing: "-0.02em" }],
 				lede: ["clamp(1rem, 1.6vw, 1.25rem)", { lineHeight: "1.6" }],
 				label: ["0.6875rem", { lineHeight: "1", letterSpacing: "0.16em" }],
 				meta: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.02em" }],

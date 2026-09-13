@@ -81,18 +81,4 @@ export const projectsData: ProjectItem[] = [
 			{ label: "Delivery service", kind: "service" },
 		],
 	},
-	{
-		title: "ResearchBook",
-		description: "Social platform for scholars, built around a corpus of research papers.",
-		imageSrc: "/researchbook.png",
-		role: "Full-stack",
-		technologies: ["Next.js", "Tailwind", "Firebase", "DevOps"],
-		url: "https://researchbook.vercel.app",
-		figure: "stack",
-		stack: [
-			{ label: "Next.js + Tailwind", kind: "client" },
-			{ label: "Firebase", kind: "store" },
-			{ label: "CI / hosting", kind: "edge" },
-		],
-	},
 ]

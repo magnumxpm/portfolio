@@ -1,7 +1,7 @@
 import { elbow, handle, type Vec3 } from "@/lib/iso"
 import type { ProjectFigureKind, StackLayer } from "@/types"
 
-import { IsoBox, IsoSlab } from "../IsoBox"
+import { IsoBox } from "../IsoBox"
 import { IsoLink } from "../IsoLink"
 import { IsoPlane } from "../IsoPlane"
 import { IsoScene } from "../IsoScene"
@@ -63,8 +63,6 @@ function renderFigure(kind: ProjectFigureKind, layers: StackLayer[]) {
 			return <Mesh layers={layers} />
 		case "grid":
 			return <Grid layers={layers} />
-		case "stack":
-			return <Stack layers={layers} />
 	}
 }
 
@@ -245,41 +243,6 @@ function Grid({ layers }: { layers: StackLayer[] }) {
 					step={k}
 				/>
 			))}
-		</>
-	)
-}
-
-/** Layers, for the one project that genuinely is a stack of documents. */
-function Stack({ layers }: { layers: StackLayer[] }) {
-	const w = 16
-	const d = 12
-	const gap = 3
-	const x = (SPAN - w) / 2
-	const y = (SPAN - d) / 2
-
-	return (
-		<>
-			{layers.map((layer, i) => {
-				const z = (layers.length - 1 - i) * gap
-				return (
-					<g key={layer.label}>
-						{z > 0 ? (
-							<IsoLink
-								route={elbow([SPAN / 2, SPAN / 2, z - gap + 1], [SPAN / 2, SPAN / 2, z])}
-								variant="dashed"
-								arrow={false}
-								step={i}
-							/>
-						) : null}
-						<IsoSlab
-							origin={[x, y, z]}
-							size={[w, d]}
-							tone={STACK_TONE[layer.kind]}
-							step={layers.length - 1 - i}
-						/>
-					</g>
-				)
-			})}
 		</>
 	)
 }
