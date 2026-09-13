@@ -1,3 +1,4 @@
+import { PointerSpotlight } from "@/components/motion/PointerSpotlight"
 import { Reveal } from "@/components/motion/Reveal"
 import { SectionHeader } from "@/components/ui/SectionHeader"
 import { heroData, socialLinks } from "@/data/heroData"
@@ -18,16 +19,16 @@ export function Contact() {
 				<Reveal delay={0.05}>
 					<a
 						href={`mailto:${heroData.email}`}
-						className="mt-8 inline-block font-mono text-h3 text-accent transition-opacity duration-200 ease-out hover:opacity-80"
+						className="sweep mt-8 inline-block font-mono text-h3 text-accent"
 					>
 						{heroData.email}
 					</a>
 				</Reveal>
 
 				<Reveal delay={0.1}>
-					<ul className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
+					<PointerSpotlight className="spotlight mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
 						{socialLinks.map((social) => (
-							<li key={social.label}>
+							<div key={social.label}>
 								<a
 									href={social.href}
 									target="_blank"
@@ -41,9 +42,9 @@ export function Contact() {
 										{social.handle}
 									</span>
 								</a>
-							</li>
+							</div>
 						))}
-					</ul>
+					</PointerSpotlight>
 				</Reveal>
 			</div>
 		</section>

@@ -20,9 +20,7 @@ export function ExternalLink({ href, children, className }: ExternalLinkProps) {
 				className
 			)}
 		>
-			<span className="border-b border-line-hi pb-px transition-colors duration-200 ease-out group-hover:border-accent">
-				{children}
-			</span>
+			<span className="sweep">{children}</span>
 			<ArrowUpRight
 				aria-hidden="true"
 				className="size-3.5 transition-transform duration-200 ease-out group-hover:-translate-y-px group-hover:translate-x-px"

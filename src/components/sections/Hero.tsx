@@ -69,7 +69,7 @@ export function Hero() {
 									href={social.href}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="font-mono text-meta text-fg-dim transition-colors duration-200 ease-out hover:text-fg"
+									className="sweep font-mono text-meta text-fg-dim hover:text-fg"
 								>
 									{social.label}
 								</a>

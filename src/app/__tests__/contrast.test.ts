@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
 
-import { FIELD_ACCENT, FIELD_MAX } from "@/components/background/ascii-config"
+import { FIELD_ACCENT, FIELD_MAX, FIELD_MAX_EDGE } from "@/components/background/ascii-config"
 
 /**
  * The background field paints text-coloured glyphs behind real copy, so the
@@ -60,5 +60,22 @@ describe("contrast over the background field", () => {
 
 	it("keeps the accent glyph colour in sync with the --accent token", () => {
 		expect(FIELD_ACCENT.toLowerCase()).toBe(token("accent").toLowerCase())
+	})
+
+	it("keeps the gutter tier in sync with its token", () => {
+		expect(FIELD_MAX_EDGE.toLowerCase()).toBe(token("field-max-edge").toLowerCase())
+	})
+
+	it("keeps the gutter tier genuinely brighter — otherwise the split is pointless", () => {
+		expect(relativeLuminance(token("field-max-edge"))).toBeGreaterThan(
+			relativeLuminance(token("field-max")) * 2
+		)
+	})
+
+	it("does NOT require the gutter tier to clear AA — it sits behind no text", () => {
+		// Documenting the exemption rather than leaving it implicit: this tier is
+		// only painted where isGutterCell() allows, which is outside the text
+		// column. If that ever changes, ascii-engine.test.ts fails first.
+		expect(contrast(token("text-dim"), token("field-max-edge"))).toBeLessThan(AA)
 	})
 })

@@ -12,7 +12,7 @@ export function Experience() {
 					{experienceData.map((item, i) => (
 						<li key={item.company}>
 							<Reveal delay={i * 0.05}>
-								<article className="grid grid-cols-1 gap-4 border-b border-line py-8 sm:grid-cols-[13rem_1fr] sm:gap-10">
+								<article className="iso-frame grid grid-cols-1 gap-4 border-b border-line px-1 py-8 transition-colors duration-300 ease-out hover:border-line-hi sm:grid-cols-[13rem_1fr] sm:gap-10">
 									<div>
 										<p className="font-mono text-meta text-fg-faint">{item.period}</p>
 										{item.current ? (

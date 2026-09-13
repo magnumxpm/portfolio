@@ -2,6 +2,7 @@ import { AgentGraph } from "@/components/iso/diagrams/AgentGraph"
 import { EvalGrid } from "@/components/iso/diagrams/EvalGrid"
 import { RagStack } from "@/components/iso/diagrams/RagStack"
 import { ServiceStack } from "@/components/iso/diagrams/ServiceStack"
+import { PointerSpotlight } from "@/components/motion/PointerSpotlight"
 import { Reveal } from "@/components/motion/Reveal"
 import { SectionHeader } from "@/components/ui/SectionHeader"
 import { focusData } from "@/data/focusData"
@@ -19,7 +20,7 @@ export function Focus() {
 			<div className="shell">
 				<SectionHeader index="01" label="What I'm building now" />
 
-				<div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2">
+				<PointerSpotlight className="spotlight mt-12 grid gap-px border border-line bg-line sm:grid-cols-2">
 					{focusData.map((item, i) => {
 						const Diagram = DIAGRAMS[item.id]
 						return (
@@ -49,7 +50,7 @@ export function Focus() {
 							</Reveal>
 						)
 					})}
-				</div>
+				</PointerSpotlight>
 			</div>
 		</section>
 	)
