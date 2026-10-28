@@ -86,3 +86,15 @@ export interface SocialItem {
 	href: string
 	handle: string
 }
+
+export interface GameItem {
+	/** URL segment: /games/<slug>. */
+	slug: string
+	title: string
+	tagline: string
+	description: string
+	platforms: string[]
+	status: string
+	/** ISO date the privacy policy last changed. */
+	privacyUpdated: string
+}
