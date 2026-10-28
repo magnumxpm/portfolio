@@ -12,7 +12,7 @@ import "./globals.css"
 const AsciiField = dynamic(() => import("@/components/background/AsciiField"))
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://www.pmukherjee.com"),
+	metadataBase: new URL("https://www.pmukherjee.dev"),
 	title: "Pritam Mukherjee — Software Engineer, Agent Systems",
 	description:
 		"Software engineer building agentic systems: LangGraph orchestration, RAG and knowledge engineering, AgentOps, and evaluation harnesses.",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 		title: "Pritam Mukherjee — Software Engineer, Agent Systems",
 		description:
 			"Software engineer building agentic systems: LangGraph orchestration, RAG and knowledge engineering, AgentOps, and evaluation harnesses.",
-		url: "https://www.pmukherjee.com",
+		url: "https://www.pmukherjee.dev",
 	},
 	twitter: {
 		card: "summary_large_image",

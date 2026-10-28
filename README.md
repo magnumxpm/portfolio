@@ -1,4 +1,4 @@
-# pmukherjee.com
+# pmukherjee.dev
 
 Personal site for Pritam Mukherjee — software engineer working on agent systems.
 
