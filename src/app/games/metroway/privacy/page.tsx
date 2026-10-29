@@ -202,7 +202,10 @@ export default function MetrowayPrivacyPage() {
 						</ul>
 						<p>
 							The Android app asks for internet access (to load ads and check purchases), vibration (for
-							haptics, which you can turn off) and the advertising ID permission used by AdMob.
+							haptics, which you can turn off) and the advertising ID permission used by AdMob. The
+							Google ad and Play Billing libraries built into the game also declare standard system
+							permissions: network state, wake lock, foreground service, basic phone state and billing.
+							None of these let the game read your phone number, contacts, location or files.
 						</p>
 					</Section>
 
